@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mon": "nodemon -r dotenv/config ./backend/app.js",
+    "start": "node -r dotenv/config ./backend/app.js"
   },
   "repository": {
     "type": "git",
