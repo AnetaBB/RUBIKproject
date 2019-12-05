@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "mon": "nodemon -r dotenv/config ./backend/app.js",
-    "start": "node -r dotenv/config ./backend/app.js"
+    "start": "node -r dotenv/config ./backend/app.js",
+    "prettier-win": "prettier --write **/*.js",
+    "prettier-mac": "prettier --write '**/*.js'"
   },
   "repository": {
     "type": "git",
