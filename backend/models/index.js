@@ -3,5 +3,5 @@ const Project = require('./Project');
 
 module.exports = {
   User,
-  Project
+  Project,
 };

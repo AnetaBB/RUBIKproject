@@ -6,26 +6,26 @@ const Project = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   description: {
-    type: String
+    type: String,
   },
   cratedAt: {
-    type: Date
+    type: Date,
   },
   deadline: {
-    type: Date
+    type: Date,
   },
   owner: {
     type: String,
-    required: true
+    required: true,
   },
   contributors: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 module.exports = {
-  Project
+  Project,
 };
