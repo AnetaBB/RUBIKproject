@@ -1,5 +1,6 @@
 const db = require('./db');
 const express = require('express');
+const routerHome = require('./routes/home');
 
 const main = async () => {
   const app = express();
@@ -12,6 +13,19 @@ const main = async () => {
       //TO-DO if ever...
     }
   }
+
+  // Routes
+  app.use('/', routerHome);
+
+  // App start
+  const host = process.env.HOST || '127.0.0.1';
+  const port = process.env.PORT || 8080;
+  app.listen(port, host, () =>
+    console.log(
+      `[App] Server is listening on http://${host}:${port}\n` +
+      '========================================================'
+    )
+  );
 };
 
 main();
