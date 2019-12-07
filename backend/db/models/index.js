@@ -1,7 +1,7 @@
 const User = require('./User');
-const Projects = require('./Projects');
+const Projects = require('./Project');
 
 module.exports = {
   User,
-  Projects
+  Project
 };

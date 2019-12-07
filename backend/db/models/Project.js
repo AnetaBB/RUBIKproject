@@ -2,7 +2,7 @@ const { Schema } = require('mongoose');
 
 const ObjectId = Schema.Types.ObjectId;
 
-const Projects = new Schema({
+const Project = new Schema({
   title: {
     type: String,
     required: true,
@@ -27,5 +27,5 @@ const Projects = new Schema({
 });
 
 module.exports = {
-  Projects
+  Project
 };
