@@ -1,6 +1,6 @@
 const db = require('./db');
 const express = require('express');
-const users = require('./routes/register');
+const users = require('./routes/user');
 const routerHome = require('./routes/home');
 
 const main = async () => {
