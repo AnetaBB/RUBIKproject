@@ -16,7 +16,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const { Demo } = res.locals.models;
   const demo = new Demo({
-    ...req.body,
+    email: req.body.email,
+    password: req.body.password,
   });
   await demo.save();
   res.json(demo);
