@@ -7,6 +7,23 @@ const Milestone = new Schema({
     required: true,
     unique: true,
   },
+  description: {
+    type: String,
+  },
+  cratedAt: {
+    type: Date,
+  },
+  owner: {
+    type: String,
+    
+  },
+  deadline: {
+    type: Date,
+  },
+  contributors: {
+    type: String,
+  },
+
 });
 
 module.exports = {
