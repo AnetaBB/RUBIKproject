@@ -1,5 +1,6 @@
 const connect = require('./connect');
 const models = require('../models');
+const register = require('./register');
 
 const load = db => {
   const compiledModels = {};
@@ -15,4 +16,5 @@ const load = db => {
 module.exports = {
   connect,
   load,
+  register,
 };
