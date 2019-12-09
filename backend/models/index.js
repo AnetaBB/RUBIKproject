@@ -4,6 +4,7 @@ const Project = require('./Project');
 const Milestone = require('./Milestone');
 const Subticket = require('./Subticket');
 const Feature = require('./Feature');
+const Ticket = require('./Ticket');
 
 module.exports = {
   Demo,
@@ -12,4 +13,5 @@ module.exports = {
   Milestone,
   Subticket,
   Feature,
+  Ticket,
 };
