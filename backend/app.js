@@ -1,9 +1,9 @@
 const db = require('./db');
 const express = require('express');
-const routerMilestone = require('./routes/milestone');
+const routerComment = require('./routes/comment');
 const routerDemo = require('./routes/demo');
-
 const routerHome = require('./routes/home');
+const routerMilestone = require('./routes/milestone');
 
 const main = async () => {
   const app = express();
@@ -26,8 +26,8 @@ const main = async () => {
   // Routes
   app.use('/api/demos/', routerDemo);
   app.use('/', routerHome);
+  app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
-  app.use('/api/subtickets/', routerSubticket);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
