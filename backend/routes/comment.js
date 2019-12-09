@@ -3,14 +3,14 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const {
-    Comments
+    Comment
   } = res.locals.models;
-  const comments = await Comments.find();
+  const comments = await Comment.find();
   res.sendStatus(200);
   console.log(
     req.query,
-    comments.map(comments => {
-      return comments;
+    comments.map(comment => {
+      return comment;
     })
   );
 });
