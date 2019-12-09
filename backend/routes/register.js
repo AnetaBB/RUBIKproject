@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);*/
-
+  console.log(req.body);
   console.log('Przed dodanie obiektu');
 
   let user = new User({
@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
     surname: req.body.surname,
     email: req.body.email,
     password: req.body.password,
+    active: req.body.active,
   });
 
   console.log('Po dodaniu obiektu');
