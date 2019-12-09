@@ -1,28 +1,37 @@
 const bcrypt = require('bcrypt');
 const { User, validate } = require('../models/User');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+//let user = mongoose.model('user', User);
+let Komandos = mongoose.model('Komandos', User);
+
 router.post('/', async (req, res) => {
-  let user = await User.findOne({
+  /* let user = await User.findOne({
     email: req.body.email,
   });
   if (user) return res.status(400).send('User already registered');
 
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);*/
 
-  user = new User({
+  console.log('Przed dodanie obiektu');
+
+  let user = new Komandos({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
     password: req.body.password,
   });
 
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(req.body.password, salt);
+  console.log('Po dodaniu obiektu');
+  console.log(user);
 
-  await user.save();
+  /*const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);*/
+
+  user.save();
   res.send('User add to databse. Move to dashboard');
 });
 

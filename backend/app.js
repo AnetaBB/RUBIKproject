@@ -20,9 +20,9 @@ const main = async () => {
   // Routes
   app.use('/', routerHome);
   app.use(express.json());
-  app.use('/api/users', users);
-  app.use('/api/auth', auth);
-  app.use('/api/updateUser', updateUSer);
+  app.use('/rubikproject/users', users);
+  app.use('/rubikproject/auth', auth);
+  app.use('/rubikproject/updateUser', updateUSer);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';

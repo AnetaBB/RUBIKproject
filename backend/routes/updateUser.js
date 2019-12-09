@@ -6,8 +6,8 @@ const Joi = require('@hapi/joi');
 router.put('/:id', async (req, res) => {
   console.log(req.params.id);
 
-  const user = await User.findById(req.params.id);
-  if (!user) res.status(400).send('This user not exist');
+  /*const user = await User.findById(req.params.id);
+  if (!user) res.status(400).send('This user not exist');*/
 
   /* Pamiętaj o walidacja danych 
       Zróbmy dwie opcje dla zmiany wszystkiego z panela user`a
