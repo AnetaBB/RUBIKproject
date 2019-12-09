@@ -13,4 +13,13 @@ router.get('/', async (req, res) => {
   );
 });
 
+router.post('/', async (req, res) => {
+  const { Demo } = res.locals.models;
+  const demo = new Demo({
+    ...req.body,
+  });
+  await demo.save();
+  res.json(demo);
+});
+
 module.exports = router;

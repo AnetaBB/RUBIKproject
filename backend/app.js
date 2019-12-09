@@ -19,6 +19,10 @@ const main = async () => {
 
   db.register(app, connection, models);
 
+  // Global middleware
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+
   // Routes
   app.use('/', routerHome);
 
