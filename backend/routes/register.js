@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 //let user = mongoose.model('user', User);
-let User = mongoose.model('Komandos', userSchema);
+let User = mongoose.model('User', userSchema);
 
 router.post('/', async (req, res) => {
   /* let user = await User.findOne({
@@ -28,11 +28,12 @@ router.post('/', async (req, res) => {
   console.log('Po dodaniu obiektu');
   console.log(user);
 
-  /*const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(req.body.password, salt);*/
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);
 
   user.save();
   res.send('User add to databse. Move to dashboard');
+  console.log(user);
 });
 
 module.exports = router;
