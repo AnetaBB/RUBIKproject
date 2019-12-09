@@ -4,6 +4,7 @@ const routerMilestone = require('./routes/milestone');
 const routerDemo = require('./routes/demo');
 
 const routerHome = require('./routes/home');
+const routerComments = require('./routes/comments');
 
 const main = async () => {
   const app = express();
@@ -24,6 +25,7 @@ const main = async () => {
 
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
+  app.use('/api/comments/', routerComments);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
@@ -31,7 +33,7 @@ const main = async () => {
   app.listen(port, host, () =>
     console.log(
       `[App] Server is listening on http://${host}:${port}\n` +
-        '========================================================'
+      '========================================================'
     )
   );
 };

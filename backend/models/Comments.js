@@ -4,8 +4,10 @@ const {
 const ObjectId = Schema.Types.ObjectId;
 
 const Comments = new Schema({
-  comment: {
+  commentInsert: {
     type: String,
+
+
   },
   date: {
     type: Date,
