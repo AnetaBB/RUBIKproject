@@ -17,7 +17,7 @@ const main = async () => {
 
   // Routes
   app.use('/', routerHome);
-  app.use('/api/milestones', routerMilestone);
+  app.use('/api/milestones/', routerMilestone);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
