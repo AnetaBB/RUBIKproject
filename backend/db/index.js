@@ -1,5 +1,5 @@
 const connect = require('./connect');
-const models = require('./models');
+const models = require('../models');
 
 const load = db => {
   const compiledModels = {};
