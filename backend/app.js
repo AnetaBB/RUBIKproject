@@ -1,7 +1,10 @@
 const db = require('./db');
 const express = require('express');
+
 const routerMilestone = require('./routes/milestone');
 const routerDemo = require('./routes/demo');
+const routerProject = require('./routes/project');
+
 
 const routerHome = require('./routes/home');
 
@@ -22,6 +25,7 @@ const main = async () => {
 
   // Routes
   app.use('/', routerHome);
+  app.use('/api/projects/', routerProject);
 
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
