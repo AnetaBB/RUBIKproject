@@ -1,5 +1,6 @@
 const db = require('./db');
 const express = require('express');
+const routerProject = require('./routes/project');
 const routerHome = require('./routes/home');
 
 const main = async () => {
@@ -14,8 +15,11 @@ const main = async () => {
     }
   }
 
+  db.register(app, connection, models);
+
   // Routes
   app.use('/', routerHome);
+  app.use('/api/projects/', routerProject);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';

@@ -1,11 +1,10 @@
 const { Schema } = require('mongoose');
-
 const ObjectId = Schema.Types.ObjectId;
 
 const Project = new Schema({
   title: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
   },
   description: {
@@ -19,7 +18,7 @@ const Project = new Schema({
   },
   owner: {
     type: String,
-    required: true,
+    // required: true,
   },
   contributors: {
     type: String,
