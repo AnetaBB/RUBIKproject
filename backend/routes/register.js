@@ -37,4 +37,40 @@ router.post('/', async (req, res) => {
   console.log(user);
 });
 
+/*function validateUpdateData(par) {
+  const schema = Joi.object({
+    name: Joi.string()
+      .min(3)
+      .max(30)
+      .required(),
+    surname: Joi.string()
+      .min(3)
+      .max(30)
+      .required(),
+    email: Joi.string()
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(5)
+      .max(255)
+      .required(),
+    repeat_password: Joi.ref('password'),
+  });
+
+  return schema.validate(par);
+}*/
+
+/* ========================== Autentykacja ============================ */
+/*router.post('/', async (req, res) => {
+  let user = await User.findOne({
+    email: req.body.email,
+  });
+  if (!user) return res.status(400).send('Invalid email');
+
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword) return res.status(400).send('Invalid password');
+
+  res.send('Good morning user :)');
+});*/
+
 module.exports = router;
