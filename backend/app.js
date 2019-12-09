@@ -24,10 +24,10 @@ const main = async () => {
   app.use(express.urlencoded({ extended: false }));
 
   // Routes
-  app.use('/', routerHome);
-
-  app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
+  app.use('/', routerHome);
+  app.use('/api/milestones/', routerMilestone);
+  app.use('/api/subtickets/', routerSubticket);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';

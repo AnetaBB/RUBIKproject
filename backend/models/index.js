@@ -1,13 +1,17 @@
 const Demo = require('./Demo');
-const User = require('./User');
-const Project = require('./Project');
+const Feature = require('./Feature');
 const Milestone = require('./Milestone');
 const Feature = require('./Feature');
+const Project = require('./Project');
+const Subticket = require('./Subticket');
+const User = require('./User');
 
 module.exports = {
   Demo,
-  User,
-  Project,
+  Feature,
   Milestone,
   Feature,
+  Project,
+  Subticket,
+  User,
 };
