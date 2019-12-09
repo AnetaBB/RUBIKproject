@@ -17,6 +17,7 @@ const main = async () => {
 
   db.register(app, connection, models);
 
+
   // Routes
   app.use('/', routerHome);
   app.use('/api/projects/', routerProject);
