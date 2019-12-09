@@ -21,7 +21,9 @@ router.post('/', async (req, res) => {
   const milestone = new Milestone({
     id: milestones.length + 1,
     title: req.body.title,
+    description: req.body.description,
     owner: req.body.owner,
+    contributors: req.body.contributors,
   });
 
   milestones.push(milestone);

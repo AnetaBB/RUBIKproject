@@ -10,20 +10,14 @@ const Milestone = new Schema({
   description: {
     type: String,
   },
-  cratedAt: {
-    type: Date,
-  },
+
   owner: {
-    type: String,
-    
-  },
-  deadline: {
-    type: Date,
-  },
-  contributors: {
     type: String,
   },
 
+  contributors: {
+    type: String,
+  },
 });
 
 module.exports = {
