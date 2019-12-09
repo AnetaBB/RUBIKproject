@@ -4,7 +4,7 @@ const ObjectId = Schema.Types.ObjectId;
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
-let User = new Schema({
+let userSchema = new Schema({
   name: {
     type: String,
     minlength: 3,
@@ -35,9 +35,9 @@ let User = new Schema({
   },
 });
 
-//const User = mongoose.model('User', mongoSchema);
+//const userSchemaSchema = mongoose.model('userSchema', mongoSchema);
 
-function validateUser(user) {
+function validateuserSchema(userSchema) {
   const schema = Joi.object({
     name: Joi.string()
       .min(3)
@@ -57,8 +57,8 @@ function validateUser(user) {
     repeat_password: Joi.ref('password'),
   });
 
-  return schema.validate(user);
+  return schema.validate(userSchema);
 }
 
-module.exports = { User };
-//exports.validate = validateUser;
+module.exports = { userSchema };
+//exports.validate = validateuserSchema;

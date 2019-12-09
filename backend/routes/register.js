@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
-const { User, validate } = require('../models/User');
+const { userSchema, validate } = require('../models/User');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
 //let user = mongoose.model('user', User);
-let Komandos = mongoose.model('Komandos', User);
+let User = mongoose.model('Komandos', userSchema);
 
 router.post('/', async (req, res) => {
   /* let user = await User.findOne({
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 
   console.log('Przed dodanie obiektu');
 
-  let user = new Komandos({
+  let user = new User({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
