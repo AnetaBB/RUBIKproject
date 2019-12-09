@@ -1,20 +1,18 @@
-const {
-  Schema
-} = require('mongoose');
+const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
 const Subticket = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   description: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = {
-  Subticket
+  Subticket,
 };
