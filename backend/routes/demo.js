@@ -4,7 +4,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const { Demo } = res.locals.models;
   const demos = await Demo.find();
-  res.sendStatus(200);
+  res.status(200).json(demos);
   console.log(
     req.query,
     demos.map(demo => {
@@ -15,12 +15,16 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { Demo } = res.locals.models;
-  const demo = new Demo({
-    email: req.body.email,
-    password: req.body.password,
-  });
-  await demo.save();
-  res.json(demo);
+  console.log(req.body);
+  const demo = new Demo(req.body);
+  demo
+    .save()
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(error => {
+      res.status(400).send('adding demo failed: ' + error);
+    });
 });
 
 module.exports = router;
