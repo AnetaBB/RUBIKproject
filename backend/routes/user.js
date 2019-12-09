@@ -7,6 +7,7 @@ const router = express.Router();
 //let user = mongoose.model('user', User);
 let User = mongoose.model('User', userSchema);
 
+/* Add user */
 router.post('/', async (req, res) => {
   /* let user = await User.findOne({
     email: req.body.email,
@@ -36,6 +37,16 @@ router.post('/', async (req, res) => {
   res.send('User add to databse. Move to dashboard');
   console.log(user);
 });
+
+/* Get user */
+router.get('/:id', async (req, res) => {
+  console.log("I`m here");
+  console.log(req.body.name);
+  const szukam = await User.findOne();
+
+  console.log(szukam);
+  res.send(szukam);
+ });
 
 /*function validateUpdateData(par) {
   const schema = Joi.object({
