@@ -1,15 +1,13 @@
 const db = require('./db');
 const express = require('express');
 
-
 const routerMilestone = require('./routes/milestone');
 const routerDemo = require('./routes/demo');
 const routerProject = require('./routes/project');
 const routerComment = require('./routes/comment');
 
-
 const routerHome = require('./routes/home');
-const routerMilestone = require('./routes/milestone');
+
 const routerTicket = require('./routes/ticket');
 
 const main = async () => {
