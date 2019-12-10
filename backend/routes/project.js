@@ -11,12 +11,12 @@ router.post('/', async (req, res) => {
   const { Project } = res.locals.models;
   const projects = await Project.find();
 
-  if(!req.body) return res.status(400).send('0 in body');
+  if (!req.body) return res.status(400).send('0 in body');
 
   const project = new Project({
     id: projects.length + 1,
     title: req.body.title,
-    owner: req.body.owner
+    owner: req.body.owner,
   });
 
   projects.push(project);
