@@ -5,24 +5,12 @@ router.get('/', async (req, res) => {
   const { Comment } = res.locals.models;
   const comments = await Comment.find();
   res.status(200).json(comments);
-  console.log(
-    req.query,
-    comments.map(comment => {
-      return comment;
-    })
-  );
 });
 
 router.get('/:id', async (req, res) => {
   const { Comment } = res.locals.models;
   const comments = await Comment.findById(req.params.id);
   res.status(200).json(comments);
-  console.log(
-    req.query,
-    comments.map(comment => {
-      return comment;
-    })
-  );
 });
 
 router.post('/', async (req, res) => {
@@ -36,7 +24,6 @@ router.post('/', async (req, res) => {
   }
 });
 router.delete('/:id', async (req, res) => {
-  console.log(req.params.id);
   try {
     const { Comment } = res.locals.models;
     const comment = await Comment.findByIdAndRemove(req.params.id);
