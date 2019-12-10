@@ -5,6 +5,7 @@ const routerDemo = require('./routes/demo');
 const routerHome = require('./routes/home');
 const routerMilestone = require('./routes/milestone');
 const routerTicket = require('./routes/ticket');
+const routerSubticket = require('./routes/subticket');
 
 const main = async () => {
   const app = express();
@@ -27,10 +28,9 @@ const main = async () => {
   // Routes
   app.use('/', routerHome);
   app.use('/api/demos/', routerDemo);
-
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
-
+  app.use('/api/subtickets/', routerSubticket);
   app.use('/api/tickets', routerTicket);
 
   // App start
