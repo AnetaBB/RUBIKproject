@@ -1,18 +1,10 @@
 const bcrypt = require('bcrypt');
-const { userSchema, validate } = require('../models/User');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const app = express();
-app.use(express.json());
-
-//let user = mongoose.model('user', User);
-//let User = mongoose.model('User', userSchema);
 
 /* Add user */
 router.post('/', async (req, res) => {
   const { User } = res.locals.models;
-  //const szukam = await User.find();
   /* const user = await User.findOne({
     email: req.body.email,
   });
@@ -20,10 +12,8 @@ router.post('/', async (req, res) => {
 
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);*/
-  console.log(req.body);
-  console.log('Przed dodanie obiektu');
 
-  let user = new User({
+  const user = new User({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
@@ -31,46 +21,41 @@ router.post('/', async (req, res) => {
     active: req.body.active,
   });
 
-  console.log('Po dodaniu obiektu');
-  console.log(user);
-
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(req.body.password, salt);
 
   user.save();
   res.send('User add to databse. Move to dashboard');
-  console.log(user);
 });
 
 /* Get user */
 router.get('/', async (req, res) => {
-  console.log('I`m here');
-  console.log('makaron');
-  console.log(res.locals.models);
   const { User } = res.locals.models;
-  const szukam = await User.find();
-
-  console.log(szukam);
-  res.status(200).send(szukam);
+  const user = await User.find();
+  res.status(200).send(user);
   console.log(
     req.query,
-    szukam.map(szuka => {
+    user.map(szuka => {
       return szuka;
     })
   );
 });
 
-/*router.get('/', async (req, res) => {
-  const { Milestone } = res.locals.models;
-  const milestones = await Milestone.find();
-  res.sendStatus(200);
-  console.log(
-    req.query,
-    milestones.map(milestone => {
-      return milestone;
-    })
-  );
-});*/
+router.put('/:id', async(req, res) => {
+  const { User } = res.locals.models;
+  const user = await User.findById(req.params.id);
+  user.name = req.body.name;
+  user.save();
+  res.send(user);
+});
+
+router.delete('/:id', async(req, res) => {
+  const { User } = res.locals.models;
+  const user = await User.findByIdAndRemove(req.params.id);
+  user.name = req.body.name;
+  user.save();
+  res.send('User is 3m below ground...');
+});
 
 /*function validateUpdateData(par) {
   const schema = Joi.object({
