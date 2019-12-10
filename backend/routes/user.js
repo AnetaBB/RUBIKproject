@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 //let user = mongoose.model('user', User);
-let User = mongoose.model('User', userSchema);
+//let User = mongoose.model('User', userSchema);
 
 /* Add user */
 /*router.post('/', async (req, res) => {
@@ -42,7 +42,11 @@ let User = mongoose.model('User', userSchema);
 router.get('/', async (req, res) => {
   console.log('I`m here');
   console.log('makaron');
+  console.log(res.locals.models);
+  const { User } = res.locals.models;
   const szukam = await User.find();
+
+  res.sendStatus(200);
 
   console.log(szukam);
   res.send(szukam);

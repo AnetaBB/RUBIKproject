@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
-const Milestone = new Schema({
+const Subticket = new Schema({
   title: {
     type: String,
     required: true,
@@ -9,23 +9,10 @@ const Milestone = new Schema({
   },
   description: {
     type: String,
+    required: true,
   },
-  cratedAt: {
-    type: Date,
-  },
-  owner: {
-    type: String,
-    
-  },
-  deadline: {
-    type: Date,
-  },
-  contributors: {
-    type: String,
-  },
-
 });
 
 module.exports = {
-  Milestone,
+  Subticket,
 };

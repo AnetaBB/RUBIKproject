@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
-const Milestone = new Schema({
+const Feature = new Schema({
   title: {
     type: String,
     required: true,
@@ -10,22 +10,22 @@ const Milestone = new Schema({
   description: {
     type: String,
   },
-  cratedAt: {
-    type: Date,
-  },
   owner: {
     type: String,
-    
+    required: true,
   },
-  deadline: {
-    type: Date,
+  project: { 
+    type: ObjectId, 
+    ref: 'Project', 
+    required: true,
   },
-  contributors: {
+  status: {
     type: String,
+    enum: ['Open', 'Misguided', 'Acceptable'],
+    required: true,
   },
-
 });
 
 module.exports = {
-  Milestone,
+  Feature,
 };

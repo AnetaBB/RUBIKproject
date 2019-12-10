@@ -1,6 +1,10 @@
 const db = require('./db');
 const express = require('express');
 const users = require('./routes/user');
+const routerMilestone = require('./routes/milestone');
+const routerDemo = require('./routes/demo');
+const routerSubticket = require('./routes/subticket');
+
 const routerHome = require('./routes/home');
 
 const main = async () => {
@@ -16,9 +20,16 @@ const main = async () => {
     }
   }
 
+  db.register(app, connection, models);
+
   // Routes
   app.use('/', routerHome);
-  app.use('/rubikproject/users', users);
+  app.use('/rubikproject/users/', users);
+
+  app.use('/api/milestones/', routerMilestone);
+  app.use('/api/demos/', routerDemo);
+  app.use('/api/subtickets/', routerSubticket);
+  //app.use('/api/tickets', routerTicket);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
