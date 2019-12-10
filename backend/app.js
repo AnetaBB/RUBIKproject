@@ -25,11 +25,15 @@ const main = async () => {
   app.use(express.urlencoded({ extended: false }));
 
   // Routes
-  app.use('/api/demos/', routerDemo);
   app.use('/', routerHome);
+<<<<<<< Updated upstream
+=======
+  app.use('/api/demos/', routerDemo);
+  app.use('/api/projects/', routerProject);
+>>>>>>> Stashed changes
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
-  // app.use('/api/subtickets/', routerSubticket);
+
   app.use('/api/tickets', routerTicket);
 
   // App start
