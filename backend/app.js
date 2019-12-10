@@ -1,18 +1,13 @@
 const db = require('./db');
 const express = require('express');
-
-const routerMilestone = require('./routes/milestone');
-const routerDemo = require('./routes/demo');
-const routerProject = require('./routes/project');
 const routerComment = require('./routes/comment');
-
+const routerDemo = require('./routes/demo');
 const routerHome = require('./routes/home');
-
+const routerMilestone = require('./routes/milestone');
 const routerTicket = require('./routes/ticket');
 
 const main = async () => {
   const app = express();
-  app.use(express.json());
 
   // Database setup and connection
   const connection = await db.connect();
@@ -32,8 +27,6 @@ const main = async () => {
   // Routes
   app.use('/api/demos/', routerDemo);
   app.use('/', routerHome);
-  app.use('/api/projects/', routerProject);
-
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
   // app.use('/api/subtickets/', routerSubticket);
