@@ -5,8 +5,7 @@ const routerDemo = require('./routes/demo');
 const routerHome = require('./routes/home');
 const routerMilestone = require('./routes/milestone');
 const routerTicket = require('./routes/ticket');
-const routerSubticket = require('./routes/subticket');
-
+const routerProject = require('./routes/project');
 const main = async () => {
   const app = express();
 
@@ -30,8 +29,8 @@ const main = async () => {
   app.use('/api/demos/', routerDemo);
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
-  app.use('/api/subtickets/', routerSubticket);
   app.use('/api/tickets', routerTicket);
+  app.use('/api/project', routerProject);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
