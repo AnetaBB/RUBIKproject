@@ -14,9 +14,9 @@ const Feature = new Schema({
     type: String,
     required: true,
   },
-  project: { 
-    type: ObjectId, 
-    ref: 'Project', 
+  project: {
+    type: ObjectId,
+    ref: 'Project',
     required: true,
   },
   status: {

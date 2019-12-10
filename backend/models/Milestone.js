@@ -15,7 +15,6 @@ const Milestone = new Schema({
   },
   owner: {
     type: String,
-    
   },
   deadline: {
     type: Date,
@@ -23,7 +22,6 @@ const Milestone = new Schema({
   contributors: {
     type: String,
   },
-
 });
 
 module.exports = {

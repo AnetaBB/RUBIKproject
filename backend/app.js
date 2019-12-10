@@ -4,7 +4,7 @@ const routerMilestone = require('./routes/milestone');
 const routerDemo = require('./routes/demo');
 
 const routerHome = require('./routes/home');
-const routerComments = require('./routes/comments');
+const routerComments = require('./routes/comment');
 
 const main = async () => {
   const app = express();
@@ -33,7 +33,7 @@ const main = async () => {
   app.listen(port, host, () =>
     console.log(
       `[App] Server is listening on http://${host}:${port}\n` +
-      '========================================================'
+        '========================================================'
     )
   );
 };
