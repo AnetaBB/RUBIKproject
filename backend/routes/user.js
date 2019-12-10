@@ -3,23 +3,27 @@ const { userSchema, validate } = require('../models/User');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const app = express();
+app.use(express.json());
 
 //let user = mongoose.model('user', User);
 //let User = mongoose.model('User', userSchema);
 
 /* Add user */
-/*router.post('/', async (req, res) => {
-  /* let user = await User.findOne({
+router.post('/', async (req, res) => {
+  const { User } = res.locals.models;
+  //const szukam = await User.find();
+  /* const user = await User.findOne({
     email: req.body.email,
   });
   if (user) return res.status(400).send('User already registered');
 
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);*/
   console.log(req.body);
   console.log('Przed dodanie obiektu');
 
-  /*let user = new User({
+  let user = new User({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
@@ -36,7 +40,7 @@ const router = express.Router();
   user.save();
   res.send('User add to databse. Move to dashboard');
   console.log(user);
-});*/
+});
 
 /* Get user */
 router.get('/', async (req, res) => {
@@ -47,8 +51,26 @@ router.get('/', async (req, res) => {
   const szukam = await User.find();
 
   console.log(szukam);
-  res.send(szukam);
+  res.status(200).send(szukam);
+  console.log(
+    req.query,
+    szukam.map(szuka => {
+      return szuka;
+    })
+  );
 });
+
+/*router.get('/', async (req, res) => {
+  const { Milestone } = res.locals.models;
+  const milestones = await Milestone.find();
+  res.sendStatus(200);
+  console.log(
+    req.query,
+    milestones.map(milestone => {
+      return milestone;
+    })
+  );
+});*/
 
 /*function validateUpdateData(par) {
   const schema = Joi.object({

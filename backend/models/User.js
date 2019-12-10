@@ -1,17 +1,15 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
-
-const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
-let User = new mongoose.Schema({
+let User = new Schema({
   name: {
     type: String,
     minlength: 3,
     maxlength: 30,
     required: true,
   },
-  /*surname: {
+  surname: {
     type: String,
     minlength: 3,
     maxlength: 30,
@@ -32,10 +30,8 @@ let User = new mongoose.Schema({
   },
   active: {
     type: Boolean,
-  },*/
+  },
 });
-
-//const userSchemaSchema = mongoose.model('userSchema', mongoSchema);
 
 function validateuserSchema(userSchema) {
   const schema = Joi.object({

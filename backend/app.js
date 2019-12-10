@@ -24,7 +24,7 @@ const main = async () => {
 
   // Routes
   app.use('/', routerHome);
-  app.use('/rubikproject/users/', users);
+  app.use('/api/users/', users);
 
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
