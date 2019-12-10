@@ -3,8 +3,10 @@ const express = require('express');
 const routerMilestone = require('./routes/milestone');
 const routerDemo = require('./routes/demo');
 const routerSubticket = require('./routes/subticket');
+const routerTicket = require('./routes/ticket');
 
 const routerHome = require('./routes/home');
+const routerComment = require('./routes/comment');
 
 const main = async () => {
   const app = express();
@@ -26,6 +28,7 @@ const main = async () => {
 
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
+  app.use('/api/comments/', routerComment);
   app.use('/api/subtickets/', routerSubticket);
   app.use('/api/tickets', routerTicket);
 
