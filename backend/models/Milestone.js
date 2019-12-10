@@ -4,8 +4,6 @@ const ObjectId = Schema.Types.ObjectId;
 const Milestone = new Schema({
   title: {
     type: String,
-    required: true,
-    unique: true,
   },
   description: {
     type: String,
