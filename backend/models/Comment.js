@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
-const Comments = new Schema({
+const Comment = new Schema({
   commentInsert: {
     type: String,
   },
@@ -12,5 +12,5 @@ const Comments = new Schema({
 });
 
 module.exports = {
-  Comments,
+  Comment,
 };

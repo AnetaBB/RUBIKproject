@@ -17,7 +17,7 @@ const main = async () => {
     }
   }
 
-  db.register(app, connection, models);
+  db.register(app, connection, models); //ads db connection and models to res.locals
 
   // Global middleware
   app.use(express.json());

@@ -15,14 +15,15 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { Demo } = res.locals.models;
-  console.log(req.body);
   const demo = new Demo(req.body);
   demo
     .save()
     .then(result => {
+      console.log(result);
       res.status(200).json(result);
     })
     .catch(error => {
+      console.log(error);
       res.status(400).send('adding demo failed: ' + error);
     });
 });
