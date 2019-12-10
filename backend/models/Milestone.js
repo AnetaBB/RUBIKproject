@@ -14,9 +14,6 @@ const Milestone = new Schema({
   owner: {
     type: String,
   },
-  deadline: {
-    type: Date,
-  },
 
   contributors: {
     type: String,

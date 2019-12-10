@@ -30,5 +30,12 @@ router.post('/', async (req, res) => {
     })
   );
 });
+router.delete('/:id', async (req, res) => {
+  const { Milestone } = res.locals.models;
+  const milestone = await Milestone.findByIdAndRemove(req.params.id);
+  milestone.name = req.body.name;
+  milestone.save();
+  res.send('Game over');
+});
 
 module.exports = router;

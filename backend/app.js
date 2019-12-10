@@ -27,7 +27,7 @@ const main = async () => {
   // Routes
   app.use('/', routerHome);
   app.use('/api/demos/', routerDemo);
-  app.use('/api/projects/', routerProject);
+
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
 
