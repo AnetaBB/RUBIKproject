@@ -4,7 +4,7 @@ const ObjectId = Schema.Types.ObjectId;
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
-let userSchema = new mongoose.Schema({
+let User = new mongoose.Schema({
   name: {
     type: String,
     minlength: 3,
@@ -60,5 +60,5 @@ function validateuserSchema(userSchema) {
   return schema.validate(userSchema);
 }
 
-module.exports = { userSchema };
+module.exports = { User };
 //exports.validate = validateuserSchema;

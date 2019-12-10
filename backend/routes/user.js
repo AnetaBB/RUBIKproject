@@ -46,8 +46,6 @@ router.get('/', async (req, res) => {
   const { User } = res.locals.models;
   const szukam = await User.find();
 
-  res.sendStatus(200);
-
   console.log(szukam);
   res.send(szukam);
 });
