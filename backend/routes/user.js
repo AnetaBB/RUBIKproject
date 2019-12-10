@@ -8,18 +8,18 @@ const router = express.Router();
 let User = mongoose.model('User', userSchema);
 
 /* Add user */
-router.post('/', async (req, res) => {
+/*router.post('/', async (req, res) => {
   /* let user = await User.findOne({
     email: req.body.email,
   });
   if (user) return res.status(400).send('User already registered');
 
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);*/
+  if (error) return res.status(400).send(error.details[0].message);
   console.log(req.body);
   console.log('Przed dodanie obiektu');
 
-  let user = new User({
+  /*let user = new User({
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
@@ -36,17 +36,17 @@ router.post('/', async (req, res) => {
   user.save();
   res.send('User add to databse. Move to dashboard');
   console.log(user);
-});
+});*/
 
 /* Get user */
-router.get('/:id', async (req, res) => {
-  console.log("I`m here");
-  console.log(req.body.name);
-  const szukam = await User.findOne();
+router.get('/', async (req, res) => {
+  console.log('I`m here');
+  console.log('makaron');
+  const szukam = await User.find();
 
   console.log(szukam);
   res.send(szukam);
- });
+});
 
 /*function validateUpdateData(par) {
   const schema = Joi.object({

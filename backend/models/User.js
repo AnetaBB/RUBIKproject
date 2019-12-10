@@ -4,14 +4,14 @@ const ObjectId = Schema.Types.ObjectId;
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
-let userSchema = new Schema({
+let userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 3,
     maxlength: 30,
     required: true,
   },
-  surname: {
+  /*surname: {
     type: String,
     minlength: 3,
     maxlength: 30,
@@ -32,7 +32,7 @@ let userSchema = new Schema({
   },
   active: {
     type: Boolean,
-  },
+  },*/
 });
 
 //const userSchemaSchema = mongoose.model('userSchema', mongoSchema);

@@ -5,6 +5,7 @@ const routerHome = require('./routes/home');
 
 const main = async () => {
   const app = express();
+  app.use(express.json());
 
   // Database setup and connection
   const connection = await db.connect();
@@ -17,7 +18,6 @@ const main = async () => {
 
   // Routes
   app.use('/', routerHome);
-  app.use(express.json());
   app.use('/rubikproject/users', users);
 
   // App start
