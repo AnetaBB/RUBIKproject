@@ -26,11 +26,8 @@ const main = async () => {
 
   // Routes
   app.use('/', routerHome);
-<<<<<<< Updated upstream
-=======
   app.use('/api/demos/', routerDemo);
   app.use('/api/projects/', routerProject);
->>>>>>> Stashed changes
   app.use('/api/comments/', routerComment);
   app.use('/api/milestones/', routerMilestone);
 
