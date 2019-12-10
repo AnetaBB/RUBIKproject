@@ -1,17 +1,25 @@
 const bcrypt = require('bcrypt');
+const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
 
-/* Add user */
+/* Add user 
+Example: 
+  "name": "kitty",
+	"surname": "meow",
+	"email": "kitty@meow.com",
+	"password": "qweasd",
+	"repeat_password": "qweasd",
+	"active": true  */
 router.post('/', async (req, res) => {
   const { User } = res.locals.models;
-  /* const user = await User.findOne({
+   const checkUser = await User.findOne({
     email: req.body.email,
   });
-  if (user) return res.status(400).send('User already registered');
+  if (checkUser) return res.status(400).send('User already registered');
 
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);*/
+  if (error) return res.status(400).send(error.details[0].message);
 
   const user = new User({
     name: req.body.name,
@@ -28,17 +36,23 @@ router.post('/', async (req, res) => {
   res.send('User add to databse. Move to dashboard');
 });
 
-/* Get user */
 router.get('/', async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.find();
   res.status(200).send(user);
   console.log(
     req.query,
-    user.map(szuka => {
-      return szuka;
+    user.map(user => {
+      return user;
     })
   );
+});
+
+router.get('/:id', async (req, res) => {
+  const { User } = res.locals.models;
+  const user = await User.findById(req.params.id);
+  user.save();
+  res.send(user);
 });
 
 router.put('/:id', async(req, res) => {
@@ -57,7 +71,7 @@ router.delete('/:id', async(req, res) => {
   res.send('User is 3m below ground...');
 });
 
-/*function validateUpdateData(par) {
+function validate(user) {
   const schema = Joi.object({
     name: Joi.string()
       .min(3)
@@ -75,10 +89,11 @@ router.delete('/:id', async(req, res) => {
       .max(255)
       .required(),
     repeat_password: Joi.ref('password'),
+    active: Joi.boolean()
   });
 
-  return schema.validate(par);
-}*/
+  return schema.validate(user);
+}
 
 /* ========================== Autentykacja ============================ */
 /*router.post('/', async (req, res) => {

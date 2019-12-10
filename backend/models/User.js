@@ -1,6 +1,5 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
-const Joi = require('@hapi/joi');
 
 let User = new Schema({
   name: {
@@ -33,28 +32,4 @@ let User = new Schema({
   },
 });
 
-function validateuserSchema(userSchema) {
-  const schema = Joi.object({
-    name: Joi.string()
-      .min(3)
-      .max(30)
-      .required(),
-    surname: Joi.string()
-      .min(3)
-      .max(30)
-      .required(),
-    email: Joi.string()
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(5)
-      .max(255)
-      .required(),
-    repeat_password: Joi.ref('password'),
-  });
-
-  return schema.validate(userSchema);
-}
-
 module.exports = { User };
-//exports.validate = validateuserSchema;
