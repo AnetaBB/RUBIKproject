@@ -8,6 +8,7 @@ const routerComments = require('./routes/comment');
 
 const main = async () => {
   const app = express();
+  app.use(express.json());
 
   // Database setup and connection
   const connection = await db.connect();
