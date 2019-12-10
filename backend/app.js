@@ -1,16 +1,14 @@
 const db = require('./db');
 const express = require('express');
-const routerMilestone = require('./routes/milestone');
-const routerDemo = require('./routes/demo');
-const routerSubticket = require('./routes/subticket');
-const routerTicket = require('./routes/ticket');
-
-const routerHome = require('./routes/home');
 const routerComment = require('./routes/comment');
+const routerDemo = require('./routes/demo');
+const routerHome = require('./routes/home');
+const routerMilestone = require('./routes/milestone');
+const routerTicket = require('./routes/ticket');
+const routerSubticket = require('./routes/subticket');
 
 const main = async () => {
   const app = express();
-  app.use(express.json());
 
   // Database setup and connection
   const connection = await db.connect();
@@ -21,14 +19,17 @@ const main = async () => {
     }
   }
 
-  db.register(app, connection, models);
+  db.register(app, connection, models); //ads db connection and models to res.locals
+
+  // Global middleware
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
 
   // Routes
   app.use('/', routerHome);
-
-  app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
   app.use('/api/comments/', routerComment);
+  app.use('/api/milestones/', routerMilestone);
   app.use('/api/subtickets/', routerSubticket);
   app.use('/api/tickets', routerTicket);
 
