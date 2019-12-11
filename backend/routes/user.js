@@ -2,6 +2,18 @@ const bcrypt = require('bcrypt');
 const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
+
+/* Aby zobaczyć działanie json web token w postam wywołaj GET dla api/users
+  error. brak tokena
+  Otworz nowa karte w postman, trzeba zrobić post`a do user wykorzystujac dane ponizej(nie zamykaj karty po poprawnej odpowiedzi)
+  Nasza odpowiedz jest w body, przechodzimy do Headers. Kopiujemy wartość x-auth-token
+  Wracam do naszej karty gdzie jest GET
+  Poniżej GET i paska adresu wybieramy Headers
+  Wpisujemy nowy klucz: x-auth-token
+  W pole wartości wklejamy wartość z karty post`a
+  Klikamy send i dopiero wtedy mamy wszystkich userów :D  */
 
 /* Add user 
 Example: 
@@ -13,7 +25,7 @@ Example:
 	"active": true  */
 router.post('/', async (req, res) => {
   const { User } = res.locals.models;
-   const checkUser = await User.findOne({
+  const checkUser = await User.findOne({
     email: req.body.email,
   });
   if (checkUser) return res.status(400).send('User already registered');
@@ -33,10 +45,17 @@ router.post('/', async (req, res) => {
   user.password = await bcrypt.hash(req.body.password, salt);
 
   user.save();
-  res.send('User add to databse. Move to dashboard');
+
+  /* Gdy bedzie ustalone jakie parametry to zapisz token w localStorage 
+  Aktualnie,aby zobaczyć jwt po wysłaniu POST`a należy w odpowiedzi należy przejść do headers -> x-auth-header: *token* */
+
+  //const token = user.generateJwtToken();
+  const token = jwt.sign({ _id: user.id }, process.env.rubikproject_jwtKey);
+
+  res.header('x-auth-token', token).send(token);
 });
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.find();
   res.status(200).send(user);
@@ -55,7 +74,7 @@ router.get('/:id', async (req, res) => {
   res.send(user);
 });
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.findById(req.params.id);
   user.name = req.body.name;
@@ -63,7 +82,7 @@ router.put('/:id', async(req, res) => {
   res.send(user);
 });
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.findByIdAndRemove(req.params.id);
   user.name = req.body.name;
@@ -89,7 +108,7 @@ function validate(user) {
       .max(255)
       .required(),
     repeat_password: Joi.ref('password'),
-    active: Joi.boolean()
+    active: Joi.boolean(),
   });
 
   return schema.validate(user);
@@ -105,7 +124,14 @@ function validate(user) {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send('Invalid password');
 
+  jwt.sign({ _id: user.id }, 'ZmjZuxaSYE');
+
   res.send('Good morning user :)');
 });*/
 
 module.exports = router;
+
+/* Plan dla jwt:
+podczas rejestracji tworzymy token, który wysyłamy do user`a i zostaje zapisany w localStorage
+podczas logowania wysyłamy jego token w header 
+Trzeba przygotować cały plan autentykacji dla poszczególnych routes. Kiedy użytkownik może wysłać właśnie to zapytanie */

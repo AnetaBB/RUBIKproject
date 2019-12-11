@@ -7,6 +7,7 @@ const routerDemo = require('./routes/demo');
 const routerHome = require('./routes/home');
 const routerTicket = require('./routes/ticket');
 const routerProject = require('./routes/project');
+const config = require('config');
 const main = async () => {
   const app = express();
 
@@ -21,6 +22,17 @@ const main = async () => {
 
   db.register(app, connection, models); //ads db connection and models to res.locals
 
+  /* Sprawdzenie czy jest zdefiniowana zmienna środowiskowa jwtKey */
+  if (!process.env.rubikproject_jwtKey) {
+    console.log('FATAL ERROR: jwtKey is not defined.');
+    process.exit(1);
+  }
+  /* jeżeli po odpaleniu widzisz error: jwtKey is not defined.
+     musisz zdefiniować zmienną środowiskową
+     w pliku .env wklej na końcu
+     rubikproject_jwtKey=secretKey
+      */
+
   // Global middleware
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
@@ -30,7 +42,7 @@ const main = async () => {
   app.use('/api/users/', users);
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
-  app.use('/api/subtickets/', routerSubticket);
+  //app.use('/api/subtickets/', routerSubticket);
   app.use('/api/comments/', routerComment);
   app.use('/api/tickets', routerTicket);
   app.use('/api/project', routerProject);
