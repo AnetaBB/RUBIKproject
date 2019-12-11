@@ -6,6 +6,7 @@ const Project = require('./Project');
 const User = require('./User');
 const Ticket = require('./Ticket');
 const Comment = require('./Comment');
+const Subticket = require('./Subticket');
 
 module.exports = {
   Demo,
@@ -15,4 +16,5 @@ module.exports = {
   Comment,
   Feature,
   Ticket,
+  Subticket,
 };
