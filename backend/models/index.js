@@ -3,6 +3,7 @@ const Demo = require('./Demo');
 const Feature = require('./Feature');
 const Milestone = require('./Milestone');
 const Project = require('./Project');
+const Subticket = require('./Subticket');
 const Ticket = require('./Ticket');
 const User = require('./User');
 
@@ -12,6 +13,7 @@ module.exports = {
   Feature,
   Milestone,
   Project,
+  Subticket,
   Ticket,
   User,
 };

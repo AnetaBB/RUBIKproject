@@ -5,8 +5,8 @@ const routerComment = require('./routes/comment');
 const routerDemo = require('./routes/demo');
 const routerHome = require('./routes/home');
 const routerMilestone = require('./routes/milestone');
-const routerTicket = require('./routes/ticket');
 const routerProject = require('./routes/project');
+const routerSubticket = require('./routes/subticket');
 const routerTicket = require('./routes/ticket');
 const routerUser = require('./routes/user');
 
@@ -33,7 +33,10 @@ const main = async () => {
   app.use('/api/demos', routerDemo);
   app.use('/', routerHome);
   app.use('/api/milestones', routerMilestone);
+  app.use('/api/users/', routerUsers);
+  app.use('/api/milestones/', routerMilestone);
   app.use('/api/project', routerProject);
+  app.use('/api/subtickets/', routerSubticket);
   app.use('/api/tickets', routerTicket);
   app.use('/api/users', routerUser);
 
