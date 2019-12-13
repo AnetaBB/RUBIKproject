@@ -4,23 +4,51 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const { Project } = res.locals.models;
   const projects = await Project.find();
-  res.status(200).send(projects);
+  res.status(200).json(projects);
+});
+
+router.get('/:id', async (req, res) => {
+  const { Project } = res.locals.models;
+  const project = await Project.findById(req.params.id);
+  res.status(200).json(project);
 });
 
 router.post('/', async (req, res) => {
   const { Project } = res.locals.models;
-  const projects = await Project.find();
-
-  if(!req.body) return res.status(400).send('0 in body');
-
-  const project = new Project({
-    id: projects.length + 1,
-    title: req.body.title,
-    owner: req.body.owner
-  });
-
-  projects.push(project);
-  res.sendStatus(200).send(project);
+  if (!req.body) return res.status(400).send('Bad request');
+  const project = new Project(req.body);
+  project
+    .save()
+    .then(res.status(200).json(project))
+    .catch(error => {
+      res.status(400).send('Adding project failed: ' + error);
+    });
 });
 
+router.put('/:id', async (req, res) => {
+  const { Project } = res.locals.models;
+  if (!req.body) return res.status(400).send('Bad request');
+  const project = await Project.findById(req.params.id);
+  if (!project) return;
+
+  const bodyElements = [];
+  for (let el in Project.schema.obj){
+    bodyElements.push(el)
+  }
+  bodyElements.forEach( prop => {
+      const bodyProp = req.body[prop];
+      if (bodyProp) {
+        project.set({
+          [prop]: bodyProp
+        });
+      }
+  });
+
+  project
+    .save()
+    .then(res.status(200).json(project))
+    .catch(error => {
+      res.status(400).send('Editing project failed: ' + error);
+    })
+});
 module.exports = router;

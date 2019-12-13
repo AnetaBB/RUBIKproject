@@ -34,7 +34,7 @@ const main = async () => {
   app.use('/api/subtickets/', routerSubticket);
   app.use('/api/comments/', routerComment);
   app.use('/api/tickets', routerTicket);
-  app.use('/api/project', routerProject);
+  app.use('/api/projects', routerProject);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
