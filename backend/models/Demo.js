@@ -1,23 +1,18 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
-const Milestone = new Schema({
-  title: {
+const Demo = new Schema({
+  email: {
     type: String,
+    required: true,
+    unique: true,
   },
-  description: {
+  password: {
     type: String,
-  },
-
-  owner: {
-    type: String,
-  },
-
-  contributors: {
-    type: String,
+    required: true,
   },
 });
 
 module.exports = {
-  Milestone,
+  Demo,
 };

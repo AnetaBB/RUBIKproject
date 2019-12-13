@@ -6,12 +6,16 @@ const load = db => {
   const compiledModels = {};
 
   for (let modelName in models) {
-    compiledModels[modelName] = db.model(modelName, models[modelName]);
+    compiledModels[modelName] = db.model(
+      modelName,
+      models[modelName][modelName]
+    );
   }
 
   console.log('[MongoDB] Models compiled');
   return compiledModels;
 };
+
 
 module.exports = {
   connect,
