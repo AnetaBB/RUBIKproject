@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body);
   const { Project } = res.locals.models;
   const projects = await Project.find();
 
@@ -18,9 +19,11 @@ router.post('/', async (req, res) => {
     title: req.body.title,
     owner: req.body.owner
   });
+  console.log(project);
+
 
   projects.push(project);
-  res.sendStatus(200).send(project);
+  res.status(200).send(project);
 });
 
 module.exports = router;

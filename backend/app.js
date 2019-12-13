@@ -5,6 +5,7 @@ const routerHome = require('./routes/home');
 
 const main = async () => {
   const app = express();
+  app.use(express.json());
 
   // Database setup and connection
   const connection = await db.connect();
@@ -16,7 +17,6 @@ const main = async () => {
   }
 
   db.register(app, connection, models);
-
 
   // Routes
   app.use('/', routerHome);
