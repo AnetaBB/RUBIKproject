@@ -18,6 +18,17 @@ class Login extends React.Component {
       <>
         Inputy dla logowania
         <br />
+        <button
+          onClick={() => {
+            this.context.isLogged = localStorage.setItem(
+              'token',
+              'wartoscTokena'
+            );
+            window.location.reload();
+          }}
+        >
+          Przejdź do Dashboard
+        </button>
       </>
     );
   }

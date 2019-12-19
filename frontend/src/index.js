@@ -5,8 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './Store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-localStorage.setItem('token', 'asdf');
-
 ReactDOM.render(
   <StoreProvider>
     <App />

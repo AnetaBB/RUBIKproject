@@ -8,10 +8,7 @@ class Sidebar extends React.Component {
           className="navbar-nav bg-gray-900 sidebar sidebar-dark accordion"
           id="accordionSidebar"
         >
-          <a
-            className="sidebar-brand d-flex align-items-center justify-content-center"
-            href="index.html"
-          >
+          <span className="sidebar-brand d-flex align-items-center justify-content-center">
             <div className="sidebar-brand-icon rotate-n-15">
               <i className="fas fa-dice-d20"></i>
             </div>
@@ -23,7 +20,7 @@ class Sidebar extends React.Component {
                 project
               </span>
             </div>
-          </a>
+          </span>
 
           <li className="nav-item active">
             <a className="nav-link" href="main.html">
