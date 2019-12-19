@@ -11,7 +11,7 @@ class Register extends React.Component {
 
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
-    return <>Rejestracja... </>;
+    return <>Inputy dla rejestracji </>;
   }
 }
 

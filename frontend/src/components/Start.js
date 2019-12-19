@@ -16,8 +16,9 @@ class Login extends React.Component {
     if (this.context.isLogged) return <Redirect to="/" />;
     return (
       <>
-        Inputy dla logowania
+        Na pierwszy widok.
         <br />
+        <h2>Become a part of Rubik project...</h2>
       </>
     );
   }
