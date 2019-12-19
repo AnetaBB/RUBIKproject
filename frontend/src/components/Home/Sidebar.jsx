@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Sidebar({ mojaFunkcja }) {
+function Sidebar({ changeContent }) {
   return (
     <>
       <ul
@@ -22,18 +22,17 @@ function Sidebar({ mojaFunkcja }) {
         </span>
 
         <li className="nav-item active">
-          <a className="nav-link" href="main.html">
+          <span className="nav-link" href="main.html">
             <i className="fas fa-fw fa-home"></i>
             <span>Dashboard</span>
-          </a>
+          </span>
         </li>
 
         <div className="sidebar-heading">Interface</div>
 
         <li className="nav-item">
-          <a
+          <span
             className="nav-link collapsed"
-            href="#"
             data-toggle="collapse"
             data-target="#collapseTwo"
             aria-expanded="true"
@@ -41,7 +40,7 @@ function Sidebar({ mojaFunkcja }) {
           >
             <i className="fas fa-fw fa-cog"></i>
             <span>Projects</span>
-          </a>
+          </span>
           <div
             id="collapseTwo"
             className="collapse"
@@ -53,7 +52,7 @@ function Sidebar({ mojaFunkcja }) {
               <span
                 id="project1"
                 className="collapse-item"
-                onClick={() => mojaFunkcja('project')}
+                onClick={() => changeContent('project')}
               >
                 Project #1
               </span>
@@ -63,25 +62,45 @@ function Sidebar({ mojaFunkcja }) {
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="bugs.html">
-            <i className="fas fa-fw fa-bug"></i>
+          <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseThird"
+            aria-expanded="true"
+            aria-controls="collapseThird"
+          >
+            <i className="fas fa-fw fa-cog"></i>
             <span>Bugs</span>
-          </a>
+          </span>
+          <div
+            id="collapseThird"
+            className="collapse"
+            aria-labelledby="headingThird"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <span
+                id="project1"
+                className="collapse-item" >
+                Add ticket
+              </span>
+              <span className="collapse-item">View all</span>
+            </div>
+          </div>
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <span className="nav-link">
             <i className="fas fa-fw fa-tasks"></i>
             <span>Tasks</span>
-          </a>
+          </span>
         </li>
 
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">
-          <a
+          <span
             className="nav-link collapsed"
-            href="#"
             data-toggle="collapse"
             data-target="#collapseTemplates"
             aria-expanded="true"
@@ -89,7 +108,7 @@ function Sidebar({ mojaFunkcja }) {
           >
             <i className="fas fa-fw fa-folder"></i>
             <span>Templates</span>
-          </a>
+          </span>
           <div
             id="collapseTemplates"
             className="collapse"
@@ -98,31 +117,24 @@ function Sidebar({ mojaFunkcja }) {
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">Templates:</h6>
-              <a className="collapse-item" href="tables.html">
+              <span className="collapse-item" href="tables.html">
                 Table
-              </a>
-              <a className="collapse-item" href="progress-bar.html">
+              </span>
+              <span className="collapse-item" href="progress-bar.html">
                 Progess bars
-              </a>
-              <a className="collapse-item" href="input-fields.html">
+              </span>
+              <span className="collapse-item" href="input-fields.html">
                 Input fields
-              </a>
+              </span>
             </div>
           </div>
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <span className="nav-link">
             <i className="fas fa-fw fa-plus"></i>
             <span>New project</span>
-          </a>
-        </li>
-
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            <i className="fas fa-fw fa-book"></i>
-            <span>Documentation</span>
-          </a>
+          </span>
         </li>
 
         {/*<div className="text-center d-none d-md-inline">
