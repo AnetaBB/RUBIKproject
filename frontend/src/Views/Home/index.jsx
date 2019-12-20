@@ -5,7 +5,7 @@ import ExampleCard1 from '../../components/Home/ExampleCard1';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
-  state = { content: '', myApi: ['raz', 'dwa'] };
+  state = { content: '', myApi: [] };
 
   selectContent = wartosc => {
     this.setState({ content: wartosc });
@@ -18,9 +18,12 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('http://127.0.0.1:8080/api/users')
       .then(res => res.json())
-      .then(result => this.setState({ myApi: result[0].title }));
+      .then(data =>
+        //this.setState(prevState => ({ myApi: [prevState.push(data)] }))
+        console.log(data)
+      );
   }
 
   render() {
@@ -32,7 +35,8 @@ class Home extends React.Component {
             <div id="content">
               <TopNavbar />
               <div className="container-fluid">
-                {this.renderContent()} {this.state.myApi}
+                {this.renderContent()}
+                {this.state.myApi}
               </div>
             </div>
           </div>
