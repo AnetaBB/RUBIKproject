@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import ExampleCard1 from '../../components/Home/ExampleCard1';
+import Milestone from '../../components/Milestones/Milestone';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
@@ -13,7 +14,7 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <ExampleCard1 />;
+      return (<ExampleCard1 />), (<Milestone />);
     }
   }
 
