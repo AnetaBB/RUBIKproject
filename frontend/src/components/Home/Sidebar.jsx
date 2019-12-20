@@ -65,23 +65,21 @@ function Sidebar({ changeContent }) {
           <span
             className="nav-link collapsed"
             data-toggle="collapse"
-            data-target="#collapseThird"
+            data-target="#collapseBugs"
             aria-expanded="true"
-            aria-controls="collapseThird"
+            aria-controls="collapseBugs"
           >
             <i className="fas fa-fw fa-cog"></i>
             <span>Bugs</span>
           </span>
           <div
-            id="collapseThird"
+            id="collapseBugs"
             className="collapse"
-            aria-labelledby="headingThird"
+            aria-labelledby="headingBugs"
             data-parent="#accordionSidebar"
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
-              <span
-                id="project1"
-                className="collapse-item" >
+              <span id="project1" className="collapse-item">
                 Add ticket
               </span>
               <span className="collapse-item">View all</span>

@@ -25,7 +25,7 @@ class Home extends React.Component {
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <TopNavbar />
-              {this.renderContent()}
+              <div className="container-fluid">{this.renderContent()}</div>
             </div>
           </div>
         </div>
