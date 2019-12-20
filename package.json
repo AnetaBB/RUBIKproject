@@ -34,7 +34,8 @@
     "mongoose": "^5.7.14",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "serialize-javascript": "^2.1.1"
   },
   "proxy": "http://127.0.0.1:8080"
 }
