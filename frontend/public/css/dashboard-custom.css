@@ -1,0 +1,64 @@
+body {
+    color: #dddfeb;
+}
+
+.card {
+    border: 0px;
+}
+
+.card-header {
+    background-color: #3a3b45;
+    border-radius: 0.5rem;
+}
+
+.card-body {
+    background-color: #5a5c69;
+    border-radius: 0.5rem;
+}
+
+.dropdown-menu {
+    background-color: #3a3b45;
+}
+
+.dropdown-item {
+    color: #eaecf4;
+    background-color: #3a3b45;
+}
+
+.rubik-project {
+    font-family: 'Montserrat Subrayada', sans-serif;
+    color: #00D1FF;
+}
+
+.fa-dice-d20 {
+    color: #b8117b;
+}
+
+a {
+    color: #00D1FF;
+}
+
+a:hover {
+    color: #000;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #6e707e;
+}
+
+.paginate_button {
+    background-color: #3a3b45;
+}
+
+.cards {
+    display: none;
+}
+
+.collapse-item {
+    color: #eaecf4;
+}
+
+.collapse-item:hover {
+    color: #000;
+}
