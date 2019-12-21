@@ -24,7 +24,7 @@ function Sidebar({ changeContent }) {
         <li className="nav-item active">
           <span className="nav-link" href="main.html">
             <i className="fas fa-fw fa-home"></i>
-            <span>Dashboard</span>
+            <span onClick={() => changeContent('')}>Dashboard</span>
           </span>
         </li>
 

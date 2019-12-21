@@ -1,4 +1,5 @@
 import React from 'react';
+import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import ExampleCard1 from '../../components/Home/ExampleCard1';
@@ -16,8 +17,8 @@ class Home extends React.Component {
     if (this.state.content === 'project') {
       return <ExampleCard1 />;
     } else if (this.state.content === 'users') {
-      return <Users />
-    } else return <h1>Dashboard</h1>;
+      return <Users />;
+    } else return <StartDashboard />;
   }
 
   render() {
@@ -28,9 +29,7 @@ class Home extends React.Component {
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <TopNavbar />
-              <div className="container-fluid">
-                {this.renderContent()}
-              </div>
+              <div className="container-fluid">{this.renderContent()}</div>
             </div>
           </div>
         </div>
