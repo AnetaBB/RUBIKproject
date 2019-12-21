@@ -56,7 +56,7 @@ function Sidebar({ changeContent }) {
               >
                 Project #1
               </span>
-              <span className="collapse-item">Project #2</span>
+              <span className="collapse-item">+ Add new project</span>
             </div>
           </div>
         </li>

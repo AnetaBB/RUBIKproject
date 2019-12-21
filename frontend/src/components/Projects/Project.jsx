@@ -5,8 +5,8 @@ import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
 
-class Project extends React.Component {
-  render() {
+const Project = () =>  {
+
     return (
 
       <div className="container">
@@ -35,6 +35,11 @@ class Project extends React.Component {
                       <td>low</td>
                       <td>projectDeadline</td>
                     </tr>
+                    <tr>
+                      <td>View all tasks</td>
+                      <td></td>
+                      <td>View all deadlines</td>
+                    </tr>
                   </tbody>
                 </Table>
               </Card.Body>
@@ -46,7 +51,7 @@ class Project extends React.Component {
               <Card.Body>
                 <Card.Title>Name of first task from table</Card.Title>
                 <Card.Text>
-                  Description
+                  Description... but you can click the next one in the table to view its description
                 </Card.Text>
                 <Button variant="primary">Go to this task</Button>
               </Card.Body>
@@ -55,7 +60,7 @@ class Project extends React.Component {
         </div>
 
         <div className="row">
-          <div className="col-lg-6 mb-4">
+          <div className="col-lg-7 mb-4">
             <Card>
               <Card.Header>Project name</Card.Header>
               <Card.Body>
@@ -76,8 +81,6 @@ class Project extends React.Component {
 
       </div>
     )
-  }
-
 }
 
 export default Project;

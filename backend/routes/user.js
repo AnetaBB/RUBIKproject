@@ -13,7 +13,7 @@ Example:
 	"active": true  */
 router.post('/', async (req, res) => {
   const { User } = res.locals.models;
-   const checkUser = await User.findOne({
+  const checkUser = await User.findOne({
     email: req.body.email,
   });
   if (checkUser) return res.status(400).send('User already registered');
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
   res.send(user);
 });
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.findById(req.params.id);
   user.name = req.body.name;
@@ -63,7 +63,7 @@ router.put('/:id', async(req, res) => {
   res.send(user);
 });
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
   const { User } = res.locals.models;
   const user = await User.findByIdAndRemove(req.params.id);
   user.name = req.body.name;
@@ -89,7 +89,7 @@ function validate(user) {
       .max(255)
       .required(),
     repeat_password: Joi.ref('password'),
-    active: Joi.boolean()
+    active: Joi.boolean(),
   });
 
   return schema.validate(user);
