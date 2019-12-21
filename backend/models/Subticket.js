@@ -11,6 +11,12 @@ const Subticket = new Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    default: 'Open',
+    required: true,
+    enum: ['Open', 'Assigned', 'Completed', 'Closed'],
+  },
 });
 
 module.exports = {
