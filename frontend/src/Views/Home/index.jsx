@@ -2,10 +2,11 @@ import React from 'react';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import ExampleCard1 from '../../components/Home/ExampleCard1';
+import Users from '../../components/Users/index';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
-  state = { content: '', myApi: [] };
+  state = { content: '' };
 
   selectContent = wartosc => {
     this.setState({ content: wartosc });
@@ -14,16 +15,9 @@ class Home extends React.Component {
   renderContent() {
     if (this.state.content === 'project') {
       return <ExampleCard1 />;
-    }
-  }
-
-  componentDidMount() {
-    fetch('http://127.0.0.1:8080/api/users')
-      .then(res => res.json())
-      .then(data =>
-        //this.setState(prevState => ({ myApi: [prevState.push(data)] }))
-        console.log(data)
-      );
+    } else if (this.state.content === 'users') {
+      return <Users />
+    } else return <h1>Dashboard</h1>;
   }
 
   render() {
@@ -36,7 +30,6 @@ class Home extends React.Component {
               <TopNavbar />
               <div className="container-fluid">
                 {this.renderContent()}
-                {this.state.myApi}
               </div>
             </div>
           </div>

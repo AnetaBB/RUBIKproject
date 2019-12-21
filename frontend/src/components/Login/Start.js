@@ -1,5 +1,5 @@
 import React from 'react';
-import Store from '../Store';
+import Store from '../../Store';
 import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
@@ -16,19 +16,9 @@ class Login extends React.Component {
     if (this.context.isLogged) return <Redirect to="/" />;
     return (
       <>
-        Inputy dla logowania
+        Na pierwszy widok.
         <br />
-        <button
-          onClick={() => {
-            this.context.isLogged = localStorage.setItem(
-              'token',
-              'wartoscTokena'
-            );
-            window.location.reload();
-          }}
-        >
-          Przejdź do Dashboard
-        </button>
+        <h2>Become a part of Rubik project...</h2>
       </>
     );
   }

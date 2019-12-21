@@ -135,6 +135,36 @@ function Sidebar({ changeContent }) {
           </span>
         </li>
 
+        <li className="nav-item">
+          <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseUsers"
+            aria-expanded="true"
+            aria-controls="collapseUsers"
+          >
+            <i className="fas fa-user"></i>
+            <span>Users</span>
+          </span>
+          <div
+            id="collapseUsers"
+            className="collapse"
+            aria-labelledby="headingUsers"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <span
+                id="project1"
+                className="collapse-item"
+                onClick={() => changeContent('users')}
+              >
+                View all
+              </span>
+              <span className="collapse-item">Update</span>
+            </div>
+          </div>
+        </li>
+
         {/*<div className="text-center d-none d-md-inline">
               <button className="rounded-circle border-0" id="sidebarToggle">
                 <i className="fas fa-arrow-left"></i>
