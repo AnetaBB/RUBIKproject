@@ -4,14 +4,10 @@ import Card from 'react-bootstrap/Card';
 class Users extends React.Component {
   state = { myApi: [] };
 
-  componentDidMount() {
-    fetch('http://127.0.0.1:8080/api/users')
-      .then(res => res.json())
-      .then(
-        data => this.setState({ myApi: data[0].name })
-        //this.setState(prevState => ({ myApi: [prevState.push(data)] }))
-        //console.log(data);
-      );
+  async componentDidMount() {
+    const response = await fetch('http://127.0.0.1:8080/api/users');
+    const data = await response.json();
+    this.setState({ myApi: data });
   }
 
   render() {
@@ -22,7 +18,12 @@ class Users extends React.Component {
             <Card.Header>List of users</Card.Header>
             <Card.Body>
               <Card.Title>Title</Card.Title>
-              <Card.Text>{this.state.myApi}</Card.Text>
+              <Card.Text></Card.Text>
+              <ul>
+                {this.state.myApi.map(function(item) {
+                  return <li key={item._id}>{item.name}</li>;
+                })}
+              </ul>
             </Card.Body>
           </Card>
         </div>
