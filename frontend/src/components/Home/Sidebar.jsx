@@ -93,7 +93,36 @@ function Sidebar({ changeContent }) {
             <span>Tasks</span>
           </span>
         </li>
-
+        <li className="nav-item">
+          <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseMilestones"
+            aria-expanded="true"
+            aria-controls="collapseMilestones"
+          >
+            <i className="fas fa-fw fa-list"></i>
+            <span>Milestones</span>
+          </span>
+          <div
+            id="collapseMilestones"
+            className="collapse"
+            aria-labelledby="headingMilestone"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <h6 className="collapse-header">My milestones:</h6>
+              <span
+                id="milestone1"
+                className="collapse-item"
+                onClick={() => changeContent('milestone')}
+              >
+                Show milestones
+              </span>
+              <span className="collapse-item">Add new</span>
+            </div>
+          </div>
+        </li>
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">
