@@ -9,6 +9,34 @@ class Milestone extends React.Component {
     return (
       <div className="row">
         <div className="col-lg-7">
+          <Card>
+            <Card.Header>
+              Your milestones for this project this project
+            </Card.Header>
+            <Card.Body>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Nr of the Project</th>
+                    <th>Priority</th>
+                    <th>Deadline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>task1</td>
+                    <td>low</td>
+                    <td>projectDeadline</td>
+                  </tr>
+                  <tr>
+                    <td>View all tasks</td>
+                    <td></td>
+                    <td>View all deadlines</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
           <Card style={{ width: '20rem' }}>
             <Card.Body>
               <Card.Title>Milestone</Card.Title>
