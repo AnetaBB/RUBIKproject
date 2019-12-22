@@ -14,7 +14,10 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return (<ExampleCard1 />), (<Milestone />);
+      return <ExampleCard1 />;
+    }
+    if (this.state.content === 'milestone') {
+      return <Milestone />;
     }
   }
 
