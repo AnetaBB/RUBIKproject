@@ -2,6 +2,11 @@ const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
 const Todo = new Schema({
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   content: {
     type: String,
     required: true,
