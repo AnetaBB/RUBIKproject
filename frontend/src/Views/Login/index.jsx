@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterOrLogin from '../../components/RegisterOrLogin';
+import RegisterOrLogin from '../../components/Login/RegisterOrLogin';
 
 const Login = () => {
   return <RegisterOrLogin />;
