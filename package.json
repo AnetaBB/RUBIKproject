@@ -7,7 +7,10 @@
     "mon": "nodemon -r dotenv/config ./backend/app.js",
     "start": "node -r dotenv/config ./backend/app.js",
     "prettier-win": "prettier --write **/*.js",
-    "prettier-mac": "prettier --write '**/*.js'"
+    "prettier-mac": "prettier --write '**/*.js'",
+    "server": "node -r dotenv/config ./backend/app.js",
+    "client": "npm start --prefix ./frontend",
+    "dev": "concurrently \" npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -25,11 +28,15 @@
     "@babel/core": "^7.7.4",
     "@hapi/joi": "^16.1.8",
     "bcrypt": "^3.0.7",
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.14",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
-    "react-router-dom": "^5.1.2"
-  }
+    "react-router-dom": "^5.1.2",
+    "serialize-javascript": "^2.1.1"
+  },
+  "proxy": "http://127.0.0.1:8080"
 }
