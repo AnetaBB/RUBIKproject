@@ -21,6 +21,20 @@ class Login extends React.Component {
         repeat_password: 'qweasd',
         active: true,
       });
+      if (response.status)
+        this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  loginUser = async () => {
+    try {
+      const response = await api_rubikproject.post('/api/login', {
+        email: 'tomek7@gmail.com',
+        password: 'qweasd',
+      });
       console.log(response);
       if (response.status)
         this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
@@ -38,7 +52,12 @@ class Login extends React.Component {
     if (this.state.changeContent === 'start')
       return <Welcome changeContent={this.changeContent} />;
     if (this.state.changeContent === 'login')
-      return <LoginInputs changeContent={this.changeContent} />;
+      return (
+        <LoginInputs
+          loginUser={this.loginUser}
+          changeContent={this.changeContent}
+        />
+      );
     if (this.state.changeContent === 'register')
       return <Register registerUser={this.registerUser} />;
   }
