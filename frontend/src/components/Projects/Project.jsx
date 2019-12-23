@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
@@ -6,20 +6,24 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 
 
 const Project = () =>  {
+  const {project, getProject} = useState('');
+
+  const getProjectData = async () => {
+    const response = await fetch
+  };
 
     return (
-
       <div className="container">
 
         <div className="row">
-          <h1 className="col-lg-9 mb-4">Good morning, Ola</h1>
+          <h1 className="col-lg-9 mb-4">project.name</h1>
           <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">+ Add new project</Button>
         </div>
 
         <div className="row">
           <div className="col-lg-7 mb-4">
             <Card>
-              <Card.Header>Your tasks in this project</Card.Header>
+              <Card.Header>Your tasks in "project.name"</Card.Header>
               <Card.Body>
                 <Table striped bordered hover>
                   <thead>

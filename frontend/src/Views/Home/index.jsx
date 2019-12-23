@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
-import Project from '../../components/Projects/Project'
+import Projects from '../../Views/Projects'
 
 //import ExampleCard1 from '../../components/Home/ExampleCard1';
 //import { ReactComponent } from '*.svg';
@@ -15,7 +15,7 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <Project />;
+      return <Projects />;
     }
   }
 
