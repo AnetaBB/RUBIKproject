@@ -27,11 +27,17 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const schema = Joi.object({
     title: Joi.string()
-      .min(3)
+      .min(5)
       .max(70)
       .required(),
     description: Joi.string()
-      .min(20)
+      .min(25)
+      .required(),
+    priority: Joi.string()
+      .valid('Low', 'Medium', 'High', 'Urgent')
+      .required(),
+    relevance: Joi.string()
+      .valid('Trivial', 'Minor', 'Major', 'Critical')
       .required(),
   });
   try {
@@ -48,10 +54,13 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const schema = Joi.object({
     title: Joi.string()
-      .min(3)
+      .min(5)
       .max(70),
-    description: Joi.string().min(20),
+    description: Joi.string().min(25),
     status: Joi.string().valid('Open', 'Assigned', 'Completed', 'Closed'),
+    contributor: Joi.string().min(3),
+    priority: Joi.string().valid('Low', 'Medium', 'High', 'Urgent'),
+    relevance: Joi.string().valid('Trivial', 'Minor', 'Major', 'Critical'),
   });
   try {
     const value = await schema.validateAsync(req.body);
@@ -59,9 +68,9 @@ router.put('/:id', async (req, res) => {
     const subticket = await Subticket.findById(req.params.id);
     if (!subticket)
       return res.status(404).send('The subticket with given ID was not found.');
-    subticket.title = value.title || subticket.title;
-    subticket.description = value.description || subticket.description;
-    subticket.status = value.status || subticket.status;
+    for (let [k, v] of Object.entries(value)) {
+      subticket[k] = v;
+    }
     const result = await subticket.save();
     res.status(200).send(result);
   } catch (err) {
