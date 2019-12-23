@@ -73,11 +73,7 @@ class Register extends React.Component {
                   <span
                     className="btn btn-primary btn-user btn-block"
                     onClick={() => {
-                      this.context.isLogged = localStorage.setItem(
-                        'token',
-                        'wartoscTokena'
-                      );
-                      window.location.reload();
+                      this.props.registerUser();
                     }}
                   >
                     Register Account
