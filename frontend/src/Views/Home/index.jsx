@@ -4,6 +4,7 @@ import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import ExampleCard1 from '../../components/Home/ExampleCard1';
 import Users from '../../components/Users/index';
+import Bugs from '../../components/Bugs/index';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
@@ -18,6 +19,8 @@ class Home extends React.Component {
       return <ExampleCard1 />;
     } else if (this.state.content === 'users') {
       return <Users />;
+    } else if (this.state.content === 'bugs') {
+      return <Bugs />;
     } else return <StartDashboard />;
   }
 
