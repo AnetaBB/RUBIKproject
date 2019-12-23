@@ -9,14 +9,20 @@ class TopNavbarLogin extends React.Component {
           id="mainNav"
         >
           <div className="container">
-            <a className="navbar-brand" href="index.html">
-              <span className="rubik-project" style={{ fontSize: '46px' }}>
+            <span className="navbar-brand">
+              <span
+                className="rubik-project"
+                style={{ fontSize: '46px' }}
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
                 <span style={{ fontSize: '105%' }}>
-                  <b>RUBIK</b>
+                  <b>RUBIK </b>
                 </span>
                 project
               </span>
-            </a>
+            </span>
             <button
               className="navbar-toggler navbar-toggler-right"
               type="button"
@@ -31,14 +37,20 @@ class TopNavbarLogin extends React.Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto my-2 my-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <span
+                    className="nav-link"
+                    onClick={() => this.props.changeContent('login')}
+                  >
                     Login
-                  </a>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <span
+                    className="nav-link"
+                    onClick={() => this.props.changeContent('register')}
+                  >
                     Register
-                  </a>
+                  </span>
                 </li>
               </ul>
             </div>

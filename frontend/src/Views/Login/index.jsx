@@ -1,30 +1,31 @@
 import React from 'react';
 import TopNavbarLogin from '../../components/Login/TopNavbarLogin';
-import RegisterOrLogin from '../../components/Login/RegisterOrLogin';
+import Welcome from '../../components/Login/Welcome';
+import LoginInputs from '../../components/Login/LoginInputs';
+import Register from '../../components/Login/Register';
 
 class Login extends React.Component {
+  state = { changeContent: 'start' };
+
+  changeContent = wartosc => {
+    this.setState({ changeContent: wartosc });
+  };
+
+  displayContent() {
+    if (this.state.changeContent === 'start')
+      return <Welcome changeContent={this.changeContent} />;
+    if (this.state.changeContent === 'login')
+      return <LoginInputs changeContent={this.changeContent} />;
+    if (this.state.changeContent === 'register') return <Register />;
+  }
+
   render() {
     return (
       <>
-        <TopNavbarLogin />
-        <div id="main" className="container h-100 top-bottom-margin">
+        <TopNavbarLogin changeContent={this.changeContent} />
+        <div id="main" className="container h-100">
           <div className="row h-100 align-items-center justify-content-center text-center">
-            <div className="col-lg-10 align-self-end">
-              <h1 className="text-uppercase text-white font-weight-bold">
-                Become a part of
-                <br />
-                <span className="rubik-project">Rubik project</span>
-              </h1>
-              <hr className="divider my-4" />
-            </div>
-            <div className="col-lg-8 align-self-baseline">
-              <p className="text-white-75 font-weight-light mb-5">
-                Click button below and make yours dreams come true!
-              </p>
-              <button id="startBtn" className="btn btn-primary btn-lg">
-                Let`s start
-              </button>
-            </div>
+            {this.displayContent()}
           </div>
         </div>
       </>

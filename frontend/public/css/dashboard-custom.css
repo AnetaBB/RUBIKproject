@@ -1,15 +1,97 @@
+/* General */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     color: #dddfeb;
+    background-image: url('../img//bg.png');
 }
 
 #root {
-    background-image: url('../img//bg.png');
     height: 100vh;
+}
+
+.navbar-brand:hover {
+    cursor: pointer;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.rubik-project {
+    font-family: 'Montserrat Subrayada', sans-serif;
+    color: #00D1FF;
+}
+
+.fa-dice-d20 {
+    color: #b8117b;
 }
 
 .card {
     border: 0px;
+    background: none;
 }
+
+.btn {
+    color: #fff;
+    transition: all 0.7s;
+}
+
+.btn:hover {
+    color: #bebebe;
+}
+
+.divider {
+    width: 20%;
+    height: 3px;
+    background-color: #000;
+}
+
+.transparent {
+    background: none !important;
+}
+
+/* Login page */
+
+/* Navbar */
+@media(max-width: 992px) {
+    .navbar {
+        background-color: #353434;
+        box-shadow: 0px 15px 10px -15px #111;
+    }
+}
+
+#main {
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+
+#login {
+    margin-top: 200px;
+}
+
+.dice-icon {
+    font-size: 15rem;
+    color: #b8117b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-user:hover {
+    color: #fff;
+}
+
+.btn-google:hover,
+.btn-facebook:hover {
+    color: #bebebe;
+}
+
+/* Dashboard page */
 
 .card-header {
     background-color: #3a3b45;
@@ -30,15 +112,6 @@ body {
     background-color: #3a3b45;
 }
 
-.rubik-project {
-    font-family: 'Montserrat Subrayada', sans-serif;
-    color: #00D1FF;
-}
-
-.fa-dice-d20 {
-    color: #b8117b;
-}
-
 a {
     color: #00D1FF;
 }
@@ -47,6 +120,16 @@ a:hover {
     color: #000;
 }
 
+/*a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #bebebe;
+}*/
+
 .dropdown-item:hover,
 .dropdown-item:focus {
     background-color: #6e707e;
@@ -54,10 +137,6 @@ a:hover {
 
 .paginate_button {
     background-color: #3a3b45;
-}
-
-.cards {
-    display: none;
 }
 
 .collapse-item {
