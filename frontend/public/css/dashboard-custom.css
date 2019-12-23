@@ -2,6 +2,11 @@ body {
     color: #dddfeb;
 }
 
+#root {
+    background-image: url('../img//bg.png');
+    height: 100vh;
+}
+
 .card {
     border: 0px;
 }
