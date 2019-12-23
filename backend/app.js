@@ -1,5 +1,6 @@
 const db = require('./db');
 const express = require('express');
+const cors = require('cors');
 const routerUsers = require('./routes/user');
 const routerMilestone = require('./routes/milestone');
 const routerComment = require('./routes/comment');
@@ -23,6 +24,7 @@ const main = async () => {
   db.register(app, connection, models); //ads db connection and models to res.locals
 
   // Global middleware
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 

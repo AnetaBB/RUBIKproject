@@ -1,6 +1,9 @@
 import React from 'react';
+import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
+import ExampleCard1 from '../../components/Home/ExampleCard1';
+import Users from '../../components/Users/index';
 import Projects from '../../Views/Projects'
 
 //import ExampleCard1 from '../../components/Home/ExampleCard1';
@@ -15,8 +18,10 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <Projects />;
-    }
+      return <ExampleCard1 />;
+    } else if (this.state.content === 'users') {
+      return <Users />;
+    } else return <StartDashboard />;
   }
 
   render() {

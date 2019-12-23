@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import Store from '../Store';
+import Store from '../../Store';
 class Register extends React.Component {
   constructor(props) {
     super(props);
