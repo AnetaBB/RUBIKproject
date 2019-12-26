@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
@@ -6,24 +6,33 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 
 
 const Project = () =>  {
-  const {project, getProject} = useState('');
+  const [ project, setProject ] = useState({});
 
-  const getProjectData = async () => {
-    const response = await fetch
-  };
+  useEffect(()=>{
+    fetch(`http://localhost:8080/api/projects/5dffa4f6bef9482377ac5212`)
+      .then(result => result.json())
+      .then(project => {
+        console.log(project);
+        setProject({title: project.title})
+      });
+  });
 
     return (
       <div className="container">
 
         <div className="row">
-          <h1 className="col-lg-9 mb-4">project.name</h1>
+          {
+            project.title
+              ? <h1 className="col-lg-9 mb-4">{project.title}</h1>
+              : <h1 className="col-lg-9 mb-4">Loading project...</h1>
+          }
           <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">+ Add new project</Button>
         </div>
 
         <div className="row">
           <div className="col-lg-7 mb-4">
             <Card>
-              <Card.Header>Your tasks in "project.name"</Card.Header>
+              <Card.Header>Your tasks in {project.title}</Card.Header>
               <Card.Body>
                 <Table striped bordered hover>
                   <thead>
@@ -37,7 +46,12 @@ const Project = () =>  {
                     <tr>
                       <td>task1</td>
                       <td>low</td>
-                      <td>projectDeadline</td>
+                      <td>taskDeadline</td>
+                    </tr>
+                    <tr>
+                      <td>task2</td>
+                      <td>height</td>
+                      <td>taskDeadline</td>
                     </tr>
                     <tr>
                       <td>View all tasks</td>
@@ -66,7 +80,7 @@ const Project = () =>  {
         <div className="row">
           <div className="col-lg-7 mb-4">
             <Card>
-              <Card.Header>Project name</Card.Header>
+              <Card.Header>{project.title} progress</Card.Header>
               <Card.Body>
                 <Card.Subtitle className="mb-2 text-muted">Bugs/Issues</Card.Subtitle>
                 <ProgressBar className="mb-4" variant="danger" now={80} />
