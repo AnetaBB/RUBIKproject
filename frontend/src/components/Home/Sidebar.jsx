@@ -93,6 +93,8 @@ function Sidebar({ changeContent }) {
             <span>Tasks</span>
           </span>
         </li>
+
+
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -113,7 +115,7 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My milestones:</h6>
               <span
-                id="milestone1"
+                id="project1"
                 className="collapse-item"
                 onClick={() => changeContent('milestone')}
               >
