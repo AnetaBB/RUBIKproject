@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import {Context} from "../../Store";
 
 
 const Project = () =>  {
   const [ project, setProject ] = useState({});
 
+  let context = useContext(Context);
+
   useEffect(()=>{
-    fetch(`http://localhost:8080/api/projects/5dffa4f6bef9482377ac5212`)
+    fetch(`http://localhost:8080/api/projects/${context.projectID}`)
       .then(result => result.json())
       .then(project => {
-        console.log(project);
         setProject({title: project.title})
       });
   });

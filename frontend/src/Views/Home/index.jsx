@@ -3,7 +3,8 @@ import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import Users from '../../components/Users/index';
-import Project from '../Project'
+import Project from '../../components/Project/Project';
+import Store from '../../Store';
 
 //import ExampleCard1 from '../../components/Home/ExampleCard1';
 //import { ReactComponent } from '*.svg';
@@ -11,13 +12,15 @@ import Project from '../Project'
 class Home extends React.Component {
   state = { content: '' };
 
-  selectContent = wartosc => {
-    this.setState({ content: wartosc });
+  static contextType = Store;
+
+  selectContent = value => {
+    this.setState({ content: value });
   };
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <Project />;
+      return <Project/>;
     } else if (this.state.content === 'users') {
       return <Users />;
     } else return <StartDashboard />;
