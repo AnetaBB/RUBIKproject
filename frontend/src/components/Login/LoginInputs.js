@@ -1,6 +1,7 @@
 import React from 'react';
 import Store from '../../Store';
 import { Redirect } from 'react-router-dom';
+import api_rubikproject from '../../api/api_rubikproject';
 
 class LoginInputs extends React.Component {
   constructor(props) {
@@ -11,6 +12,21 @@ class LoginInputs extends React.Component {
   }
 
   static contextType = Store;
+
+  loginUser = async () => {
+    try {
+      const response = await api_rubikproject.post('/api/login', {
+        email: 'tomek7@gmail.com',
+        password: 'qweasd',
+      });
+      console.log(response);
+      if (response.status)
+        this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
@@ -64,7 +80,7 @@ class LoginInputs extends React.Component {
                     <button
                       className="btn btn-primary btn-user btn-block"
                       onClick={() => {
-                        this.props.loginUser();
+                        this.loginUser();
                       }}
                     >
                       Login
