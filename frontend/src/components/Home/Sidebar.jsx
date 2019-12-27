@@ -81,7 +81,12 @@ function Sidebar({ changeContent }) {
               <span id="project1" className="collapse-item">
                 Add ticket
               </span>
-              <span className="collapse-item">View all</span>
+              <span
+                className="collapse-item"
+                onClick={() => changeContent('bugs')}
+              >
+                View all
+              </span>
             </div>
           </div>
         </li>
