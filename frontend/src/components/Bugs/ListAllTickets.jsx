@@ -17,12 +17,12 @@ class ListAllTickets extends React.Component {
         <Card.Header>List of tickets</Card.Header>
         <Card.Body>
           <Table responsive="x1" striped bordered hover variant="dark">
-            <thread>
+            <thead>
               <tr>
                 <th>Title</th>
                 <th>Status</th>
               </tr>
-            </thread>
+            </thead>
             <tbody>
               {this.state.ticketsApi.map(function(item) {
                 return (
