@@ -5,32 +5,54 @@ import Card from 'react-bootstrap/Card';
 import api_rubikproject from '../../api/api_rubikproject';
 
 class Register extends React.Component {
-  state = { error: '' };
+  state = {
+    name: '',
+    surname: '',
+    email: '',
+    pass: '',
+    re_pass: '',
+    error: '',
+  };
 
   static contextType = Store;
+
+  handleNameChange = e => {
+    this.setState({ name: e.target.value });
+  };
+  handleSurnameChange = e => {
+    this.setState({ surname: e.target.value });
+  };
+  handleEmailChange = e => {
+    this.setState({ email: e.target.value });
+  };
+  handlePassChange = e => {
+    this.setState({ pass: e.target.value });
+  };
+  handleRePassChange = e => {
+    this.setState({ re_pass: e.target.value });
+  };
 
   registerUser = async () => {
     try {
       const response = await api_rubikproject.post('/api/users', {
-        name: 'tomek',
-        surname: 'tomek',
-        email: 'tomek7@gmail.com',
-        password: 'qweasd',
-        repeat_password: 'qweasd',
+        name: this.state.name,
+        surname: this.state.surname,
+        email: this.state.email,
+        password: this.state.pass,
+        repeat_password: this.state.re_pass,
         active: true,
       });
       if (response.status)
         this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.log(this.state.name);
       this.setState({ error: 'Nie prawidłowe dane logowania.' });
     }
   };
 
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
-    console.log(this.state.error);
     return (
       <>
         <Card className=" o-hidden border-0 my-5" style={{ width: '100%' }}>
@@ -52,6 +74,8 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleFirstName"
                           placeholder="First Name"
+                          value={this.state.name}
+                          onChange={this.handleNameChange}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -60,6 +84,8 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleLastName"
                           placeholder="Last Name"
+                          value={this.state.surname}
+                          onChange={this.handleSurnameChange}
                         />
                       </div>
                     </div>
@@ -69,6 +95,9 @@ class Register extends React.Component {
                         className="form-control form-control-user"
                         id="exampleInputEmail"
                         placeholder="Email Address"
+                        autoComplete="username"
+                        value={this.state.email}
+                        onChange={this.handleEmailChange}
                       />
                     </div>
                     <div className="form-group row">
@@ -78,6 +107,9 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleInputPassword"
                           placeholder="Password"
+                          autoComplete="new-password"
+                          value={this.state.pass}
+                          onChange={this.handlePassChange}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -86,6 +118,9 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleRepeatPassword"
                           placeholder="Repeat Password"
+                          autoComplete="new-password"
+                          value={this.state.re_pass}
+                          onChange={this.handleRePassChange}
                         />
                       </div>
                     </div>

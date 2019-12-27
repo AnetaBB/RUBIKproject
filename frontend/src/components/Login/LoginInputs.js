@@ -4,28 +4,31 @@ import { Redirect } from 'react-router-dom';
 import api_rubikproject from '../../api/api_rubikproject';
 
 class LoginInputs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogged: false,
-    };
-  }
+  state = { isLogged: false, email: '', pass: '', error: '' };
 
   static contextType = Store;
 
   loginUser = async () => {
     try {
       const response = await api_rubikproject.post('/api/login', {
-        email: 'tomek7@gmail.com',
-        password: 'qweasd',
+        email: this.state.email,
+        password: this.state.pass,
       });
-      console.log(response);
+
       if (response.status)
         this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      this.setState({ error: 'Nieprawidłowe dane logowania.' });
     }
+  };
+
+  handleEmailChange = e => {
+    this.setState({ email: e.target.value });
+  };
+
+  handlePassChange = e => {
+    this.setState({ pass: e.target.value });
   };
 
   render() {
@@ -44,65 +47,74 @@ class LoginInputs extends React.Component {
                     <div className="text-center">
                       <h1 className="h2 mb-4">Welcome!</h1>
                     </div>
-
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        className="form-control form-control-user"
-                        id="exampleInputEmail"
-                        aria-describedby="emailHelp"
-                        placeholder="Enter Email Address..."
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className="form-control form-control-user"
-                        id="exampleInputPassword"
-                        placeholder="Password"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <div className="custom-control custom-checkbox small">
+                    <form>
+                      <div className="form-group">
                         <input
-                          type="checkbox"
-                          className="custom-control-input"
-                          id="customCheck"
+                          type="email"
+                          className="form-control form-control-user"
+                          id="exampleInputEmail"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter Email Address..."
+                          autoComplete="username"
+                          value={this.state.email}
+                          onChange={this.handleEmailChange}
                         />
-                        <label
-                          className="custom-control-label"
-                          htmlFor="customCheck"
-                        >
-                          Remember Me
-                        </label>
                       </div>
-                    </div>
-                    <button
-                      className="btn btn-primary btn-user btn-block"
-                      onClick={() => {
-                        this.loginUser();
-                      }}
-                    >
-                      Login
-                    </button>
-                    <button
-                      id="registerBtn"
-                      className="btn btn-success btn-user btn-block"
-                      onClick={() => this.props.changeContent('register')}
-                    >
-                      Create an Account!
-                    </button>
-                    <button className="btn btn-google btn-user btn-block">
-                      <i className="fab fa-google fa-fw"></i> Login with Google
-                    </button>
-                    <button className="btn btn-facebook btn-user btn-block">
-                      <i className="fab fa-facebook-f fa-fw"></i> Login with
-                      Facebook
-                    </button>
-                    <hr className="divider" />
-                    <div className="text-center">
-                      <span className="small">Forgot Password?</span>
-                    </div>
+                      <div className="form-group">
+                        <input
+                          type="password"
+                          className="form-control form-control-user"
+                          id="exampleInputPassword"
+                          placeholder="Password"
+                          autoComplete="current-password"
+                          value={this.state.pass}
+                          onChange={this.handlePassChange}
+                        />
+                      </div>
+                      <p style={{ color: 'red' }}>{this.state.error}</p>
+                      <div className="form-group">
+                        <div className="custom-control custom-checkbox small">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input"
+                            id="customCheck"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="customCheck"
+                          >
+                            Remember Me
+                          </label>
+                        </div>
+                      </div>
+                      <span
+                        className="btn btn-primary btn-user btn-block"
+                        onClick={() => {
+                          this.loginUser();
+                        }}
+                      >
+                        Login
+                      </span>
+                      <button
+                        id="registerBtn"
+                        className="btn btn-success btn-user btn-block"
+                        onClick={() => this.props.changeContent('register')}
+                      >
+                        Create an Account!
+                      </button>
+                      <button className="btn btn-google btn-user btn-block">
+                        <i className="fab fa-google fa-fw"></i> Login with
+                        Google
+                      </button>
+                      <button className="btn btn-facebook btn-user btn-block">
+                        <i className="fab fa-facebook-f fa-fw"></i> Login with
+                        Facebook
+                      </button>
+                      <hr className="divider" />
+                      <div className="text-center">
+                        <span className="small">Forgot Password?</span>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
