@@ -1,12 +1,17 @@
 import React from 'react';
 
-const Context = React.createContext();
+export const Context = React.createContext();
 
 export class StoreProvider extends React.Component {
-  state = { isLogged: localStorage.getItem('token') ? true : false, me: null };
+  state = {
+    isLogged: localStorage.getItem('token') ? true : false,
+    me: null,
+    projectID: '',
+  };
 
   changeStore = (name, value) => {
     this.setState({ [name]: value });
+    console.log(`Store element: ${name} , value: ${value}`);
   };
 
   render() {
