@@ -23,14 +23,6 @@ class LoginInputs extends React.Component {
     }
   };
 
-  handleEmailChange = e => {
-    this.setState({ email: e.target.value });
-  };
-
-  handlePassChange = e => {
-    this.setState({ pass: e.target.value });
-  };
-
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
     return (
@@ -57,7 +49,9 @@ class LoginInputs extends React.Component {
                           placeholder="Enter Email Address..."
                           autoComplete="username"
                           value={this.state.email}
-                          onChange={this.handleEmailChange}
+                          onChange={e => {
+                            this.setState({ email: e.target.value });
+                          }}
                         />
                       </div>
                       <div className="form-group">
@@ -68,7 +62,9 @@ class LoginInputs extends React.Component {
                           placeholder="Password"
                           autoComplete="current-password"
                           value={this.state.pass}
-                          onChange={this.handlePassChange}
+                          onChange={e => {
+                            this.setState({ pass: e.target.value });
+                          }}
                         />
                       </div>
                       <p style={{ color: 'red' }}>{this.state.error}</p>

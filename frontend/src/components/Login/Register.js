@@ -16,22 +16,6 @@ class Register extends React.Component {
 
   static contextType = Store;
 
-  handleNameChange = e => {
-    this.setState({ name: e.target.value });
-  };
-  handleSurnameChange = e => {
-    this.setState({ surname: e.target.value });
-  };
-  handleEmailChange = e => {
-    this.setState({ email: e.target.value });
-  };
-  handlePassChange = e => {
-    this.setState({ pass: e.target.value });
-  };
-  handleRePassChange = e => {
-    this.setState({ re_pass: e.target.value });
-  };
-
   registerUser = async () => {
     try {
       const response = await api_rubikproject.post('/api/users', {
@@ -75,7 +59,9 @@ class Register extends React.Component {
                           id="exampleFirstName"
                           placeholder="First Name"
                           value={this.state.name}
-                          onChange={this.handleNameChange}
+                          onChange={e => {
+                            this.setState({ name: e.target.value });
+                          }}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -85,7 +71,9 @@ class Register extends React.Component {
                           id="exampleLastName"
                           placeholder="Last Name"
                           value={this.state.surname}
-                          onChange={this.handleSurnameChange}
+                          onChange={e => {
+                            this.setState({ surname: e.target.value });
+                          }}
                         />
                       </div>
                     </div>
@@ -97,7 +85,9 @@ class Register extends React.Component {
                         placeholder="Email Address"
                         autoComplete="username"
                         value={this.state.email}
-                        onChange={this.handleEmailChange}
+                        onChange={e => {
+                          this.setState({ email: e.target.value });
+                        }}
                       />
                     </div>
                     <div className="form-group row">
@@ -109,7 +99,9 @@ class Register extends React.Component {
                           placeholder="Password"
                           autoComplete="new-password"
                           value={this.state.pass}
-                          onChange={this.handlePassChange}
+                          onChange={e => {
+                            this.setState({ pass: e.target.value });
+                          }}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -120,7 +112,9 @@ class Register extends React.Component {
                           placeholder="Repeat Password"
                           autoComplete="new-password"
                           value={this.state.re_pass}
-                          onChange={this.handleRePassChange}
+                          onChange={e => {
+                            this.setState({ re_pass: e.target.value });
+                          }}
                         />
                       </div>
                     </div>
