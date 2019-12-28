@@ -30,8 +30,7 @@ class Register extends React.Component {
         this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
       window.location.reload();
     } catch (error) {
-      console.log(this.state.name);
-      this.setState({ error: 'Nie prawidłowe dane logowania.' });
+      this.setState({ error: 'Dane są nieprawidłowe. Spróbuj ponownie.' });
     }
   };
 

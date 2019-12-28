@@ -2,9 +2,10 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 
-/* ========================== Autentykacja ============================ */
 router.post('/', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
 
   let user = await User.findOne({
     email: req.body.email,
