@@ -6,6 +6,7 @@ import Users from '../../components/Users/index';
 import Bugs from '../../components/Bugs/index';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
+import NewProjectForm from "../../components/Project/NewProjectForm";
 
 //import ExampleCard1 from '../../components/Home/ExampleCard1';
 //import { ReactComponent } from '*.svg';
@@ -21,7 +22,9 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <Project/>;
+      return <Project />;
+    } else if (this.state.content === 'newProject') {
+      return <NewProjectForm />;
     } else if (this.state.content === 'users') {
       return <Users />;
     } else if (this.state.content === 'bugs') {

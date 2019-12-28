@@ -52,7 +52,7 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
 
-                <span className="collapse-item">+ Add new project</span>
+                <span className="collapse-item" onClick={()=>{changeContent('newProject')}}>+ Add new project</span>
 
                 <ProjectsList changeContent={changeContent}/>
 

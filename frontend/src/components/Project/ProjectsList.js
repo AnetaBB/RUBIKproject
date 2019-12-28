@@ -8,16 +8,18 @@ const ProjectsList = props => {
   let context = useContext(Context);
 
   useEffect(() => {
-    fetch(`/api/projects`)
+    let isSubscribed = true;
+    fetch(`http://localhost:8080/api/projects`)
       .then(result => result.json())
       .then(projects => {
         setProjects(projects);
       })
       .catch(error => setError(error));
+    return () => isSubscribed = false;
   }, []);
 
   if (error) {
-    return <span>{error.toString()}</span>;
+    return <span className="collapse-item"><p>Something went wrong</p><p>we have an error</p></span>;
   } else {
     return (
       projects &&
@@ -28,8 +30,8 @@ const ProjectsList = props => {
             id={project._id}
             className="collapse-item"
             onClick={() => {
-              context.changeStore('projectID', project._id);
               props.changeContent('project');
+              context.changeStore('projectID', project._id);
             }}
           >
             {project.title}
