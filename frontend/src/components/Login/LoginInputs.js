@@ -9,18 +9,25 @@ class LoginInputs extends React.Component {
   static contextType = Store;
 
   loginUser = async () => {
-    try {
-      const response = await api_rubikproject.post('/api/login', {
-        email: this.state.email,
-        password: this.state.pass,
-      });
+    const loginForm = document.getElementById("loginForm");
+    loginForm.addEventListener('submit', e => { e.preventDefault(); });
 
-      if (response.status)
-        this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
-      window.location.reload();
-    } catch (error) {
-      this.setState({ error: 'Nieprawidłowe dane logowania.' });
-    }
+    if (this.state.email && this.state.pass) {
+      try {
+        const response = await api_rubikproject.post('/api/login', {
+          email: this.state.email,
+          password: this.state.pass,
+        });
+
+        if (response.status)
+          this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+        window.location.reload();
+      } catch (error) {
+        this.setState({ error: 'Incorrect email or password' });
+      }
+    } else this.setState({ error: 'E-mail & password missing' });
+
+
   };
 
   render() {
@@ -39,12 +46,12 @@ class LoginInputs extends React.Component {
                     <div className="text-center">
                       <h1 className="h2 mb-4">Welcome!</h1>
                     </div>
-                    <form>
+                    <form id="loginForm">
                       <div className="form-group">
                         <input
                           type="email"
                           className="form-control form-control-user"
-                          id="exampleInputEmail"
+                          id="Email"
                           aria-describedby="emailHelp"
                           placeholder="Enter Email Address..."
                           autoComplete="username"
@@ -52,45 +59,34 @@ class LoginInputs extends React.Component {
                           onChange={e => {
                             this.setState({ email: e.target.value });
                           }}
+                          required
                         />
                       </div>
                       <div className="form-group">
                         <input
                           type="password"
                           className="form-control form-control-user"
-                          id="exampleInputPassword"
+                          id="Password"
                           placeholder="Password"
+                          minLength="5"
                           autoComplete="current-password"
                           value={this.state.pass}
                           onChange={e => {
                             this.setState({ pass: e.target.value });
                           }}
+                          required
                         />
                       </div>
                       <p style={{ color: 'red' }}>{this.state.error}</p>
-                      <div className="form-group">
-                        <div className="custom-control custom-checkbox small">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="customCheck"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="customCheck"
-                          >
-                            Remember Me
-                          </label>
-                        </div>
-                      </div>
-                      <span
+                      <input
+                        type="submit"
                         className="btn btn-primary btn-user btn-block"
                         onClick={() => {
                           this.loginUser();
                         }}
-                      >
-                        Login
-                      </span>
+                        value="Login"
+                      />
+
                       <button
                         id="registerBtn"
                         className="btn btn-success btn-user btn-block"

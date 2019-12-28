@@ -144,5 +144,6 @@ a:hover {
 }
 
 .collapse-item:hover {
+    cursor: pointer;
     color: #000;
 }

@@ -17,21 +17,28 @@ class Register extends React.Component {
   static contextType = Store;
 
   registerUser = async () => {
-    try {
-      const response = await api_rubikproject.post('/api/users', {
-        name: this.state.name,
-        surname: this.state.surname,
-        email: this.state.email,
-        password: this.state.pass,
-        repeat_password: this.state.re_pass,
-        active: true,
-      });
-      if (response.status)
-        this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
-      window.location.reload();
-    } catch (error) {
-      this.setState({ error: 'Dane są nieprawidłowe. Spróbuj ponownie.' });
-    }
+    const registerForm = document.getElementById("registerForm");
+    registerForm.addEventListener('submit', e => { e.preventDefault(); });
+
+    if (this.state.name && this.state.surname && this.state.email && this.state.pass && this.state.re_pass) {
+      try {
+        const response = await api_rubikproject.post('/api/users', {
+          name: this.state.name,
+          surname: this.state.surname,
+          email: this.state.email,
+          password: this.state.pass,
+          repeat_password: this.state.re_pass,
+          active: true,
+        });
+        if (response.status)
+          this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+        window.location.reload();
+      } catch (error) {
+        this.setState({ error: 'User already exist' });
+      }
+    } else this.setState({ error: 'Fill in all blanks' });
+
+
   };
 
   render() {
@@ -49,7 +56,7 @@ class Register extends React.Component {
                   <div className="text-center">
                     <h1 className="h4 mb-4">Create an Account!</h1>
                   </div>
-                  <form>
+                  <form id="registerForm">
                     <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
                         <input
@@ -57,10 +64,13 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleFirstName"
                           placeholder="First Name"
+                          minLength="3"
+                          maxLength="30"
                           value={this.state.name}
                           onChange={e => {
                             this.setState({ name: e.target.value });
                           }}
+                          required
                         />
                       </div>
                       <div className="col-sm-6">
@@ -69,10 +79,13 @@ class Register extends React.Component {
                           className="form-control form-control-user"
                           id="exampleLastName"
                           placeholder="Last Name"
+                          minLength="3"
+                          maxLength="30"
                           value={this.state.surname}
                           onChange={e => {
                             this.setState({ surname: e.target.value });
                           }}
+                          required
                         />
                       </div>
                     </div>
@@ -87,6 +100,7 @@ class Register extends React.Component {
                         onChange={e => {
                           this.setState({ email: e.target.value });
                         }}
+                        required
                       />
                     </div>
                     <div className="form-group row">
@@ -97,10 +111,12 @@ class Register extends React.Component {
                           id="exampleInputPassword"
                           placeholder="Password"
                           autoComplete="new-password"
+                          minLength="5"
                           value={this.state.pass}
                           onChange={e => {
                             this.setState({ pass: e.target.value });
                           }}
+                          required
                         />
                       </div>
                       <div className="col-sm-6">
@@ -110,39 +126,30 @@ class Register extends React.Component {
                           id="exampleRepeatPassword"
                           placeholder="Repeat Password"
                           autoComplete="new-password"
+                          minLength="5"
                           value={this.state.re_pass}
                           onChange={e => {
                             this.setState({ re_pass: e.target.value });
                           }}
+                          required
                         />
                       </div>
                     </div>
                     <p style={{ color: 'red' }}>{this.state.error}</p>
-                    <span
+                    <input
+                      type="submit"
                       className="btn btn-primary btn-user btn-block"
                       onClick={() => {
                         this.registerUser();
                       }}
-                    >
-                      Register Account
-                    </span>
+                      value="Register Account"
+                    />
                     <span className="btn btn-google btn-user btn-block">
-                      <i className="fab fa-google fa-fw"></i> Register with
-                      Google
+                      <i className="fab fa-google fa-fw"></i> Register with Google
                     </span>
                     <span className="btn btn-facebook btn-user btn-block">
-                      <i className="fab fa-facebook-f fa-fw"></i> Register with
-                      Facebook
+                      <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
                     </span>
-                    <hr className="divider" />
-                    <div className="text-center">
-                      <span className="small">Forgot Password?</span>
-                    </div>
-                    <div className="text-center">
-                      <span className="small">
-                        Already have an account? Login!
-                      </span>
-                    </div>
                   </form>
                 </div>
               </div>
