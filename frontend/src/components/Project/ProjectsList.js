@@ -9,7 +9,7 @@ const ProjectsList = props => {
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(`http://localhost:8080/api/projects`)
+    fetch(`/api/projects`)
       .then(result => result.json())
       .then(projects => {
         setProjects(projects);
