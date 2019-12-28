@@ -34,7 +34,7 @@ class Register extends React.Component {
           this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
         window.location.reload();
       } catch (error) {
-        this.setState({ error: 'User already exist' });
+        this.setState({ error: 'Incorrect data' });
       }
     } else this.setState({ error: 'Fill in all blanks' });
 
