@@ -3,7 +3,6 @@ import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
 import Milestone from '../../components/Milestones/index';
-import Users from '../../components/Users/index';
 import AddAMilestone from '../../components/Milestones/AddAMilestone';
 import Footer from '../../components/Home/Footer';
 import Bugs from '../../components/Bugs/index';
@@ -33,8 +32,6 @@ class Home extends React.Component {
       return <Milestone />;
     } else if (this.state.content === 'newMilestone') {
       return <AddAMilestone />;
-    } else if (this.state.content === 'users') {
-      return <Users />;
     } else if (this.state.content === 'bugs') {
       return <Bugs />;
     } else return <StartDashboard />;
