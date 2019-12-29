@@ -15,11 +15,16 @@ const ProjectsList = props => {
         setProjects(projects);
       })
       .catch(error => setError(error));
-    return () => isSubscribed = false;
+    return () => (isSubscribed = false);
   }, []);
 
   if (error) {
-    return <span className="collapse-item"><p>Something went wrong</p><p>we have an error</p></span>;
+    return (
+      <span className="collapse-item">
+        <p>Something went wrong</p>
+        <p>we have an error</p>
+      </span>
+    );
   } else {
     return (
       projects &&
