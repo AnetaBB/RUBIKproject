@@ -95,7 +95,7 @@ function validate(user) {
       .max(255)
       .required(),
     repeat_password: Joi.ref('password'),
-    active: Joi.boolean()
+    active: Joi.boolean(),
   });
 
   return schema.validate(user);
