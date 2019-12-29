@@ -12,13 +12,17 @@ Example:
 	"repeat_password": "qweasd",
 	"active": true  */
 router.post('/', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
   const checkUser = await User.findOne({
     email: req.body.email,
   });
   if (checkUser) return res.status(400).send('User already registered');
 
-  const { error } = validate(req.body);
+  const {
+    error
+  } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = new User({
@@ -37,20 +41,26 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
   const user = await User.find();
   res.status(200).send(user);
 });
 
 router.get('/:id', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
   const user = await User.findById(req.params.id);
   user.save();
   res.send(user);
 });
 
 router.put('/:id', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
   const user = await User.findById(req.params.id);
   user.name = req.body.name;
   user.save();
@@ -58,7 +68,9 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  const { User } = res.locals.models;
+  const {
+    User
+  } = res.locals.models;
   const user = await User.findByIdAndRemove(req.params.id);
   user.name = req.body.name;
   user.save();
@@ -88,18 +100,5 @@ function validate(user) {
 
   return schema.validate(user);
 }
-
-/* ========================== Autentykacja ============================ */
-/*router.post('/', async (req, res) => {
-  let user = await User.findOne({
-    email: req.body.email,
-  });
-  if (!user) return res.status(400).send('Invalid email');
-
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send('Invalid password');
-
-  res.send('Good morning user :)');
-});*/
 
 module.exports = router;

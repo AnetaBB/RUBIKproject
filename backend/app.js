@@ -2,6 +2,7 @@ const db = require('./db');
 const express = require('express');
 const cors = require('cors');
 const routerUsers = require('./routes/user');
+const routerLogin = require('./routes/login');
 const routerMilestone = require('./routes/milestone');
 const routerComment = require('./routes/comment');
 const routerDemo = require('./routes/demo');
@@ -31,6 +32,7 @@ const main = async () => {
   // Routes
   app.use('/', routerHome);
   app.use('/api/users/', routerUsers);
+  app.use('/api/login/', routerLogin);
   app.use('/api/milestones/', routerMilestone);
   app.use('/api/demos/', routerDemo);
   app.use('/api/subtickets/', routerSubticket);
