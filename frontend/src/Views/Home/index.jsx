@@ -2,7 +2,6 @@ import React from 'react';
 import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
-import ExampleCard1 from '../../components/Home/ExampleCard1';
 import Milestone from '../../components/Milestones/index';
 import Users from '../../components/Users/index';
 import AddAMilestone from '../../components/Milestones/AddAMilestone';
