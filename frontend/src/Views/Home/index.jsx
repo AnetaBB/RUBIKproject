@@ -2,13 +2,11 @@ import React from 'react';
 import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
-import Users from '../../components/Users/index';
 import Bugs from '../../components/Bugs/index';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
 import NewProjectForm from "../../components/Project/NewProjectForm";
 
-//import ExampleCard1 from '../../components/Home/ExampleCard1';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
@@ -25,8 +23,6 @@ class Home extends React.Component {
       return <Project />;
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm />;
-    } else if (this.state.content === 'users') {
-      return <Users />;
     } else if (this.state.content === 'bugs') {
       return <Bugs />;
     } else return <StartDashboard />;
