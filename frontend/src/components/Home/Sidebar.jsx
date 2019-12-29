@@ -1,6 +1,8 @@
 import React from 'react';
+import ProjectsList from "../../components/Project/ProjectsList";
 
 function Sidebar({ changeContent }) {
+
   return (
     <>
       <ul
@@ -49,14 +51,11 @@ function Sidebar({ changeContent }) {
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
-              <span
-                id="project1"
-                className="collapse-item"
-                onClick={() => changeContent('project')}
-              >
-                Project #1
-              </span>
-              <span className="collapse-item">Project #2</span>
+
+              <span className="collapse-item" onClick={() => { changeContent('newProject') }}>+ Add new project</span>
+
+              <ProjectsList changeContent={changeContent} />
+
             </div>
           </div>
         </li>
@@ -82,7 +81,12 @@ function Sidebar({ changeContent }) {
               <span id="project1" className="collapse-item">
                 Add ticket
               </span>
-              <span className="collapse-item">View all</span>
+              <span
+                className="collapse-item"
+                onClick={() => changeContent('bugs')}
+              >
+                View all
+              </span>
             </div>
           </div>
         </li>
@@ -169,36 +173,6 @@ function Sidebar({ changeContent }) {
             <i className="fas fa-fw fa-plus"></i>
             <span>New project</span>
           </span>
-        </li>
-
-        <li className="nav-item">
-          <span
-            className="nav-link collapsed"
-            data-toggle="collapse"
-            data-target="#collapseUsers"
-            aria-expanded="true"
-            aria-controls="collapseUsers"
-          >
-            <i className="fas fa-user"></i>
-            <span>Users</span>
-          </span>
-          <div
-            id="collapseUsers"
-            className="collapse"
-            aria-labelledby="headingUsers"
-            data-parent="#accordionSidebar"
-          >
-            <div className="bg-gray-800 py-2 collapse-inner rounded">
-              <span
-                id="project1"
-                className="collapse-item"
-                onClick={() => changeContent('users')}
-              >
-                View all
-              </span>
-              <span className="collapse-item">Update</span>
-            </div>
-          </div>
         </li>
 
         {/*<div className="text-center d-none d-md-inline">

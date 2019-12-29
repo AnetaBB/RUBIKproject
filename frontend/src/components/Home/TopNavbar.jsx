@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 class TopNavbar extends React.Component {
   render() {
@@ -11,6 +12,16 @@ class TopNavbar extends React.Component {
           >
             <i className="fa fa-bars"></i>
           </button>
+          <Button
+            className="btn ml-auto"
+            variant="primary"
+            onClick={() => {
+              localStorage.removeItem('token');
+              window.location.reload();
+            }}
+          >
+            Wyloguj
+          </Button>
         </nav>
       </>
     );
