@@ -31,14 +31,14 @@ const Project = () =>  {
           )
     } else {
       return (
-        <div className="container">
+        <>
           <div className="row">
             {
               project.title
                 ? <h1 className="col-lg-9 mb-4">{project.title}</h1>
                 : <h1 className="col-lg-9 mb-4">Loading project...</h1>
             }
-            <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">+ Add new project</Button>
+            <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">button for something ;)</Button>
           </div>
 
           <div className="row">
@@ -46,29 +46,25 @@ const Project = () =>  {
               <Card>
                 <Card.Header>Your tasks in {project.title}</Card.Header>
                 <Card.Body>
-                  <Table striped bordered hover>
+                  <Table className="text-gray-300" striped bordered hover>
                     <thead>
                     <tr>
                       <th>Task</th>
                       <th>Priority</th>
-                      <th>Deadline</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                       <td>task1</td>
                       <td>low</td>
-                      <td>taskDeadline</td>
                     </tr>
                     <tr>
                       <td>task2</td>
                       <td>height</td>
-                      <td>taskDeadline</td>
                     </tr>
                     <tr>
                       <td>View all tasks</td>
                       <td></td>
-                      <td>View all deadlines</td>
                     </tr>
                     </tbody>
                   </Table>
@@ -108,9 +104,9 @@ const Project = () =>  {
               </Card>
             </div>
           </div>
-        </div>
+        </>
       )
     }
-}
+};
 
 export default Project;

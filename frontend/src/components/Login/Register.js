@@ -17,10 +17,18 @@ class Register extends React.Component {
   static contextType = Store;
 
   registerUser = async () => {
-    const registerForm = document.getElementById("registerForm");
-    registerForm.addEventListener('submit', e => { e.preventDefault(); });
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+    });
 
-    if (this.state.name && this.state.surname && this.state.email && this.state.pass && this.state.re_pass) {
+    if (
+      this.state.name &&
+      this.state.surname &&
+      this.state.email &&
+      this.state.pass &&
+      this.state.re_pass
+    ) {
       try {
         const response = await api_rubikproject.post('/api/users', {
           name: this.state.name,
@@ -31,14 +39,15 @@ class Register extends React.Component {
           active: true,
         });
         if (response.status)
-          this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+          this.context.isLogged = localStorage.setItem(
+            'token',
+            'wartoscTokena'
+          );
         window.location.reload();
       } catch (error) {
         this.setState({ error: 'Incorrect data' });
       }
     } else this.setState({ error: 'Fill in all blanks' });
-
-
   };
 
   render() {
@@ -145,10 +154,12 @@ class Register extends React.Component {
                       value="Register Account"
                     />
                     <span className="btn btn-google btn-user btn-block">
-                      <i className="fab fa-google fa-fw"></i> Register with Google
+                      <i className="fab fa-google fa-fw"></i> Register with
+                      Google
                     </span>
                     <span className="btn btn-facebook btn-user btn-block">
-                      <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                      <i className="fab fa-facebook-f fa-fw"></i> Register with
+                      Facebook
                     </span>
                   </form>
                 </div>

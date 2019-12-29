@@ -9,8 +9,10 @@ class LoginInputs extends React.Component {
   static contextType = Store;
 
   loginUser = async () => {
-    const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener('submit', e => { e.preventDefault(); });
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+    });
 
     if (this.state.email && this.state.pass) {
       try {
@@ -20,14 +22,15 @@ class LoginInputs extends React.Component {
         });
 
         if (response.status)
-          this.context.isLogged = localStorage.setItem('token', 'wartoscTokena');
+          this.context.isLogged = localStorage.setItem(
+            'token',
+            'wartoscTokena'
+          );
         window.location.reload();
       } catch (error) {
         this.setState({ error: 'Incorrect email or password' });
       }
     } else this.setState({ error: 'E-mail & password missing' });
-
-
   };
 
   render() {
