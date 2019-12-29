@@ -2,6 +2,7 @@ import React from 'react';
 import StartDashboard from '../../components/Home/StartDashboard';
 import Sidebar from '../../components/Home/Sidebar';
 import TopNavbar from '../../components/Home/TopNavbar';
+import Footer from '../../components/Home/Footer';
 import Bugs from '../../components/Bugs/index';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
@@ -38,6 +39,7 @@ class Home extends React.Component {
               <TopNavbar />
               <div className="container-fluid">{this.renderContent()}</div>
             </div>
+            <Footer />
           </div>
         </div>
       </>
