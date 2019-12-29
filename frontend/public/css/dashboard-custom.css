@@ -100,7 +100,7 @@ body {
 
 .card-body {
     background-color: #5a5c69;
-    border-radius: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .dropdown-menu {
