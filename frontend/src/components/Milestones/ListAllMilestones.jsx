@@ -31,7 +31,7 @@ class ListAllMilestones extends React.Component {
             >
               <thead>
                 <tr>
-               
+               <th>ProjectID</th>
                   <th>Title</th>
                   <th>Description</th>
                   <th>Owner</th>
@@ -42,6 +42,7 @@ class ListAllMilestones extends React.Component {
                 {this.state.usersApi.map(function(item) {
                   return (
                     <tr key={item._id}>
+                      <td>{item.id}</td>
                       <td>{item.title}</td>
                       <td>{item.description}</td>
                       <td>{item.owner}</td>

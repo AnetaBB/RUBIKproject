@@ -5,6 +5,7 @@ import TopNavbar from '../../components/Home/TopNavbar';
 import ExampleCard1 from '../../components/Home/ExampleCard1';
 import Milestone from '../../components/Milestones/index';
 import Users from '../../components/Users/index';
+import AddAMilestone from '../../components/Milestones/AddAMilestone';
 //import { ReactComponent } from '*.svg';
 
 class Home extends React.Component {
@@ -18,15 +19,23 @@ class Home extends React.Component {
     if (this.state.content === 'project') {
       return <ExampleCard1 />;
     }
-    if (this.state.content === 'milestone') {
+    
+    else if (this.state.content === 'milestone') {
       return <Milestone />;
     }
+   else if (this.state.content === 'newMilestone') {
+    return <AddAMilestone />;}
 
-    if (this.state.content === 'users') {
+    else if (this.state.content === 'users') {
       return <Users />;
     }
     return <StartDashboard />;
   }
+
+
+ 
+
+
 
   render() {
     return (
