@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-const AddAMilestone = () => {
+import api_rubikproject from '../../api/api_rubikproject';
+import Store from '../../Store';
+
+const AddAMilestone = props => {
   const [validated, setValidated] = useState(false);
-  const handleSubmit = e => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [owner, setOwner] = useState('');
+  const [error, setError] = useState(null);
+  const sendNewMilestone = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -14,7 +21,7 @@ const AddAMilestone = () => {
     <div className='container'>
       <h2>Add a new milestone</h2>
               
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate validated={validated} onSubmit={sendNewMilestone}>
         <Form.Group controlId='milestoneTitle'>
           <Form.Label>Milestone Title</Form.Label>            
           <Form.Control required type='text' placeholder='Milestone title' />
@@ -41,16 +48,6 @@ const AddAMilestone = () => {
             <option>5</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId='milestoneContributors'>
-          <Form.Label>Choose contributor</Form.Label>
-          <Form.Control as='select'>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </Form.Control>
-        </Form.Group>{' '}
         <Button type='submit'>Submit</Button>
       </Form>
           

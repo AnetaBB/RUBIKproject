@@ -16,9 +16,6 @@ const Milestone = new Schema({
     type: String,
   },
 
-  contributors: {
-    type: String,
-  },
 });
 
 module.exports = {
