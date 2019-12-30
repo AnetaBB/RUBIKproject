@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
@@ -9,14 +9,44 @@ const AddAMilestone = props => {
   const [description, setDescription] = useState('');
   const [owner, setOwner] = useState('');
   const [error, setError] = useState(null);
+
+  let context = useContext(Store);
+
   const sendNewMilestone = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     }
+    e.preventDefault();
+    e.stopPropagation();
     setValidated(true);
+
+    if (title.length > 1) {
+      try {
+        let now = new Date();
+        let data = {
+          title: title,
+          description: description,
+          owner: 'Joanna',
+        };
+
+        let response = await api_rubikproject.post('/api/milestones', data);
+
+        if (response.status === 200) {
+          context.changeStore('projectID', response.data);
+          props.changeContent('project');
+        } else {
+          console.log(response.body);
+          setError('Failure: ' + response.body);
+        }
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    }
   };
+
   return (
     <div className='container'>
       <h2>Add a new milestone</h2>
@@ -24,7 +54,15 @@ const AddAMilestone = props => {
       <Form noValidate validated={validated} onSubmit={sendNewMilestone}>
         <Form.Group controlId='milestoneTitle'>
           <Form.Label>Milestone Title</Form.Label>            
-          <Form.Control required type='text' placeholder='Milestone title' />
+          <Form.Control
+            required
+            type='text'
+            placeholder='Milestone title'
+            value={title}
+            onChange={e => {
+              setTitle(e.target.value);
+            }}
+          />
            
           <Form.Control.Feedback type='invalid'>
             Please fill out the milestone            
@@ -36,11 +74,22 @@ const AddAMilestone = props => {
             as='textarea'
             rows='7'
             placeholder='Describe the main milestones you need to reach to finish your project!'
+            value={description}
+            onChange={e => {
+              setDescription(e.target.value);
+            }}
           />
         </Form.Group>
         <Form.Group controlId='milestoneOwner'>
           <Form.Label>Choose owner</Form.Label>
-          <Form.Control as='select'>
+          <Form.Control
+            as='select'
+            type='string'
+            value={owner}
+            onChange={e => {
+              setOwner(e.target.value);
+            }}
+          >
             <option>1</option>
             <option>2</option>
             <option>3</option>
