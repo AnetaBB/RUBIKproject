@@ -5,12 +5,12 @@ const Todo = new Schema({
   content: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   done: {
     type: Boolean,
-    default: true,
-    required: true
+    default: false,
+    required: true,
   },
 });
 
