@@ -12,7 +12,8 @@ const AddAMilestone = props => {
   const [error, setError] = useState(null);
 
   const currentUsers = new CurrentUsers();
-  console.log(currentUsers.getUsers());
+  const showUsers = currentUsers.getUsers();
+  console.log(showUsers);
 
   let context = useContext(Store);
 
