@@ -2,33 +2,31 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
-class ListAllTickets extends React.Component {
-  state = { ticketsApi: [] };
+class CurrentUsers extends React.Component {
+  state = { usersApi: [] };
 
   async componentDidMount () {
-    const response = await fetch('http://127.0.0.1:8080/api/tickets');
+    const response = await fetch('http://127.0.0.1:8080/api/users');
     const data = await response.json();
-    this.setState({ ticketsApi: data });
+    this.setState({ usersApi: data });
   }
 
   render () {
     return (
       <Card>
-        <Card.Header>List of tickets</Card.Header>
+        <Card.Header>List of users</Card.Header>
         <Card.Body>
           <Table responsive='x1' striped bordered hover variant='dark'>
-            <thread>
+            <thead>
               <tr>
-                <th>Title</th>
-                <th>Status</th>
+                <th>Unique users</th>
               </tr>
-            </thread>
+            </thead>
             <tbody>
-              {this.state.ticketsApi.map(function (item) {
+              {this.state.usersApi.map(function (item) {
                 return (
                   <tr key={item._id}>
-                    <td>{item.title}</td>
-                    <td>{item.status}</td>
+                    <td>{item.email}</td>
                   </tr>
                 );
               })}
@@ -40,4 +38,4 @@ class ListAllTickets extends React.Component {
   }
 }
 
-export default ListAllTickets;
+export default CurrentUsers;

@@ -90,7 +90,15 @@ const AddAMilestone = props => {
               setOwner(e.target.value);
             }}
           >
-            <option>1</option>
+            <option>
+              {state.usersApi.map(function (item) {
+                return (
+                  <tr key={item._id}>
+                    <td>{item.email}</td>
+                  </tr>
+                );
+              })}
+            </option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
