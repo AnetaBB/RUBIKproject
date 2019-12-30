@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
+import CurrentUsers from './CurrentUsers';
 
 const AddAMilestone = props => {
   const [validated, setValidated] = useState(false);
@@ -9,6 +10,9 @@ const AddAMilestone = props => {
   const [description, setDescription] = useState('');
   const [owner, setOwner] = useState('');
   const [error, setError] = useState(null);
+
+  const currentUsers = new CurrentUsers();
+  console.log(currentUsers.getUsers());
 
   let context = useContext(Store);
 
@@ -91,7 +95,7 @@ const AddAMilestone = props => {
             }}
           >
             <option>{/* what to do here? */}</option>
-            <option>2</option>
+            <option></option>
             <option>3</option>
             <option>4</option>
             <option>5</option>

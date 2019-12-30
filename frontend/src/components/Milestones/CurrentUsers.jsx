@@ -6,11 +6,15 @@ class CurrentUsers extends React.Component {
   state = { usersApi: [] };
 
   async componentDidMount () {
-    const response = await fetch('http://127.0.0.1:8080/api/users');
-    const data = await response.json();
-    this.setState({ usersApi: data });
+    // const response = await fetch('http://127.0.0.1:8080/api/users');
+    // const data = await response.json();
+    this.setState({ usersApi: await this.getUsers() });
   }
-
+  async getUsers () {
+    const response = await fetch('/api/users');
+    const data = await response.json();
+    return data;
+  }
   render () {
     return (
       <Card>
