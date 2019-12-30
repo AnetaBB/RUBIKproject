@@ -5,7 +5,6 @@ import Table from 'react-bootstrap/Table';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import {Context} from "../../Store";
 
-
 const Project = () =>  {
   const [ project, setProject ] = useState({});
   const [ error, setError ] = useState('');
@@ -14,7 +13,7 @@ const Project = () =>  {
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(`http://localhost:8080/api/projects/${context.projectID}`)
+    fetch(`/api/projects/${context.projectID}`)
       .then(result => result.json())
       .then(project => {
         setProject({title: project.title})
@@ -38,7 +37,7 @@ const Project = () =>  {
                 ? <h1 className="col-lg-9 mb-4">{project.title}</h1>
                 : <h1 className="col-lg-9 mb-4">Loading project...</h1>
             }
-            <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">button for something ;)</Button>
+            <Button className="col-lg-3 col-md-5 col-sm-6 mb-4" variant="primary">add task for this project</Button>
           </div>
 
           <div className="row">

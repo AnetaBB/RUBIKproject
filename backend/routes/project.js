@@ -15,14 +15,33 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { Project } = res.locals.models;
-  if (!req.body) return res.status(400).send('Bad request');
+
   const project = new Project(req.body);
-  project
-    .save()
-    .then(res.status(200).json(project))
-    .catch(error => {
-      res.status(400).send('Adding project failed: ' + error);
+  const validation = project.validateSync();
+  const schemaErrors = validation ? validation.errors : [];
+  const validationErrors = [];
+  for (const errName in schemaErrors) {
+    validationErrors.push(schemaErrors[errName].message);
+  }
+  if (validationErrors.length > 0) {
+    res.status(400).json({errors: validationErrors});
+  } else {
+    const existsByTitle = await Project.findOne({
+      title: req.body.title
     });
+    if (existsByTitle) {
+      res.status(409).json({ errors: ['Project name already exist'] });
+    } else {
+      project
+        .save()
+        .then((savedProject) => {
+          res.status(200).json(savedProject._id)
+        })
+        .catch((error) => {
+          res.status(400).json({ errors: [error] });
+        });
+    }
+  }
 });
 
 router.put('/:id', async (req, res) => {

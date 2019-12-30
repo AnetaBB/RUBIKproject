@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectsList from "../../components/Project/ProjectsList";
+import CreateNewProjectForm from "../Project/CreateNewProjectForm";
 
 function Sidebar({ changeContent }) {
 
@@ -52,8 +53,7 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
 
-              <span className="collapse-item" onClick={() => { changeContent('newProject') }}>+ Add new project</span>
-
+              <CreateNewProjectForm changeContent={changeContent}/>
               <ProjectsList changeContent={changeContent} />
 
             </div>
