@@ -16,7 +16,6 @@ const load = db => {
   return compiledModels;
 };
 
-
 module.exports = {
   connect,
   load,

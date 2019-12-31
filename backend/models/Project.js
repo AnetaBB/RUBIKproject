@@ -10,7 +10,7 @@ const Project = new Schema({
   description: {
     type: String,
   },
-  cratedAt: {
+  createdAt: {
     type: Date,
   },
   deadline: {
