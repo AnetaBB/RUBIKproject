@@ -10,10 +10,12 @@ const AddAMilestone = props => {
   const [description, setDescription] = useState('');
   const [owner, setOwner] = useState('');
   const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
 
   const currentUsers = new CurrentUsers();
-  const showUsers = currentUsers.getUsers();
-  console.log(showUsers);
+  currentUsers.getUsers().then(res => {
+    setUsers(res);
+  });
 
   let context = useContext(Store);
 
@@ -33,14 +35,14 @@ const AddAMilestone = props => {
         let data = {
           title: title,
           description: description,
-          owner: 'Joanna',
+          owner: owner,
         };
 
         let response = await api_rubikproject.post('/api/milestones', data);
 
         if (response.status === 200) {
-          context.changeStore('projectID', response.data);
-          props.changeContent('project');
+          // context.changeStore('projectID', response.data);
+          // props.changeContent('project');
         } else {
           console.log(response.body);
           setError('Failure: ' + response.body);
@@ -95,11 +97,10 @@ const AddAMilestone = props => {
               setOwner(e.target.value);
             }}
           >
-            <option>{/* what to do here? */}</option>
             <option></option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            {users.map(function (item) {
+              return <option key={item._id}>{item.email} </option>;
+            })}
           </Form.Control>
         </Form.Group>
         <Button type='submit'>Submit</Button>
