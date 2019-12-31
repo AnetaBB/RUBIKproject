@@ -38,12 +38,16 @@ class Register extends React.Component {
           repeat_password: this.state.re_pass,
           active: true,
         });
+
         if (response.status)
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
+        this.context.user = JSON.parse(response.request.response);
         window.location.reload();
+
+
       } catch (error) {
         this.setState({ error: 'Incorrect data' });
       }
