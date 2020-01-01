@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const { Project } = res.locals.models;
-  const projects = await Project.find();
+  const projects = await Project.find({ active: true });
   res.status(200).json(projects);
 });
 
@@ -24,20 +24,20 @@ router.post('/', async (req, res) => {
     validationErrors.push(schemaErrors[errName].message);
   }
   if (validationErrors.length > 0) {
-    res.status(400).json({errors: validationErrors});
+    res.status(400).json({ errors: validationErrors });
   } else {
     const existsByTitle = await Project.findOne({
-      title: req.body.title
+      title: req.body.title,
     });
     if (existsByTitle) {
       res.status(409).json({ errors: ['Project name already exist'] });
     } else {
       project
         .save()
-        .then((savedProject) => {
-          res.status(200).json(savedProject._id)
+        .then(savedProject => {
+          res.status(200).json(savedProject._id);
         })
-        .catch((error) => {
+        .catch(error => {
           res.status(400).json({ errors: [error] });
         });
     }
@@ -50,16 +50,26 @@ router.put('/:id', async (req, res) => {
   const project = await Project.findById(req.params.id);
   if (!project) return;
 
-  const bodyElements = [];
-  for (const el in Project.schema.obj) {
-    bodyElements.push(el);
+  const reqBodyElements = [];
+  for (const el in req.body) {
+    reqBodyElements.push(el);
   }
+  const schemaElements = [];
+  for (const el in Project.schema.obj) {
+    schemaElements.push(el);
+  }
+
+  reqBodyElements.forEach(el => {
+    if (schemaElements.includes(el)) {
+      project[el] = req.body[el];
+    }
+  });
 
   // todo: validation what is required
 
   project
     .save()
-    .then(res.status(200).json(project))
+    .then(res.status(200).json(project._id))
     .catch(error => {
       res.status(400).send('Editing project failed: ' + error);
     });
