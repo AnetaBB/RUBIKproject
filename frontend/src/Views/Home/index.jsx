@@ -23,7 +23,7 @@ class Home extends React.Component {
 
   renderContent () {
     if (this.state.content === 'project') {
-      return <Project />;
+      return <Project changeContent={this.selectContent}/>;
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm changeContent={this.selectContent}/>;
     } else if (this.state.content === 'bugs') {
@@ -32,8 +32,6 @@ class Home extends React.Component {
       return <Milestone />;
     } else if (this.state.content === 'newMilestone') {
       return <AddAMilestone />;
-    } else if (this.state.content === 'bugs') {
-      return <Bugs />;
     } else return <StartDashboard />;
   }
 
