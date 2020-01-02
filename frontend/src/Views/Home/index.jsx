@@ -9,6 +9,8 @@ import Bugs from '../../components/Bugs/index';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
 import NewProjectForm from '../../components/Project/NewProjectForm';
+import AddTicket from '../../components/Bugs/AddTicket';
+import SubTicket from '../../components/Subticket';
 
 //import { ReactComponent } from '*.svg';
 
@@ -21,13 +23,17 @@ class Home extends React.Component {
     this.setState({ content: value });
   };
 
-  renderContent () {
+  renderContent() {
     if (this.state.content === 'project') {
-      return <Project changeContent={this.selectContent}/>;
+      return <Project changeContent={this.selectContent} />;
     } else if (this.state.content === 'newProject') {
-      return <NewProjectForm changeContent={this.selectContent}/>;
+      return <NewProjectForm changeContent={this.selectContent} />;
     } else if (this.state.content === 'bugs') {
       return <Bugs />;
+    } else if (this.state.content === 'addBug') {
+      return <AddTicket />;
+    } else if (this.state.content === 'subTicket') {
+      return <SubTicket />;
     } else if (this.state.content === 'milestone') {
       return <Milestone />;
     } else if (this.state.content === 'newMilestone') {
@@ -35,15 +41,15 @@ class Home extends React.Component {
     } else return <StartDashboard />;
   }
 
-  render () {
+  render() {
     return (
       <>
-        <div id='wrapper'>
+        <div id="wrapper">
           <Sidebar changeContent={this.selectContent} />
-          <div id='content-wrapper' className='d-flex flex-column'>
-            <div id='content'>
+          <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content">
               <TopNavbar />
-              <div className='container-fluid'>{this.renderContent()}</div>
+              <div className="container-fluid">{this.renderContent()}</div>
             </div>
             <Footer />
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import ListAllTickets from './ListAllTickets';
-import GetOneTicket from './GetOneTicket';
+import ListAllSubTickets from './ListAllSubTickets';
+import GetOneSubTicket from './GetOneSubTicket';
 
 class Bugs extends React.Component {
   render() {
@@ -8,10 +8,10 @@ class Bugs extends React.Component {
       <>
         <div className="row">
           <div className="col-lg-7">
-            <ListAllTickets />
+            <ListAllSubTickets />
           </div>
           <div className="col-lg-5">
-            <GetOneTicket />
+            <GetOneSubTicket />
           </div>
         </div>
       </>
