@@ -10,17 +10,23 @@ const Project = (props) =>  {
 
   let context = useContext(Context);
 
-  const handleShowDeletingModal = () => setShow(true);
+  const handleClose = () => setShow(true);
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(`/api/projects/${context.projectID}`)
-      .then(result => result.json())
-      .then(project => {
-        setProject({title: project.title})
-      })
-      .catch(error => setError(error));
-    return () => isSubscribed = false;
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/projects/${context.projectID}`);
+        if (response.status === 200) {
+          const projectData = await response.json();
+          if (isSubscribed) setProject({title: projectData.title})
+        }
+      } catch (error) {
+          if (isSubscribed) setError("Cannot retrieve project " + context.projectID)
+      }
+    }
+    fetchData();
+    return () => { isSubscribed = false };
   }, [context.projectID]);
 
     if (error) {
@@ -106,11 +112,11 @@ const Project = (props) =>  {
           </div>
           <Button
             variant="danger"
-            onClick={handleShowDeletingModal}>
+            onClick={handleClose}>
             Delete this project
           </Button>
           {
-            show === true ? <DeletingProjectModal changeContent={props.changeContent}/> : null
+            show ? <DeletingProjectModal changeContent={props.changeContent}/> : <span></span>
           }
         </>
       )

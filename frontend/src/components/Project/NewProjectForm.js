@@ -36,14 +36,13 @@ const NewProjectForm = props => {
         };
 
         let response = await api_rubikproject.post('/api/projects', data);
-        console.log(response);
         if (response.status === 200) {
           context.changeStore('projectID', response.data);
           props.changeContent('project');
         }
       } catch (error) {
         if (error.message === 'Request failed with status code 409')
-        alert('Project name already exist.')
+          alert('Project name already exist.');
       }
     }
   };
