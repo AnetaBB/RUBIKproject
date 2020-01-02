@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
-class ListAllTickets extends React.Component {
+class ListAllSubTickets extends React.Component {
   state = { ticketsApi: [] };
 
   async componentDidMount() {
@@ -42,4 +42,4 @@ class ListAllTickets extends React.Component {
   }
 }
 
-export default ListAllTickets;
+export default ListAllSubTickets;
