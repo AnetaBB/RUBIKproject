@@ -16,8 +16,9 @@ function DeletingProjectModal(props) {
       { active: false }
     );
     if (result.status === 200) {
-      props.changeContent('');
+      context.changeStore('projectID', '');
       handleClose();
+      props.changeContent('');
     }
   };
 

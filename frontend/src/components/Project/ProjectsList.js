@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../Store';
+import api_rubikproject from '../../api/api_rubikproject';
 
 const ProjectsList = props => {
   const [projects, setProjects] = useState([]);
@@ -8,17 +9,25 @@ const ProjectsList = props => {
   let context = useContext(Context);
 
   useEffect(() => {
-    fetch(`/api/projects`)
-      .then(result => result.json())
-      .then(projects => setProjects(projects))
-      .catch(error => setError(error));
-  }, [projects]);
+    let isSubscribed = true;
+    const fetchProjects = async () => {
+      try {
+        const response = await api_rubikproject.get('/api/projects');
+        if (response.status === 200) {
+          const r = await response.data;
+          if (isSubscribed) setProjects(r);
+        }
+      } catch (error) {
+        if (isSubscribed) setError(error);
+      }
+    };
+    fetchProjects();
+  }, [context.projectID]);
 
   if (error) {
     return (
       <span className="collapse-item">
-        <p>Something went wrong</p>
-        <p>we have an error</p>
+        <p>Error</p>
       </span>
     );
   } else {
