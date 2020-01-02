@@ -45,8 +45,7 @@ class Register extends React.Component {
             'wartoscTokena'
           );
           const userData = JSON.parse(response.request.response);
-          this.context.changeStore('user', userData);
-          console.log(this.context.user);
+          window.localStorage.setItem('rubikproject_user', userData._id);
           window.location.reload();
         }
       } catch (error) {

@@ -21,15 +21,15 @@ class LoginInputs extends React.Component {
           password: this.state.pass,
         });
 
-        if (response.status)
+        if (response.status) {
+          const userData = JSON.parse(response.request.response);
+          window.localStorage.setItem('rubikproject_user', userData._id);
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
-
-        this.context.user = JSON.parse(response.request.response);
-        console.log(this.context.user);
-        window.location.reload();
+          window.location.reload();
+        }
       } catch (error) {
         this.setState({ error: 'Incorrect email or password' });
       }
