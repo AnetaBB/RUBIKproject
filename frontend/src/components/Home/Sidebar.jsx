@@ -1,9 +1,8 @@
 import React from 'react';
-import ProjectsList from "../../components/Project/ProjectsList";
-import CreateNewProjectForm from "../Project/CreateNewProjectForm";
+import ProjectsList from '../../components/Project/ProjectsList';
+import CreateNewProjectForm from '../Project/CreateNewProjectForm';
 
 function Sidebar({ changeContent }) {
-
   return (
     <>
       <ul
@@ -53,9 +52,8 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
 
-              <CreateNewProjectForm changeContent={changeContent}/>
+              <CreateNewProjectForm changeContent={changeContent} />
               <ProjectsList changeContent={changeContent} />
-
             </div>
           </div>
         </li>
@@ -98,7 +96,6 @@ function Sidebar({ changeContent }) {
           </span>
         </li>
 
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -126,14 +123,29 @@ function Sidebar({ changeContent }) {
                 Show milestones
               </span>
 
-
-              <span className="collapse-item" onClick={()=>{changeContent('newMilestone')}}>+ Add new milestone</span>
-
-
-              
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newMilestone');
+                }}
+              >
+                + Add new milestone
+              </span>
             </div>
           </div>
         </li>
+        <li className="nav-item">
+          <span
+            className="nav-link"
+            onClick={() => {
+              changeContent('todo');
+            }}
+          >
+            <i className="fas fa-fw fa-list"></i>
+            <span>Todo</span>
+          </span>
+        </li>
+
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">
