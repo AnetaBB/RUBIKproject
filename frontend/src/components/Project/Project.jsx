@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Table from 'react-bootstrap/Table';
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import {Context} from "../../Store";
+import { ProgressBar, Table, Button, Card } from "react-bootstrap";
+import { Context } from "../../Store";
+import DeletingProjectModal from "./DeletingProjectModal";
 
-const Project = () =>  {
-  const [ project, setProject ] = useState({});
-  const [ error, setError ] = useState('');
+const Project = (props) =>  {
+  const [project, setProject] = useState({});
+  const [error, setError] = useState('');
+  const [show, setShow] = useState(false);
 
   let context = useContext(Context);
+
+  const handleShowDeletingModal = () => setShow(true);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -103,6 +104,14 @@ const Project = () =>  {
               </Card>
             </div>
           </div>
+          <Button
+            variant="danger"
+            onClick={handleShowDeletingModal}>
+            Delete this project
+          </Button>
+          {
+            show === true ? <DeletingProjectModal changeContent={props.changeContent}/> : null
+          }
         </>
       )
     }
