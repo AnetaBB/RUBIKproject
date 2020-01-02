@@ -39,15 +39,16 @@ class Register extends React.Component {
           active: true,
         });
 
-        if (response.status)
+        if (response.status) {
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
-        this.context.user = JSON.parse(response.request.response);
-        window.location.reload();
-
-
+          const userData = JSON.parse(response.request.response);
+          this.context.changeStore('user', userData);
+          console.log(this.context.user);
+          window.location.reload();
+        }
       } catch (error) {
         this.setState({ error: 'Incorrect data' });
       }

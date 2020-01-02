@@ -2,14 +2,18 @@ import React from 'react';
 import Store from '../../Store';
 
 class StartDashboard extends React.Component {
-  state = { user: this.context.user };
-
   static contextType = Store;
 
+  myFunction = () => {
+    console.log(this.context);
+  };
 
   render() {
-    return <h1>Good morning, {this.state.user} ;)</h1>;
-    console.log(this.context.user);
+    return (
+      <h1>
+        Good morning, <button onClick={this.myFunction}>Click me</button>
+      </h1>
+    );
   }
 }
 
