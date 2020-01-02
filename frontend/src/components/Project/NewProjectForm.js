@@ -8,7 +8,6 @@ const NewProjectForm = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [error, setError] = useState(null);
 
   let context = useContext(Store);
 
@@ -37,18 +36,14 @@ const NewProjectForm = props => {
         };
 
         let response = await api_rubikproject.post('/api/projects', data);
+        console.log(response);
         if (response.status === 200) {
           context.changeStore('projectID', response.data);
           props.changeContent('project');
-        } else {
-          console.log(response.body);
-          setError('Failure: ' + response.body); //TODO
         }
       } catch (error) {
-        //TODO if response is 409 it is handled here (display new component ContentError)
-        setError(error);
-        console.log(error);
-        // alert(error);
+        if (error.message === 'Request failed with status code 409')
+        alert('Project name already exist.')
       }
     }
   };
