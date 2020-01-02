@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import api_rubikproject from '../../api/api_rubikproject';
 
 class LoginInputs extends React.Component {
-  state = { user: '', isLogged: false, email: '', pass: '', error: '' };
+  state = { isLogged: false, email: '', pass: '', error: '' };
 
   static contextType = Store;
 
@@ -21,15 +21,12 @@ class LoginInputs extends React.Component {
           password: this.state.pass,
         });
 
-        if (response.status) {
-          const userData = JSON.parse(response.request.response);
-          window.localStorage.setItem('rubikproject_user', userData._id);
+        if (response.status)
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
-          window.location.reload();
-        }
+        window.location.reload();
       } catch (error) {
         this.setState({ error: 'Incorrect email or password' });
       }

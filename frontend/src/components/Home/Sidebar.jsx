@@ -66,7 +66,7 @@ function Sidebar({ changeContent }) {
             aria-expanded="true"
             aria-controls="collapseBugs"
           >
-            <i className="fas fa-fw fa-bug"></i>
+            <i className="fas fa-fw fa-cog"></i>
             <span>Bugs</span>
           </span>
           <div
@@ -76,44 +76,12 @@ function Sidebar({ changeContent }) {
             data-parent="#accordionSidebar"
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
-              <span
-                id="project1"
-                className="collapse-item"
-                onClick={() => changeContent('addBug')}
-              >
+              <span id="project1" className="collapse-item">
                 Add ticket
               </span>
               <span
                 className="collapse-item"
                 onClick={() => changeContent('bugs')}
-              >
-                View all
-              </span>
-            </div>
-          </div>
-        </li>
-
-        <li className="nav-item">
-          <span
-            className="nav-link collapsed"
-            data-toggle="collapse"
-            data-target="#collapseSubticket"
-            aria-expanded="true"
-            aria-controls="collapseSubticket"
-          >
-            <i className="fas fa-fw fa-cog"></i>
-            <span>Subticket</span>
-          </span>
-          <div
-            id="collapseSubticket"
-            className="collapse"
-            aria-labelledby="headingSubticket"
-            data-parent="#accordionSidebar"
-          >
-            <div className="bg-gray-800 py-2 collapse-inner rounded">
-              <span
-                className="collapse-item"
-                onClick={() => changeContent('subTicket')}
               >
                 View all
               </span>
@@ -154,10 +122,58 @@ function Sidebar({ changeContent }) {
               >
                 Show milestones
               </span>
-              <span className="collapse-item" onClick={() => { changeContent('newMilestone') }}>+ Add new milestone</span>
+
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newMilestone');
+                }}
+              >
+                + Add new milestone
+              </span>
             </div>
           </div>
         </li>
+
+        <li className="nav-item">
+          <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseComments"
+            aria-expanded="true"
+            aria-controls="collapseComments"
+          >
+            <i className="fas fa-fw fa-list"></i>
+            <span>Comments</span>
+          </span>
+          <div
+            id="collapseComments"
+            className="collapse"
+            aria-labelledby="headingComments"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <h6 className="collapse-header">My comments:</h6>
+              <span
+                id="project1"
+                className="collapse-item"
+                onClick={() => changeContent('comment')}
+              >
+                Show all my comments
+              </span>
+
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newComment');
+                }}
+              >
+                + Add new comment
+              </span>
+            </div>
+          </div>
+        </li>
+
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">

@@ -8,11 +8,15 @@ const ProjectsList = props => {
   let context = useContext(Context);
 
   useEffect(() => {
+    let isSubscribed = true;
     fetch(`/api/projects`)
       .then(result => result.json())
-      .then(projects => setProjects(projects))
+      .then(projects => {
+        setProjects(projects);
+      })
       .catch(error => setError(error));
-  }, [projects]);
+    return () => (isSubscribed = false);
+  }, []);
 
   if (error) {
     return (
@@ -22,21 +26,24 @@ const ProjectsList = props => {
       </span>
     );
   } else {
-    return projects.map(project => {
-      return (
-        <span
-          key={project._id}
-          id={project._id}
-          className="collapse-item"
-          onClick={() => {
-            props.changeContent('project');
-            context.changeStore('projectID', project._id);
-          }}
-        >
-          {project.title}
-        </span>
-      );
-    });
+    return (
+      projects &&
+      projects.map(project => {
+        return (
+          <span
+            key={project._id}
+            id={project._id}
+            className="collapse-item"
+            onClick={() => {
+              props.changeContent('project');
+              context.changeStore('projectID', project._id);
+            }}
+          >
+            {project.title}
+          </span>
+        );
+      })
+    );
   }
 };
 

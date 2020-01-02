@@ -1,20 +1,20 @@
 import React from 'react';
-import ListAllTickets from './ListAllTickets';
-import GetOneTicket from './GetOneTicket';
+import ListAllUsers from './ListAllUsers';
+import GetOneUser from './GetOneUser';
 
-class Bugs extends React.Component {
+class Users extends React.Component {
   render() {
     return (
       <div className="row">
         <div className="col-lg-7">
-          <ListAllTickets />
+          <ListAllUsers />
         </div>
         <div className="col-lg-5">
-          <GetOneTicket />
+          <GetOneUser />
         </div>
       </div>
     );
   }
 }
 
-export default Bugs;
+export default Users;

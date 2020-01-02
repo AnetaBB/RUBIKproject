@@ -14,7 +14,6 @@ class TopNavbarLogin extends React.Component {
                 className="rubik-project"
                 style={{ fontSize: '46px' }}
                 onClick={() => {
-                  localStorage.removeItem('rubikproject_user');
                   window.location.reload();
                 }}
               >

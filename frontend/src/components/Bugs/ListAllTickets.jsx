@@ -17,20 +17,18 @@ class ListAllTickets extends React.Component {
         <Card.Header>List of tickets</Card.Header>
         <Card.Body>
           <Table responsive="x1" striped bordered hover variant="dark">
-            <thead>
+            <thread>
               <tr>
                 <th>Title</th>
                 <th>Status</th>
-                <th>Project</th>
               </tr>
-            </thead>
+            </thread>
             <tbody>
               {this.state.ticketsApi.map(function(item) {
                 return (
                   <tr key={item._id}>
                     <td>{item.title}</td>
                     <td>{item.status}</td>
-                    <td>{item.projectID}</td>
                   </tr>
                 );
               })}

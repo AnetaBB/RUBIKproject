@@ -38,16 +38,12 @@ class Register extends React.Component {
           repeat_password: this.state.re_pass,
           active: true,
         });
-
-        if (response.status) {
+        if (response.status)
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
-          const userData = JSON.parse(response.request.response);
-          window.localStorage.setItem('rubikproject_user', userData._id);
-          window.location.reload();
-        }
+        window.location.reload();
       } catch (error) {
         this.setState({ error: 'Incorrect data' });
       }

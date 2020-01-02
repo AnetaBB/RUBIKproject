@@ -23,10 +23,6 @@ const Project = new Schema({
   contributors: {
     type: String,
   },
-  active: {
-    type: Boolean,
-    required: true,
-  },
 });
 
 module.exports = {

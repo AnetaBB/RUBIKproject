@@ -1,11 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Store from '../../Store';
 
 class TopNavbar extends React.Component {
-
-  static contextType = Store;
-
   render() {
     return (
       <>
@@ -21,7 +17,6 @@ class TopNavbar extends React.Component {
             variant="primary"
             onClick={() => {
               localStorage.removeItem('token');
-              this.context.user = '';
               window.location.reload();
             }}
           >

@@ -10,7 +10,6 @@ const routerHome = require('./routes/home');
 const routerTicket = require('./routes/ticket');
 const routerProject = require('./routes/project');
 const routerSubticket = require('./routes/subticket');
-const routerTodo = require('./routes/todo');
 const main = async () => {
   const app = express();
 
@@ -39,8 +38,7 @@ const main = async () => {
   app.use('/api/subtickets/', routerSubticket);
   app.use('/api/comments/', routerComment);
   app.use('/api/tickets', routerTicket);
-  app.use('/api/projects', routerProject);
-  app.use('/api/todos/', routerTodo);
+  app.use('/api/projects/', routerProject);
 
   // App start
   const host = process.env.HOST || '127.0.0.1';
