@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
   user.password = await bcrypt.hash(req.body.password, salt);
 
   user.save();
-  res.send('User add to databse. Move to dashboard');
+  res.status(200).send(user);
 });
 
 router.get('/', async (req, res) => {

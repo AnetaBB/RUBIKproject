@@ -154,15 +154,7 @@ function Sidebar({ changeContent }) {
               >
                 Show milestones
               </span>
-
-              <span
-                className="collapse-item"
-                onClick={() => {
-                  changeContent('newMilestone');
-                }}
-              >
-                + Add new milestone
-              </span>
+              <span className="collapse-item" onClick={() => { changeContent('newMilestone') }}>+ Add new milestone</span>
             </div>
           </div>
         </li>
