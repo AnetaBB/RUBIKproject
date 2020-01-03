@@ -77,17 +77,17 @@ function Sidebar({ changeContent }) {
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <span
+                className="collapse-item"
+                onClick={() => changeContent('viewAllBugs')}
+              >
+                View all
+              </span>
+              <span
                 id="project1"
                 className="collapse-item"
                 onClick={() => changeContent('addBug')}
               >
                 Add ticket
-              </span>
-              <span
-                className="collapse-item"
-                onClick={() => changeContent('bugs')}
-              >
-                View all
               </span>
             </div>
           </div>
@@ -154,7 +154,14 @@ function Sidebar({ changeContent }) {
               >
                 Show milestones
               </span>
-              <span className="collapse-item" onClick={() => { changeContent('newMilestone') }}>+ Add new milestone</span>
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newMilestone');
+                }}
+              >
+                + Add new milestone
+              </span>
             </div>
           </div>
         </li>

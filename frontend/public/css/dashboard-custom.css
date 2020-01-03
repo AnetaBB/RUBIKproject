@@ -147,3 +147,7 @@ a:hover {
     cursor: pointer;
     color: #000;
 }
+
+.viewBugDetails>tr:hover {
+    cursor: pointer;
+}
