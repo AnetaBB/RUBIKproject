@@ -1,25 +1,32 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Table from 'react-bootstrap/Table';
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import {Context} from "../../Store";
+import { ProgressBar, Table, Button, Card } from "react-bootstrap";
+import { Context } from "../../Store";
+import DeletingProjectModal from "./DeletingProjectModal";
 
-const Project = () =>  {
-  const [ project, setProject ] = useState({});
-  const [ error, setError ] = useState('');
+const Project = (props) =>  {
+  const [project, setProject] = useState({});
+  const [error, setError] = useState('');
+  const [show, setShow] = useState(false);
 
   let context = useContext(Context);
 
+  const handleClose = () => setShow(true);
+
   useEffect(() => {
     let isSubscribed = true;
-    fetch(`/api/projects/${context.projectID}`)
-      .then(result => result.json())
-      .then(project => {
-        setProject({title: project.title})
-      })
-      .catch(error => setError(error));
-    return () => isSubscribed = false;
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/projects/${context.projectID}`);
+        if (response.status === 200) {
+          const projectData = await response.json();
+          if (isSubscribed) setProject({title: projectData.title})
+        }
+      } catch (error) {
+          if (isSubscribed) setError("Cannot retrieve project " + context.projectID)
+      }
+    }
+    fetchData();
+    return () => { isSubscribed = false };
   }, [context.projectID]);
 
     if (error) {
@@ -103,6 +110,14 @@ const Project = () =>  {
               </Card>
             </div>
           </div>
+          <Button
+            variant="danger"
+            onClick={handleClose}>
+            Delete this project
+          </Button>
+          {
+            show ? <DeletingProjectModal changeContent={props.changeContent}/> : <span></span>
+          }
         </>
       )
     }

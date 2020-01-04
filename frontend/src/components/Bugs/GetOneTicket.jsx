@@ -1,35 +1,53 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import api_rubikproject from '../../api/api_rubikproject';
 
 class GetOneTicket extends React.Component {
   state = { oneTicket: [] };
 
-  getCurrentTicket = async () => {
-    const response = await fetch(
-      'http://127.0.0.1:8080/api/tickets/5e00d35d9c83429438f31583'
+  async componentDidMount() {
+    const response = await api_rubikproject.get(
+      `http://127.0.0.1:8080/api/tickets/${this.props.bugContent}`
     );
-    const data = await response.json();
-    this.setState({ oneTicket: data });
-  };
+    if (response.status) {
+      let responseData = JSON.parse(response.request.response);
+      this.setState({ oneTicket: responseData });
+    }
+  }
 
   render() {
+    const ticket = this.state.oneTicket;
     return (
-      <Card>
-        <Card.Header>{this.state.oneTicket.title}</Card.Header>
-        <Card.Body>
-          <ul key={this.state.oneTicket._id}>
-            <li>{this.state.oneTicket.status}</li>
-            <li>{this.state.oneTicket.contributors}</li>
-            <li>{this.state.oneTicket.description}</li>
-            <li>{this.state.oneTicket.priority}</li>
-            <li>{this.state.oneTicket.relevance}</li>
-          </ul>
-          <Button variant="warning" onClick={this.getCurrentTicket}>
-            Get first Ticket
-          </Button>
-        </Card.Body>
-      </Card>
+      <div className="col-sm-10">
+        <h2>{ticket.title}</h2>
+        <p className="mt-5">{ticket.description}</p>
+        <div className="row mt-4">
+          <div className="col-sm-6">
+            <p>Assigned:</p>
+            {ticket.contributors ? ticket.contributors : 'nobody'}
+          </div>
+          <div className="col-sm-6">
+            <p>Owner:</p>
+            {ticket.owner}
+          </div>
+        </div>
+        <div className="row justify-content-center mt-5 text-center">
+          <div className="col-sm-4">
+            Status:
+            <br />
+            <h5>{ticket.status}</h5>
+          </div>
+          <div className="col-sm-4">
+            Priority:
+            <br />
+            <h5>{ticket.priority}</h5>
+          </div>
+          <div className="col-sm-4">
+            Relevance:
+            <br />
+            <h5>{ticket.relevance}</h5>
+          </div>
+        </div>
+      </div>
     );
   }
 }

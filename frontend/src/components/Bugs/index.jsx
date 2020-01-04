@@ -3,16 +3,23 @@ import ListAllTickets from './ListAllTickets';
 import GetOneTicket from './GetOneTicket';
 
 class Bugs extends React.Component {
+  state = { bugContent: 'listAll' };
+
+  changeContent = value => {
+    this.setState({ bugContent: value });
+  };
+
+  renderContent() {
+    if (this.state.bugContent === 'listAll')
+      return <ListAllTickets viewBugDetail={this.changeContent} />;
+    else return <GetOneTicket bugContent={this.state.bugContent} />;
+  }
+
   render() {
     return (
-      <div className="row">
-        <div className="col-lg-7">
-          <ListAllTickets />
-        </div>
-        <div className="col-lg-5">
-          <GetOneTicket />
-        </div>
-      </div>
+      <>
+        <div className="row justify-content-center">{this.renderContent()}</div>
+      </>
     );
   }
 }

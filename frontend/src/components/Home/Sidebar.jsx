@@ -1,9 +1,8 @@
 import React from 'react';
-import ProjectsList from "../../components/Project/ProjectsList";
-import CreateNewProjectForm from "../Project/CreateNewProjectForm";
+import ProjectsList from '../../components/Project/ProjectsList';
+import CreateNewProjectForm from '../Project/CreateNewProjectForm';
 
 function Sidebar({ changeContent }) {
-
   return (
     <>
       <ul
@@ -53,9 +52,8 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
 
-              <CreateNewProjectForm changeContent={changeContent}/>
+              <CreateNewProjectForm changeContent={changeContent} />
               <ProjectsList changeContent={changeContent} />
-
             </div>
           </div>
         </li>
@@ -68,7 +66,7 @@ function Sidebar({ changeContent }) {
             aria-expanded="true"
             aria-controls="collapseBugs"
           >
-            <i className="fas fa-fw fa-cog"></i>
+            <i className="fas fa-fw fa-bug"></i>
             <span>Bugs</span>
           </span>
           <div
@@ -78,12 +76,44 @@ function Sidebar({ changeContent }) {
             data-parent="#accordionSidebar"
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
-              <span id="project1" className="collapse-item">
-                Add ticket
-              </span>
               <span
                 className="collapse-item"
-                onClick={() => changeContent('bugs')}
+                onClick={() => changeContent('viewAllBugs')}
+              >
+                View all
+              </span>
+              <span
+                id="project1"
+                className="collapse-item"
+                onClick={() => changeContent('addBug')}
+              >
+                Add ticket
+              </span>
+            </div>
+          </div>
+        </li>
+
+        <li className="nav-item">
+          <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseSubticket"
+            aria-expanded="true"
+            aria-controls="collapseSubticket"
+          >
+            <i className="fas fa-fw fa-cog"></i>
+            <span>Subticket</span>
+          </span>
+          <div
+            id="collapseSubticket"
+            className="collapse"
+            aria-labelledby="headingSubticket"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <span
+                className="collapse-item"
+                onClick={() => changeContent('subTicket')}
               >
                 View all
               </span>
@@ -97,7 +127,6 @@ function Sidebar({ changeContent }) {
             <span>Tasks</span>
           </span>
         </li>
-
 
         <li className="nav-item">
           <span
@@ -125,12 +154,14 @@ function Sidebar({ changeContent }) {
               >
                 Show milestones
               </span>
-
-
-              <span className="collapse-item" onClick={()=>{changeContent('newMilestone')}}>+ Add new milestone</span>
-
-
-              
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newMilestone');
+                }}
+              >
+                + Add new milestone
+              </span>
             </div>
           </div>
         </li>

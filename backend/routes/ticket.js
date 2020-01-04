@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const { Ticket } = res.locals.models;
-  const ticket = await Ticket.findById(req.params.id);
+  const ticket = await Ticket.findOne({ _id: req.params.id });
   res.status(200).json(ticket);
 });
 
