@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send('Invalid password');
 
-  res.send('Good morning user :)');
+  res.status(200).send(user);
 });
 
 module.exports = router;

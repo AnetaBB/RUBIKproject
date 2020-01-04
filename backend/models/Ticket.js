@@ -29,6 +29,10 @@ const Ticket = new Schema({
     required: true,
     enum: ['Trivial', 'Minor', 'Major', 'Critical'],
   },
+  projectName: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = {

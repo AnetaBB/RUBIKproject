@@ -1,18 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
-import Store from '../../Store'
+import Store from '../../Store';
 
-const NewProjectForm = (props) => {
+const NewProjectForm = props => {
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [error, setError] = useState(null);
 
   let context = useContext(Store);
 
-  const sendNewProject = async (e) => {
+  const sendNewProject = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -30,24 +29,20 @@ const NewProjectForm = (props) => {
           title: title,
           description: description,
           deadline: deadline,
-          owner: 'Ola', //todo: add owner from context.me
+          owner: context.user._id,
           createdAt: now,
-          contributors: '' //todo: add users to collaborating
+          contributors: '',
+          active: true,
         };
 
         let response = await api_rubikproject.post('/api/projects', data);
         if (response.status === 200) {
           context.changeStore('projectID', response.data);
           props.changeContent('project');
-        } else {
-          console.log(response.body);
-          setError('Failure: ' + response.body); //TODO
         }
       } catch (error) {
-        //TODO if response is 409 it is handled here (display new component ContentError)
-        setError(error);
-        console.log(error);
-        // alert(error);
+        if (error.message === 'Request failed with status code 409')
+          alert('Project name already exist.');
       }
     }
   };
