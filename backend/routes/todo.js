@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const todoObject = [
-  { content: 'make a todo list!', done: 'false' },
-  { content: 'write object', done: 'false' },
+  { content: 'make a todo list!', done: 'false', owner },
+  { content: 'write object', done: 'false' owner},
 ];
 
 router.get('/', async (req, res) => {
