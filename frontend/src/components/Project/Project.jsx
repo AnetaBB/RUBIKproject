@@ -24,7 +24,7 @@ const Project = (props) =>  {
       } catch (error) {
           if (isSubscribed) setError("Cannot retrieve project " + context.projectID)
       }
-    }
+    };
     fetchData();
     return () => { isSubscribed = false };
   }, [context.projectID]);
@@ -110,6 +110,11 @@ const Project = (props) =>  {
               </Card>
             </div>
           </div>
+          <Button className="mr-3"
+            variant="warning"
+            onClick={()=> props.changeContent('newProject')}>
+            Edit this project
+          </Button>
           <Button
             variant="danger"
             onClick={handleClose}>

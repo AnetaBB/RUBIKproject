@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
 
 const NewProjectForm = props => {
+  const [project, setProject] = useState({});
+  const [error, setError] = useState('');
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -11,7 +13,28 @@ const NewProjectForm = props => {
 
   let context = useContext(Store);
 
-  const sendNewProject = async e => {
+  // jeśli komponent otrzyma dane projektu (id) tzn ze mamy do czynienia z edycją, i pobieramy dane o projekcie z bazy
+
+  useEffect(() => {
+    if (props.projectID) {
+      let isSubscribed = true;
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/api/projects/${props.projectID}`);
+          if (response.status === 200) {
+            const projectData = await response.json();
+            if (isSubscribed) setProject(projectData)
+          }
+        } catch (error) {
+          if (isSubscribed) setError("Cannot retrieve project " + props.projectID)
+        }
+      };
+      fetchData();
+      return () => { isSubscribed = false };
+    }
+  }, [props.projectID]);
+
+  const sendProject = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -47,54 +70,62 @@ const NewProjectForm = props => {
     }
   };
 
-  return (
-    <>
-      <Form noValidate validated={validated} onSubmit={sendNewProject}>
-        <Form.Group controlId="projectTitle">
-          <Form.Label>Project title</Form.Label>
-          <Form.Control
-            minLength="3"
-            required
-            type="text"
-            placeholder="Project title"
-            value={title}
-            onChange={e => {
-              setTitle(e.target.value);
-            }}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please choose an uniq project name with at least 3 characters.
-          </Form.Control.Feedback>
-        </Form.Group>
+  if (error) {
+    return (
+      <div className="container">
+        <div className="row">{error.toString()}</div>
+      </div>
+    )
+  } else {
+    return (
+      <>
+        <Form noValidate validated={validated} onSubmit={sendProject}>
+          <Form.Group controlId="projectTitle">
+            <Form.Label>Project title</Form.Label>
+            <Form.Control
+              minLength="3"
+              required
+              type="text"
+              placeholder="Project title"
+              value={title}
+              onChange={e => {
+                setTitle(e.target.value);
+              }}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please choose an uniq project name with at least 3 characters.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group controlId="projectDescription">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows="3"
-            placeholder="Write something about your project"
-            value={description}
-            onChange={e => {
-              setDescription(e.target.value);
-            }}
-          />
-        </Form.Group>
+          <Form.Group controlId="projectDescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              placeholder="Write something about your project"
+              value={description}
+              onChange={e => {
+                setDescription(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Deadline</Form.Label>
-          <Form.Control
-            type="date"
-            value={deadline}
-            onChange={e => {
-              setDeadline(e.target.value);
-            }}
-          />
-        </Form.Group>
+          <Form.Group>
+            <Form.Label>Deadline</Form.Label>
+            <Form.Control
+              type="date"
+              value={deadline}
+              onChange={e => {
+                setDeadline(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-        <Button type="submit">Submit</Button>
-      </Form>
-    </>
-  );
+          <Button type="submit">Submit</Button>
+        </Form>
+      </>
+    );
+  }
 };
 
 export default NewProjectForm;
