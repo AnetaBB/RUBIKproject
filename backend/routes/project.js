@@ -3,7 +3,11 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const { Project } = res.locals.models;
-  const projects = await Project.find({ active: true, owner: req.query.ownerID });
+  const query = { active: true };
+  if (req.query.ownerID) {
+    query.owner = req.query.ownerID;
+  }
+  const projects = await Project.find(query);
   res.status(200).json(projects);
 });
 
