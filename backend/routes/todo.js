@@ -1,11 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const todoObject = [
-  { content: 'make a todo list!', done: 'false', owner },
-  { content: 'write object', done: 'false' owner},
-];
-
 router.get('/', async (req, res) => {
   const { Todo } = res.locals.models;
   const todos = await Todo.find();
@@ -16,7 +11,7 @@ router.get('/:id', async (req, res) => {
   const { Todo } = res.locals.models;
   const todo = await Todo.findById(req.params.id);
   if (!todo)
-    return res.status(404).send('The todo with given ID was not found.');
+    return res.status(404).send('The todo for this user id was not found.');
   res.status(200).json(todo);
 });
 
@@ -39,6 +34,7 @@ router.put('/:id', async (req, res) => {
       return res.status(404).send('The todo with given ID was not found.');
     todo.content = req.body.content;
     todo.done = req.body.done;
+    todo.userId = req.body.userId;
     const result = await todo.save();
     res.status(200).send(result);
   } catch (err) {

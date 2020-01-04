@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import api_rubikproject from '../../api/api_rubikproject';
+import Form from 'react-bootstrap/Form';
 
 export class ListAllTodos extends React.Component {
   state = { todosApi: [] };
@@ -10,13 +9,6 @@ export class ListAllTodos extends React.Component {
     const data = await response.json();
     this.setState({ todosApi: data });
   }
-
-  removeTodo = todoId => {
-    // delete request to db
-    // delete from state of the component
-    console.log('smth');
-  };
-
   render() {
     return (
       <div>
@@ -25,9 +17,6 @@ export class ListAllTodos extends React.Component {
             return (
               <div key={item._id}>
                 <Form.Check type="checkbox" label={item.content} />
-                <Button onClick={this.removeTodo}>
-                  <i className="fa fa-remove"></i>
-                </Button>
               </div>
             );
           })}

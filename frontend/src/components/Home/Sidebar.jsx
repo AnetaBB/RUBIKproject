@@ -172,7 +172,7 @@ function Sidebar({ changeContent }) {
               changeContent('todo');
             }}
           >
-            <i className="fas fa-fw fa-list"></i>
+            <i className="fas fa-check-double"></i>
             <span>Todo</span>
           </span>
         </li>
