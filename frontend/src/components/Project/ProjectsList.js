@@ -12,9 +12,9 @@ const ProjectsList = props => {
     let isSubscribed = true;
     const fetchProjects = async () => {
       try {
-        console.log("fetchProjects");
-        console.log(context.user._id);
-        const response = await api_rubikproject.get(`/api/projects?ownerID=${context.user._id}`);
+        const response = await api_rubikproject.get(
+          `/api/projects?ownerID=${context.user._id}`
+        );
         if (response.status === 200) {
           const r = await response.data;
           if (isSubscribed) setProjects(r);

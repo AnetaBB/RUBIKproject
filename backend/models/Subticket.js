@@ -1,7 +1,14 @@
-const { Schema } = require('mongoose');
+const {
+  Schema
+} = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
 const Subticket = new Schema({
+  // project: {
+  //   type: ObjectId,
+  //   ref: 'Project',
+  //   required: true,
+  // },
   // ticket: {
   //   type: ObjectId,
   //   ref: 'Ticket',
@@ -32,8 +39,8 @@ const Subticket = new Schema({
   },
   contributor: {
     type: String,
-    // docelowo wykonawca nadrzednego ticketa
-    default: 'Mateusz',
+    minlength: 3,
+    maxlength: 30,
     required: true,
   },
   priority: {
