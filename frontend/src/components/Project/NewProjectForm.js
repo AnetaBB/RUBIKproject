@@ -29,7 +29,7 @@ const NewProjectForm = props => {
           title: title,
           description: description,
           deadline: deadline,
-          owner: 'Ola', //todo: add owner from context.me
+          owner: context.user._id,
           createdAt: now,
           contributors: '',
           active: true,
