@@ -18,7 +18,7 @@ class GetOneSubTicket extends React.Component {
   };
 
   editSubTicket = () => {
-    this.props.onEdit('edit');
+    this.props.onEdit('edit', this.props.getOne);
   };
 
   deleteSubTicket = () => {

@@ -12,14 +12,14 @@ class EditSubTicketForm extends React.Component {
     e.preventDefault();
     const putBodyReq = {
       title: this.state.title,
-      description: this.state.description,
-      priority: this.state.priority,
-      relevance: this.state.relevance,
+      //description: this.state.description,
+      //priority: this.state.priority,
+      //relevance: this.state.relevance,
     };
 
     try {
-      const res = await api_rubikproject.put('/api/subtickets', putBodyReq);
-      //this.props.onSubmit(true); !!!!!!!!!!
+      const res = await api_rubikproject.put(`/api/subtickets/${this.props.subId}`, putBodyReq);
+      this.props.onSubmit('edited');
       console.log(res);
       console.log(res.data);
     } catch (error) {
