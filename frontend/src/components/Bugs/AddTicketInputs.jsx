@@ -14,10 +14,51 @@ class AddTicketInputs extends React.Component {
     owner: this.context.user.name,
     contributors: 'none',
     status: 'Open',
-    projectName: 'contextProjectID',
+    projectName: [],
   };
 
   static contextType = Store;
+
+
+  //Czeka na zmianę w backendzie projects
+  //Później trzeba te dana wyświetlić w select
+
+
+  componentDidMount() {
+    // this.getContributors();
+    this.viewProject();
+  }
+
+  viewProject = async () => {
+    if (this.context.projectID) {
+      this.setState({ projectID: this.context.projectID });
+    } else {
+      try {
+        const response = await api_rubikproject.get(`/api/projects?ownerID=${this.context.user._id}`);
+        if (response.status) {
+          let responseData = JSON.parse(response.request.response);
+          console.log(responseData);
+          this.setState({ projectName: responseData })
+          console.log(this.state.projectName);
+        }
+      } catch (error) {
+        this.setState({ error: 'Can not get projects list' });
+      }
+    }
+  };
+
+  /*getContributors = async () => {
+    if (this.context.projectID) {
+      try {
+        const response = await api_rubikproject.get(
+          `/api/projects/${this.context.projectID}`
+        );
+        if (response.status) console.log(JSON.parse(response.request.response));
+      } catch (error) {
+        this.setState({ error: 'Can not get contributors from project' });
+      }
+    }
+  };*/
 
   addTicketToDB = async () => {
     const addTicketForm = document.getElementById('addTicketForm');
@@ -167,18 +208,20 @@ class AddTicketInputs extends React.Component {
                       </div>
                       <div className="col-sm-6">
                         <label htmlFor="bugProject">Project</label>
-                        <input
-                          type="text"
-                          className="form-control form-control-user"
+                        <Form.Control
+                          as="select"
                           id="bugProject"
-                          placeholder="project"
-                          autoComplete="username"
-                          value={this.state.projectName}
                           onChange={e => {
                             this.setState({ projectName: e.target.value });
                           }}
                           required
-                        />
+                        >
+                          {this.state.projectName.map(function (item) {
+                            return (
+                              <option key={item._id}>{item.title}</option>
+                            )
+                          })}
+                        </Form.Control>
                       </div>
                     </div>
                     <h3 style={{ color: 'red', textAlign: 'center' }}>
