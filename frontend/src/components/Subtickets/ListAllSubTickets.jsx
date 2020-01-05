@@ -3,12 +3,12 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
 class ListAllSubTickets extends React.Component {
-  state = { ticketsApi: [] };
+  state = { subTicketsApi: [] };
 
   async componentDidMount() {
     const response = await fetch('http://127.0.0.1:8080/api/subtickets');
     const data = await response.json();
-    this.setState({ ticketsApi: data });
+    this.setState({ subTicketsApi: data });
   }
 
   render() {
@@ -29,15 +29,22 @@ class ListAllSubTickets extends React.Component {
                   <th>Project</th>
                 </tr>
               </thead>
-              <tbody>
-                {this.state.ticketsApi.map(function(item) {
+              <tbody
+                onClick={e =>
+                  this.props.onSelect(
+                    e.target.parentNode.lastChild.textContent
+                  )
+                }
+              >
+                {this.state.subTicketsApi.map(function (item) {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>
                       <td>{item.relevance}</td>
                       <td>{item.status}</td>
-                      <td></td>
-                      <td></td>
+                      <td>ticket-name</td>
+                      <td>project-name</td>
+                      <td style={{ display: 'none' }}>{item._id}</td>
                     </tr>
                   );
                 })}
