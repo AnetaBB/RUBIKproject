@@ -17,6 +17,10 @@ class GetOneSubTicket extends React.Component {
     this.props.onBack('listAll');
   };
 
+  deleteSubTicket = () => {
+    this.props.onDelete('deleted');
+  };
+
   render() {
     return (
       <Card>
@@ -35,7 +39,7 @@ class GetOneSubTicket extends React.Component {
           <Button variant="warning" className="mr-1">
             Edit
           </Button>
-          <Button variant="danger">
+          <Button variant="danger" onClick={this.deleteSubTicket}>
             Delete
           </Button>
         </Card.Body>
