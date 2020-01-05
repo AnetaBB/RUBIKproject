@@ -8,54 +8,49 @@ import Table from 'react-bootstrap/Table';
 class ListAllMilestones extends React.Component {
   state = { usersApi: [] };
 
-  async componentDidMount() {
+  async componentDidMount () {
     const response = await fetch('http://127.0.0.1:8080/api/milestones');
     const data = await response.json();
     this.setState({ usersApi: data });
   }
-  render() {
+  render () {
     return (
-      <div className="row">
-        <div className="col-lg-7">
+      <div className='row'>
+        <div className='col-lg-7'>
           <Card>
-            <Card.Header>
-              Your milestones for this project 
-            </Card.Header>
+            <Card.Header>Your milestones for this project</Card.Header>
             <Card.Body>
-            <div className="table-responsive">
-            <table
-              className="table table-bordered text-gray-300"
-              id="dataTable"
-              width="100%"
-              cellSpacing="0"
-            >
-              <thead>
-                <tr>
-               <th>ProjectID</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Owner</th>
-                  <th> Contributor</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.usersApi.map(function(item) {
-                  return (
-                    <tr key={item._id}>
-                      <td>{item.id}</td>
-                      <td>{item.title}</td>
-                      <td>{item.description}</td>
-                      <td>{item.owner}</td>
-                      <td>{item.contributors ? 'Yes' : 'No'}</td>
+              <div className='table-responsive'>
+                <table
+                  className='table table-bordered text-gray-300'
+                  id='dataTable'
+                  width='100%'
+                  cellSpacing='0'
+                >
+                  <thead>
+                    <tr>
+                      <th>ProjectID</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Owner</th>
                     </tr>
-                  );
-                })}
-              </tbody>
+                  </thead>
+                  <tbody>
+                    {this.state.usersApi.map(function (item) {
+                      return (
+                        <tr key={item._id}>
+                          <td>{item.id}</td>
+                          <td>{item.title}</td>
+                          <td>{item.description}</td>
+                          <td>{item.owner}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
                 </table>
-                </div>
+              </div>
             </Card.Body>
           </Card>
-          
         </div>
       </div>
     );

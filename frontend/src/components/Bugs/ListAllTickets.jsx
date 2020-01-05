@@ -5,25 +5,25 @@ import Table from 'react-bootstrap/Table';
 class ListAllTickets extends React.Component {
   state = { ticketsApi: [], projectName: '' };
 
-  async componentDidMount() {
+  async componentDidMount () {
     const response = await fetch('http://127.0.0.1:8080/api/tickets');
     const data = await response.json();
     this.setState({ ticketsApi: data });
   }
 
-  render() {
+  render () {
     return (
-      <div className="col-sm-12">
+      <div className='col-sm-12'>
         <Card>
           <Card.Header>List of tickets</Card.Header>
           <Card.Body>
             <Table
-              responsive="x1"
+              responsive='x1'
               striped
               bordered
               hover
-              variant="dark"
-              id="tableListAllBugs"
+              variant='dark'
+              id='tableListAllBugs'
             >
               <thead>
                 <tr>
@@ -34,14 +34,14 @@ class ListAllTickets extends React.Component {
                 </tr>
               </thead>
               <tbody
-                className="viewBugDetails"
+                className='viewBugDetails'
                 onClick={e =>
                   this.props.viewBugDetail(
                     e.target.parentNode.lastChild.textContent
                   )
                 }
               >
-                {this.state.ticketsApi.map(function(item) {
+                {this.state.ticketsApi.map(function (item) {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>
