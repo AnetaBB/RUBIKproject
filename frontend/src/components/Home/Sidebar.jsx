@@ -102,7 +102,7 @@ function Sidebar({ changeContent }) {
             aria-controls="collapseSubticket"
           >
             <i className="fas fa-fw fa-cog"></i>
-            <span>Subticket</span>
+            <span>Subtickets</span>
           </span>
           <div
             id="collapseSubticket"
@@ -113,9 +113,15 @@ function Sidebar({ changeContent }) {
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <span
                 className="collapse-item"
-                onClick={() => changeContent('subTicket')}
+                onClick={() => changeContent('viewAllSubTickets')}
               >
                 View all
+              </span>
+              <span
+                className="collapse-item"
+                onClick={() => changeContent('addSubTicket')}
+              >
+                Add subticket
               </span>
             </div>
           </div>
@@ -165,6 +171,18 @@ function Sidebar({ changeContent }) {
             </div>
           </div>
         </li>
+        <li className="nav-item">
+          <span
+            className="nav-link"
+            onClick={() => {
+              changeContent('todo');
+            }}
+          >
+            <i className="fas fa-check-double"></i>
+            <span>Todo</span>
+          </span>
+        </li>
+
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">
