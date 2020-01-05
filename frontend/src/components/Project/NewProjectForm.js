@@ -4,7 +4,7 @@ import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
 
 const NewProjectForm = props => {
-  const [project, setProject] = useState({});
+  const [projectData, setProject] = useState({});
   const [error, setError] = useState('');
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState('');
@@ -13,8 +13,7 @@ const NewProjectForm = props => {
 
   let context = useContext(Store);
 
-  // jeśli komponent otrzyma dane projektu (id) tzn ze mamy do czynienia z edycją, i pobieramy dane o projekcie z bazy
-
+  // jeśli komponent otrzyma w props ID projektu, tzn ze mamy do czynienia z edycją, i pobieramy dane o projekcie z bazy
   useEffect(() => {
     if (props.projectID) {
       let isSubscribed = true;
@@ -23,16 +22,27 @@ const NewProjectForm = props => {
           const response = await fetch(`/api/projects/${props.projectID}`);
           if (response.status === 200) {
             const projectData = await response.json();
-            if (isSubscribed) setProject(projectData)
+            if (isSubscribed) setProject(projectData);
           }
         } catch (error) {
-          if (isSubscribed) setError("Cannot retrieve project " + props.projectID)
+          if (isSubscribed)
+            setError('Cannot retrieve project ' + props.projectID);
         }
       };
       fetchData();
-      return () => { isSubscribed = false };
+      return () => {
+        isSubscribed = false;
+      };
     }
   }, [props.projectID]);
+
+  useEffect(() => {
+    if (projectData.title) {
+      setTitle(projectData.title);
+      setDescription(projectData.description);
+      setDeadline(projectData.deadline);
+    }
+  }, [projectData.title]);
 
   const sendProject = async e => {
     const form = e.currentTarget;
@@ -75,7 +85,7 @@ const NewProjectForm = props => {
       <div className="container">
         <div className="row">{error.toString()}</div>
       </div>
-    )
+    );
   } else {
     return (
       <>
