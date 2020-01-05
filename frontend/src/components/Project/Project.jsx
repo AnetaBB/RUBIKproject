@@ -26,7 +26,10 @@ const Project = (props) =>  {
       }
     };
     fetchData();
-    return () => { isSubscribed = false };
+    return () => {
+      isSubscribed = false;
+
+    };
   }, [context.projectID]);
 
     if (error) {
@@ -112,7 +115,7 @@ const Project = (props) =>  {
           </div>
           <Button className="mr-3"
             variant="warning"
-            onClick={()=> props.changeContent('newProject')}>
+            onClick={()=> props.changeContent('editProject')}>
             Edit this project
           </Button>
           <Button
