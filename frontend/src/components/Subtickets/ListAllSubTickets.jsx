@@ -31,7 +31,7 @@ class ListAllSubTickets extends React.Component {
               </thead>
               <tbody
                 onClick={e =>
-                  this.props.onSelect(
+                  this.props.onSelect('getOne',
                     e.target.parentNode.lastChild.textContent
                   )
                 }
