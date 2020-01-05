@@ -10,6 +10,7 @@ import AddTicket from '../../components/Bugs/AddTicket';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
 import NewProjectForm from '../../components/Project/NewProjectForm';
+import Todo from '../../components/Todo';
 import SubTickets from '../../components/Subtickets';
 import AddSubTicket from '../../components/Subtickets/AddSubTicket';
 
@@ -30,7 +31,12 @@ class Home extends React.Component {
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm changeContent={this.selectContent} />;
     } else if (this.state.content === 'editProject') {
-      return <NewProjectForm projectID={this.context.projectID} changeContent={this.selectContent} />;
+      return (
+        <NewProjectForm
+          projectID={this.context.projectID}
+          changeContent={this.selectContent}
+        />
+      );
     } else if (this.state.content === 'viewAllBugs') {
       return <ListAllTickets />;
     } else if (this.state.content === 'addBug') {
@@ -43,6 +49,8 @@ class Home extends React.Component {
       return <Milestone />;
     } else if (this.state.content === 'newMilestone') {
       return <AddAMilestone />;
+    } else if (this.state.content === 'todo') {
+      return <Todo />;
     } else return <StartDashboard />;
   }
 

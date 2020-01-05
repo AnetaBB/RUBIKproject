@@ -171,6 +171,18 @@ function Sidebar({ changeContent }) {
             </div>
           </div>
         </li>
+        <li className="nav-item">
+          <span
+            className="nav-link"
+            onClick={() => {
+              changeContent('todo');
+            }}
+          >
+            <i className="fas fa-check-double"></i>
+            <span>Todo</span>
+          </span>
+        </li>
+
         <div className="sidebar-heading">Addons</div>
 
         <li className="nav-item">
