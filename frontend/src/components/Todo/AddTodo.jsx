@@ -17,6 +17,7 @@ export class AddTodo extends React.Component {
     if (this.state.content) {
       try {
         const response = await api_rubikproject.post('/api/todos/', this.state);
+        if (response.status) console.log('update parent state');
       } catch {
         alert('error');
       }
