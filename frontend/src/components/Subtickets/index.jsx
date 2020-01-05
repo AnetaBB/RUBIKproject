@@ -2,6 +2,7 @@ import React from 'react';
 import ListAllSubTickets from './ListAllSubTickets';
 import GetOneSubTicket from './GetOneSubTicket';
 import SubTicketDeleted from './SubTicketDeleted';
+import EditSubTicketForm from './EditSubTicketForm';
 
 class SubTickets extends React.Component {
   state = { pageContent: 'listAll' };
@@ -18,10 +19,13 @@ class SubTickets extends React.Component {
       content = (<ListAllSubTickets onSelect={this.changeContent} />);
     else if (pageContent === 'deleted')
       content = (<SubTicketDeleted onAccept={this.changeContent} />);
+    else if (pageContent === 'edit')
+      content = (<EditSubTicketForm onCancel={this.changeContent} />);
     else
       content = (<GetOneSubTicket
         getOne={this.state.pageContent}
         onBack={this.changeContent}
+        onEdit={this.changeContent}
         onDelete={this.changeContent}
       />);
 
