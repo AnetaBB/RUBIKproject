@@ -4,11 +4,9 @@ import { Form, Button } from 'react-bootstrap';
 export class Todo extends React.Component {
   render() {
     return (
-      <div key={this.props.todo._id}>
+      <div>
         <Form.Check type="checkbox" label={this.props.todo.content} />
-        <Button
-          onClick={console.log(`remove todo with id:${this.props.todo._id}`)}
-        >
+        <Button>
           <i className="fa fa-remove"></i>
         </Button>
       </div>
