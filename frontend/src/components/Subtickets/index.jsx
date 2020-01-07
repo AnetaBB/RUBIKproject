@@ -23,6 +23,7 @@ class SubTickets extends React.Component {
       content = (<ListAllSubTickets onSelect={this.changeContent} />);
     else if (pageContent === 'confirmDelete')
       content = (<SubTicketConfirmDelete
+        subId={this.state.subTicketId}
         onDelete={this.changeContent}
         onCancel={this.changeContent}
       />);

@@ -1,12 +1,17 @@
 import React from 'react';
+import api_rubikproject from '../../api/api_rubikproject';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 class SubTicketConfirmDelete extends React.Component {
 
-  delete = () => {
-    console.log('Subticket was deleted successfully!');
-    this.props.onDelete('deleteNotification');
+  delete = async () => {
+    try {
+      await api_rubikproject.delete(`api/subtickets/${this.props.subId}`);
+      this.props.onDelete('deleteNotification');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   cancel = () => {
