@@ -22,7 +22,7 @@ class GetOneSubTicket extends React.Component {
   };
 
   deleteSubTicket = () => {
-    this.props.onDelete('deleted');
+    this.props.onDelete('confirmDelete', this.props.getOne);
   };
 
   render() {

@@ -1,9 +1,9 @@
 import React from 'react';
 import ListAllSubTickets from './ListAllSubTickets';
 import GetOneSubTicket from './GetOneSubTicket';
-import SubTicketDeleted from './SubTicketDeleted';
+import SubTicketConfirmDelete from './SubTicketConfirmDelete';
 import EditSubTicketForm from './EditSubTicketForm';
-import SubTicketEdited from './SubTicketEdited';
+import Notification from './Notification';
 
 class SubTickets extends React.Component {
   state = { pageContent: 'listAll', subTicketId: '' };
@@ -21,16 +21,30 @@ class SubTickets extends React.Component {
 
     if (pageContent === 'listAll')
       content = (<ListAllSubTickets onSelect={this.changeContent} />);
-    else if (pageContent === 'deleted')
-      content = (<SubTicketDeleted onAccept={this.changeContent} />);
+    else if (pageContent === 'confirmDelete')
+      content = (<SubTicketConfirmDelete
+        subId={this.state.subTicketId}
+        onDelete={this.changeContent}
+        onCancel={this.changeContent}
+      />);
+    else if (pageContent === 'deleteNotification')
+      content = (
+        <Notification onAccept={this.changeContent}>
+          Subticked was deleted successfully!
+        </Notification>
+      );
     else if (pageContent === 'edit')
       content = (<EditSubTicketForm
         subId={this.state.subTicketId}
         onSubmit={this.changeContent}
         onCancel={this.changeContent}
       />);
-    else if (pageContent === 'edited')
-      content = (<SubTicketEdited onAccept={this.changeContent} />);
+    else if (pageContent === 'editNotification')
+      content = (
+        <Notification onAccept={this.changeContent}>
+          Subticked was edited successfully!
+        </Notification>
+      );
     else if (pageContent === 'getOne')
       content = (<GetOneSubTicket
         getOne={this.state.subTicketId}

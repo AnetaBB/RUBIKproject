@@ -19,7 +19,7 @@ class EditSubTicketForm extends React.Component {
 
     try {
       const res = await api_rubikproject.put(`/api/subtickets/${this.props.subId}`, putBodyReq);
-      this.props.onSubmit('edited');
+      this.props.onSubmit('editNotification');
       console.log(res);
       console.log(res.data);
     } catch (error) {
