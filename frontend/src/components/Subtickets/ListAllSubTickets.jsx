@@ -42,7 +42,7 @@ class ListAllSubTickets extends React.Component {
                       <td>{item.title}</td>
                       <td>{item.relevance}</td>
                       <td>{item.status}</td>
-                      <td>ticket-name</td>
+                      <td>{item.ticket}</td>
                       <td>project-name</td>
                       <td style={{ display: 'none' }}>{item._id}</td>
                     </tr>
