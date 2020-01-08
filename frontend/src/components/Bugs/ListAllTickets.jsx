@@ -5,13 +5,20 @@ import Table from 'react-bootstrap/Table';
 class ListAllTickets extends React.Component {
   state = { ticketsApi: [], projectName: '' };
 
-  async componentDidMount () {
-    const response = await fetch('http://127.0.0.1:8080/api/tickets');
-    const data = await response.json();
-    this.setState({ ticketsApi: data });
+  async componentDidMount() {
+    //const response = await fetch('http://127.0.0.1:8080/api/tickets');
+    //const data = await response.json();
+    //this.setState({ ticketsApi: data });
+    this.setState({ ticketsApi: await this.getTickets() });
   }
 
-  render () {
+  async getTickets() {
+    const response = await fetch('/api/tickets');
+    const data = await response.json();
+    return data;
+  }
+
+  render() {
     return (
       <div className='col-sm-12'>
         <Card>

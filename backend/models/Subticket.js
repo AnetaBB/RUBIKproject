@@ -14,6 +14,10 @@ const Subticket = new Schema({
   //   ref: 'Ticket',
   //   required: true,
   // },
+  ticket: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     unique: true,

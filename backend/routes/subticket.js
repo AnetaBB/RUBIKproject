@@ -30,6 +30,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const schema = Joi.object({
+    ticket: Joi.string()
+      .required(),
     title: Joi.string()
       .min(5)
       .max(70)
@@ -63,6 +65,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const schema = Joi.object({
+    ticket: Joi.string(),
     title: Joi.string()
       .min(5)
       .max(70),
