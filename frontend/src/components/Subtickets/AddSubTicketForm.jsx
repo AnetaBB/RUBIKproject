@@ -5,14 +5,23 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import ListAllTickets from '../Bugs/ListAllTickets';
 
 class AddSubTicketForm extends React.Component {
   static contextType = Store;
-  state = { title: '', description: '', priority: 'Low', relevance: 'Trivial' };
+  state = { title: '', description: '', priority: 'Low', relevance: 'Trivial', ticket: '', tickets: [] };
+
+  componentDidMount() {
+    const listAllTickets = new ListAllTickets();
+    listAllTickets.getTickets().then(res => {
+      this.setState({ tickets: res })
+    });
+  }
 
   onFormSubmit = async e => {
     e.preventDefault();
     const postBodyReq = {
+      ticket: this.state.ticket,
       title: this.state.title,
       description: this.state.description,
       priority: this.state.priority,
@@ -89,6 +98,19 @@ class AddSubTicketForm extends React.Component {
                     <option>Minor</option>
                     <option>Major</option>
                     <option>Critical</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId="formSubticketTicket" as={Col}>
+                  <Form.Label>Ticket</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.ticket}
+                    onChange={e => this.setState({ ticket: e.target.value })}
+                  >
+                    {this.state.tickets.map(function (item) {
+                      return <option key={item._id}>{item.title}</option>;
+                    })}
                   </Form.Control>
                 </Form.Group>
               </Form.Row>

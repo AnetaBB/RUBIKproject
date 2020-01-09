@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-class SubTicketEdited extends React.Component {
+class Notification extends React.Component {
 
   accepted = () => {
     this.props.onAccept('listAll');
@@ -12,12 +12,12 @@ class SubTicketEdited extends React.Component {
     return (
       <div>
         <Card>
-          Subticket was edited successfully!
-            <Button onClick={this.accepted}>OK</Button>
+          {this.props.children}
+          <Button onClick={this.accepted}>OK</Button>
         </Card>
       </div>
     );
   }
 }
 
-export default SubTicketEdited;
+export default Notification;
