@@ -5,6 +5,7 @@ import DeletingProjectModal from "./DeletingProjectModal";
 
 const Project = (props) =>  {
   const [project, setProject] = useState({});
+  const [tickets, setTickets] = useState([]);
   const [error, setError] = useState('');
   const [show, setShow] = useState(false);
 
@@ -31,6 +32,29 @@ const Project = (props) =>  {
 
     };
   }, [context.projectID]);
+
+  useEffect(() => {
+      let isSubscribed = true;
+      const fetchTickets = async () => {
+        try {
+          const response = await fetch(`/api/tickets?projectID=${context.projectID}`);
+          if (response.status === 200) {
+            const ticketsData = await response.json();
+            console.log(ticketsData);
+            if (isSubscribed) setTickets(ticketsData);
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      };
+
+      fetchTickets();
+      return () => {
+        isSubscribed = false;
+      }
+  }, [context.projectID]);
+
+
 
     if (error) {
       return (
