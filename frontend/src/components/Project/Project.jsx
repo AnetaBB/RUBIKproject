@@ -84,20 +84,23 @@ const Project = (props) =>  {
                     <tr>
                       <th>Task</th>
                       <th>Priority</th>
+                      <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {
+                      tickets.map((ticket) => {
+                        return (
+                          <tr key={ticket._id}>
+                            <td>{ticket.title}</td>
+                            <td>{ticket.priority}</td>
+                            <td>{ticket.status}</td>
+                          </tr>
+                        )
+                      })
+                    }
                     <tr>
-                      <td>task1</td>
-                      <td>low</td>
-                    </tr>
-                    <tr>
-                      <td>task2</td>
-                      <td>height</td>
-                    </tr>
-                    <tr>
-                      <td>View all tasks</td>
-                      <td></td>
+                      <td onClick={()=> props.changeContent('viewAllBugs')}>View all tasks</td>
                     </tr>
                     </tbody>
                   </Table>
