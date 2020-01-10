@@ -1,6 +1,9 @@
 import React from 'react';
 
 export class AddTodo extends React.Component {
+  componentDidUpdate() {
+    this.props.inputElement.current.focus();
+  }
   render() {
     return (
       <div>

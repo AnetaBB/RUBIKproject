@@ -1,41 +1,23 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 export class ListTodos extends React.Component {
-  componentDidUpdate() {
-    // this.props.inputElement.current.focus();
-  }
+  createList = todo => {
+    return (
+      <ListGroup.Item
+        key={todo._id}
+        onClick={() => this.props.removeTodo(todo._id)}
+      >
+        {todo.content}
+      </ListGroup.Item>
+    );
+  };
   render() {
+    const todos = this.props.todos;
+    const todoList = todos.map(this.createList);
     return (
       <div>
-        <Form onSubmit={this.props.addTodo}>
-          <Form.Row>
-            <Form.Group controlId="addTodo">
-              <Form.Control
-                type="todo"
-                placeholder="Add Todo"
-                ref={this.props.inputElement}
-                onChange={this.handleInput}
-                // value={this.props.currentTodo.content}
-              />
-              <Button variant="primary" type="submit">
-                <i className="fa fa-plus" />
-              </Button>
-            </Form.Group>
-          </Form.Row>
-        </Form>
-        <Form.Group controlId="formBasicCheckbox">
-          {/* {this.props.todos.map(todo => {
-            return <Todo key={todo._id} todo={todo} />;
-          })} */}
-          <input
-            placeholder="Task"
-            ref={this.props.inputElement}
-            value={this.props.currentTodo.content}
-            onChange={this.props.handleInput}
-          />
-          <button type="submit"> Add Task </button>
-        </Form.Group>
+        <ListGroup>{todoList}</ListGroup>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button, Form, Row } from 'react-bootstrap';
 import { Context } from '../../Store';
-import List from './TodoList';
+import ListTodo from './TodoList';
 import AddTodo from './AddTodo';
 import api_rubikproject from '../../api/api_rubikproject';
 
@@ -16,7 +16,13 @@ export class Todo extends React.Component {
     };
   }
 
-  removeTodo = e => {
+  removeTodo = todoId => {
+    const filteredTodos = this.state.todos.filter(todo => {
+      return todo._id !== todoId;
+    });
+    this.setState({
+      todos: filteredTodos,
+    });
     console.log('removetodo');
   };
   componentDidMount() {
@@ -70,15 +76,7 @@ export class Todo extends React.Component {
               handleInput={this.handleInput}
               currentTodo={this.state.currentTodo}
             />
-            {/* <List
-              todos={this.state.todos}
-              currentTodo={this.state.currentTodo}
-              user={this.context.user}
-              inputElement={this.inputElement}
-              handleInput={this.handleInput}
-              addTodo={this.addTodo}
-              removeTodo={this.removeTodo}
-            /> */}
+            <ListTodo todos={this.state.todos} removeTodo={this.removeTodo} />
           </Card.Body>
         </Card>
       </div>
