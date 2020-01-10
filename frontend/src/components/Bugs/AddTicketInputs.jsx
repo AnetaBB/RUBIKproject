@@ -14,8 +14,8 @@ class AddTicketInputs extends React.Component {
     owner: this.context.user.name,
     contributors: 'none',
     status: 'Open',
-    projectName: '',
-    projectID: ''
+    projectID: '',
+    projectName: ''
   };
 
   static contextType = Store;
@@ -41,6 +41,7 @@ class AddTicketInputs extends React.Component {
           this.state.owner &&
           this.state.contributors &&
           this.state.status &&
+          this.state.projectID &&
           this.state.projectName
         ) {
           try {
@@ -53,6 +54,7 @@ class AddTicketInputs extends React.Component {
               contributors: this.state.contributors,
               status: this.state.status,
               projectName: this.state.projectName,
+              projectID: this.state.projectID,
             });
             if (response.status) this.props.changeState('added');
           } catch (error) {

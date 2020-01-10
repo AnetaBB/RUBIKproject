@@ -33,6 +33,10 @@ const Ticket = new Schema({
     type: String,
     required: true,
   },
+  projectID: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = {
