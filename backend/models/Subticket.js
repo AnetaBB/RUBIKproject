@@ -9,11 +9,11 @@ const Subticket = new Schema({
   //   ref: 'Project',
   //   required: true,
   // },
-  // ticket: {
-  //   type: ObjectId,
-  //   ref: 'Ticket',
-  //   required: true,
-  // },
+  ticketId: {
+    type: ObjectId,
+    ref: 'Ticket',
+    required: true,
+  },
   ticket: {
     type: String,
     required: true,
