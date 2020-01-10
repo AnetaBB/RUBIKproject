@@ -7,6 +7,9 @@ router.get('/', async (req, res) => {
   if (req.query.ownerID) {
     query.owner = req.query.ownerID;
   }
+  if (req.query.projectName) {
+    query.title = req.query.projectName;
+  }
   const projects = await Project.find(query);
   res.status(200).json(projects);
 });

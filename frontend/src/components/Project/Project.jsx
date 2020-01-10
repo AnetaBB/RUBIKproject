@@ -5,6 +5,7 @@ import DeletingProjectModal from "./DeletingProjectModal";
 
 const Project = (props) =>  {
   const [project, setProject] = useState({});
+  const [tickets, setTickets] = useState([]);
   const [error, setError] = useState('');
   const [show, setShow] = useState(false);
 
@@ -31,6 +32,29 @@ const Project = (props) =>  {
 
     };
   }, [context.projectID]);
+
+  useEffect(() => {
+      let isSubscribed = true;
+      const fetchTickets = async () => {
+        try {
+          const response = await fetch(`/api/tickets?projectID=${context.projectID}`);
+          if (response.status === 200) {
+            const ticketsData = await response.json();
+            console.log(ticketsData);
+            if (isSubscribed) setTickets(ticketsData);
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      };
+
+      fetchTickets();
+      return () => {
+        isSubscribed = false;
+      }
+  }, [context.projectID]);
+
+
 
     if (error) {
       return (
@@ -60,20 +84,23 @@ const Project = (props) =>  {
                     <tr>
                       <th>Task</th>
                       <th>Priority</th>
+                      <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {
+                      tickets.map((ticket) => {
+                        return (
+                          <tr key={ticket._id}>
+                            <td>{ticket.title}</td>
+                            <td>{ticket.priority}</td>
+                            <td>{ticket.status}</td>
+                          </tr>
+                        )
+                      })
+                    }
                     <tr>
-                      <td>task1</td>
-                      <td>low</td>
-                    </tr>
-                    <tr>
-                      <td>task2</td>
-                      <td>height</td>
-                    </tr>
-                    <tr>
-                      <td>View all tasks</td>
-                      <td></td>
+                      <td onClick={()=> props.changeContent('viewAllBugs')}>View all tasks</td>
                     </tr>
                     </tbody>
                   </Table>

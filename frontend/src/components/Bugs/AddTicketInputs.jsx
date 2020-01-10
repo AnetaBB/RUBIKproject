@@ -14,7 +14,8 @@ class AddTicketInputs extends React.Component {
     owner: this.context.user.name,
     contributors: 'none',
     status: 'Open',
-    projectName: 'contextProjectID',
+    projectID: '',
+    projectName: ''
   };
 
   static contextType = Store;
@@ -25,32 +26,47 @@ class AddTicketInputs extends React.Component {
       e.preventDefault();
     });
 
-    if (
-      this.state.title &&
-      this.state.description &&
-      this.state.priority &&
-      this.state.relevance &&
-      this.state.owner &&
-      this.state.contributors &&
-      this.state.status &&
-      this.state.projectName
-    ) {
+    const projectResponse = await api_rubikproject.get(`/api/projects?projectName=${this.state.projectName}`);
+    if (projectResponse.status === 200) {
       try {
-        const response = await api_rubikproject.post('/api/tickets', {
-          title: this.state.title,
-          description: this.state.description,
-          priority: this.state.priority,
-          relevance: this.state.relevance,
-          owner: this.state.owner,
-          contributors: this.state.contributors,
-          status: this.state.status,
-          projectName: this.state.projectName,
+        const r = await projectResponse.data;
+        this.setState({
+          projectID: r[0]._id
         });
-        if (response.status) this.props.changeState('added');
+        if (
+          this.state.title &&
+          this.state.description &&
+          this.state.priority &&
+          this.state.relevance &&
+          this.state.owner &&
+          this.state.contributors &&
+          this.state.status &&
+          this.state.projectID &&
+          this.state.projectName
+        ) {
+          try {
+            const response = await api_rubikproject.post('/api/tickets', {
+              title: this.state.title,
+              description: this.state.description,
+              priority: this.state.priority,
+              relevance: this.state.relevance,
+              owner: this.state.owner,
+              contributors: this.state.contributors,
+              status: this.state.status,
+              projectName: this.state.projectName,
+              projectID: this.state.projectID,
+            });
+            if (response.status) this.props.changeState('added');
+          } catch (error) {
+            this.setState({ error: 'Incorrect data' });
+          }
+        } else this.setState({ error: 'Fill in all blanks' });
       } catch (error) {
-        this.setState({ error: 'Incorrect data' });
+        this.setState({
+          error: "We don't have this project name in our base"
+        }, () => console.log("We don't have this project name in our base"));
       }
-    } else this.setState({ error: 'Fill in all blanks' });
+    }
   };
 
   render() {
