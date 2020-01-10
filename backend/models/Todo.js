@@ -12,11 +12,6 @@ const Todo = new Schema({
     required: true,
     unique: false,
   },
-  done: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
 });
 
 module.exports = {

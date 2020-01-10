@@ -12,17 +12,18 @@ export class Todo extends React.Component {
     super();
     this.state = {
       todos: [],
-      currentTodo: { content: '', userId: '', done: false },
+      currentTodo: { content: '', userId: '' },
     };
   }
 
-  removeTodo = todoId => {
+  removeTodo = async todoId => {
     const filteredTodos = this.state.todos.filter(todo => {
-      return todo._id !== todoId;
+      return this.context.user._id === todo.userId && todo._id !== todoId;
     });
     this.setState({
       todos: filteredTodos,
     });
+    await api_rubikproject.delete(`/api/todos/${todoId}`);
     console.log('removetodo');
   };
   componentDidMount() {
@@ -35,7 +36,6 @@ export class Todo extends React.Component {
     const currentTodo = {
       content: todoContent,
       userId: this.context.user._id,
-      done: false,
     };
     this.setState({ currentTodo });
   };
@@ -52,7 +52,6 @@ export class Todo extends React.Component {
         currentTodo: {
           content: '',
           userId: this.context.user._id,
-          done: false,
         },
       });
     }
