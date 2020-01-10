@@ -9,18 +9,20 @@ import ListAllTickets from '../Bugs/ListAllTickets';
 
 class AddSubTicketForm extends React.Component {
   static contextType = Store;
-  state = { title: '', description: '', priority: 'Low', relevance: 'Trivial', ticket: '', tickets: [] };
+  state = { title: '', description: '', priority: 'Low', relevance: 'Trivial', ticket: '', ticketId: '', tickets: [] };
 
   componentDidMount() {
     const listAllTickets = new ListAllTickets();
-    listAllTickets.getTickets().then(res => {
-      this.setState({ tickets: res })
+    listAllTickets.getTickets().then(tickets => {
+      const ticket = tickets[0];
+      this.setState({ tickets: tickets, ticket: ticket.title, ticketId: ticket._id });
     });
   }
 
   onFormSubmit = async e => {
     e.preventDefault();
     const postBodyReq = {
+      ticketId: this.state.ticketId,
       ticket: this.state.ticket,
       title: this.state.title,
       description: this.state.description,
@@ -37,6 +39,12 @@ class AddSubTicketForm extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  onChangeTicket = (e) => {
+    const tickets = this.state.tickets;
+    const ticket = tickets.filter(element => element.title === e.target.value);
+    this.setState({ ticket: ticket[0].title, ticketId: ticket[0]._id });
   };
 
   render() {
@@ -106,7 +114,7 @@ class AddSubTicketForm extends React.Component {
                   <Form.Control
                     as="select"
                     value={this.state.ticket}
-                    onChange={e => this.setState({ ticket: e.target.value })}
+                    onChange={e => this.onChangeTicket(e)}
                   >
                     {this.state.tickets.map(function (item) {
                       return <option key={item._id}>{item.title}</option>;
