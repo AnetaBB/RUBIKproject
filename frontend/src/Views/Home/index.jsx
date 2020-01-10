@@ -31,12 +31,7 @@ class Home extends React.Component {
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm changeContent={this.selectContent} />;
     } else if (this.state.content === 'editProject') {
-      return (
-        <NewProjectForm
-          projectID={this.context.projectID}
-          changeContent={this.selectContent}
-        />
-      );
+      return (<NewProjectForm projectID={this.context.projectID} changeContent={this.selectContent}/>);
     } else if (this.state.content === 'viewAllBugs') {
       return <ListAllTickets />;
     } else if (this.state.content === 'addBug') {
