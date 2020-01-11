@@ -24,20 +24,20 @@ router.post('/', async (req, res) => {
     validationErrors.push(schemaErrors[errName].message);
   }
   if (validationErrors.length > 0) {
-    res.status(400).json({errors: validationErrors});
+    res.status(400).json({ errors: validationErrors });
   } else {
     const existsByTitle = await Project.findOne({
-      title: req.body.title
+      title: req.body.title,
     });
     if (existsByTitle) {
       res.status(409).json({ errors: ['Project name already exist'] });
     } else {
       project
         .save()
-        .then((savedProject) => {
-          res.status(200).json(savedProject._id)
+        .then(savedProject => {
+          res.status(200).json(savedProject._id);
         })
-        .catch((error) => {
+        .catch(error => {
           res.status(400).json({ errors: [error] });
         });
     }
