@@ -1,5 +1,4 @@
 import React from 'react';
-
 class TopNavbarLogin extends React.Component {
   render() {
     return (
@@ -61,5 +60,4 @@ class TopNavbarLogin extends React.Component {
     );
   }
 }
-
 export default TopNavbarLogin;

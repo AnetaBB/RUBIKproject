@@ -1,7 +1,6 @@
 import React from 'react';
 import ProjectsList from '../../components/Project/ProjectsList';
 import CreateNewProjectForm from '../Project/CreateNewProjectForm';
-
 function Sidebar({ changeContent }) {
   return (
     <>
@@ -22,16 +21,13 @@ function Sidebar({ changeContent }) {
             </span>
           </div>
         </span>
-
         <li className="nav-item active">
           <span className="nav-link" href="main.html">
             <i className="fas fa-fw fa-home"></i>
             <span onClick={() => changeContent('')}>Dashboard</span>
           </span>
         </li>
-
         <div className="sidebar-heading">Interface</div>
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -51,13 +47,11 @@ function Sidebar({ changeContent }) {
           >
             <div className="bg-gray-800 py-2 collapse-inner rounded">
               <h6 className="collapse-header">My projects:</h6>
-
               <CreateNewProjectForm changeContent={changeContent} />
               <ProjectsList changeContent={changeContent} />
             </div>
           </div>
         </li>
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -92,7 +86,6 @@ function Sidebar({ changeContent }) {
             </div>
           </div>
         </li>
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -126,14 +119,12 @@ function Sidebar({ changeContent }) {
             </div>
           </div>
         </li>
-
         <li className="nav-item">
           <span className="nav-link">
             <i className="fas fa-fw fa-tasks"></i>
             <span>Tasks</span>
           </span>
         </li>
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -173,6 +164,45 @@ function Sidebar({ changeContent }) {
         </li>
         <li className="nav-item">
           <span
+            className="nav-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseComments"
+            aria-expanded="true"
+            aria-controls="collapseComments"
+          >
+            <i className="fas fa-fw fa-list"></i>
+            <span>Comments</span>
+          </span>
+          <div
+            id="collapseComments"
+            className="collapse"
+            aria-labelledby="headingComments"
+            data-parent="#accordionSidebar"
+          >
+            <div className="bg-gray-800 py-2 collapse-inner rounded">
+              <h6 className="collapse-header">My comments:</h6>
+              <span
+                id="project1"
+                className="collapse-item"
+                onClick={() => changeContent('comment')}
+              >
+                Show all my comments
+              </span>
+
+              <span
+                className="collapse-item"
+                onClick={() => {
+                  changeContent('newComment');
+                }}
+              >
+                + Add new comment
+              </span>
+            </div>
+          </div>
+        </li>
+
+        <li className="nav-item">
+          <span
             className="nav-link"
             onClick={() => {
               changeContent('todo');
@@ -182,9 +212,7 @@ function Sidebar({ changeContent }) {
             <span>Todo</span>
           </span>
         </li>
-
         <div className="sidebar-heading">Addons</div>
-
         <li className="nav-item">
           <span
             className="nav-link collapsed"
@@ -216,14 +244,12 @@ function Sidebar({ changeContent }) {
             </div>
           </div>
         </li>
-
         <li className="nav-item">
           <span className="nav-link">
             <i className="fas fa-fw fa-plus"></i>
             <span>New project</span>
           </span>
         </li>
-
         {/*<div className="text-center d-none d-md-inline">
               <button className="rounded-circle border-0" id="sidebarToggle">
                 <i className="fas fa-arrow-left"></i>
@@ -233,5 +259,4 @@ function Sidebar({ changeContent }) {
     </>
   );
 }
-
 export default Sidebar;

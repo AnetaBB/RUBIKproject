@@ -35,8 +35,8 @@ const Ticket = new Schema({
   },
   projectID: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = {

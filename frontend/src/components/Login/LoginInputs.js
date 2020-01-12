@@ -2,25 +2,20 @@ import React from 'react';
 import Store from '../../Store';
 import { Redirect } from 'react-router-dom';
 import api_rubikproject from '../../api/api_rubikproject';
-
 class LoginInputs extends React.Component {
   state = { user: '', isLogged: false, email: '', pass: '', error: '' };
-
   static contextType = Store;
-
   loginUser = async () => {
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', e => {
       e.preventDefault();
     });
-
     if (this.state.email && this.state.pass) {
       try {
         const response = await api_rubikproject.post('/api/login', {
           email: this.state.email,
           password: this.state.pass,
         });
-
         if (response.status) {
           const userData = JSON.parse(response.request.response);
           window.localStorage.setItem('rubikproject_user', userData._id);
@@ -35,7 +30,6 @@ class LoginInputs extends React.Component {
       }
     } else this.setState({ error: 'E-mail & password missing' });
   };
-
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
     return (
@@ -92,7 +86,6 @@ class LoginInputs extends React.Component {
                         }}
                         value="Login"
                       />
-
                       <button
                         id="registerBtn"
                         className="btn btn-success btn-user btn-block"
@@ -123,5 +116,4 @@ class LoginInputs extends React.Component {
     );
   }
 }
-
 export default LoginInputs;

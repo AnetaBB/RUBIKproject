@@ -1,6 +1,5 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
-
 const Project = new Schema({
   title: {
     type: String,
@@ -31,7 +30,6 @@ const Project = new Schema({
     required: true,
   },
 });
-
 module.exports = {
   Project,
 };

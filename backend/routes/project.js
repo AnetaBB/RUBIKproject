@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 router.get('/', async (req, res) => {
   const { Project } = res.locals.models;
   const query = { active: true };
@@ -13,16 +12,13 @@ router.get('/', async (req, res) => {
   const projects = await Project.find(query);
   res.status(200).json(projects);
 });
-
 router.get('/:id', async (req, res) => {
   const { Project } = res.locals.models;
   const project = await Project.findById(req.params.id);
   res.status(200).json(project);
 });
-
 router.post('/', async (req, res) => {
   const { Project } = res.locals.models;
-
   const project = new Project(req.body);
   const validation = project.validateSync();
   const schemaErrors = validation ? validation.errors : [];
@@ -50,13 +46,11 @@ router.post('/', async (req, res) => {
     }
   }
 });
-
 router.put('/:id', async (req, res) => {
   const { Project } = res.locals.models;
   if (!req.body) return res.status(400).send('Bad request');
   const project = await Project.findById(req.params.id);
   if (!project) return;
-
   const reqBodyElements = [];
   for (const el in req.body) {
     reqBodyElements.push(el);
@@ -65,15 +59,12 @@ router.put('/:id', async (req, res) => {
   for (const el in Project.schema.obj) {
     schemaElements.push(el);
   }
-
   reqBodyElements.forEach(el => {
     if (schemaElements.includes(el)) {
       project[el] = req.body[el];
     }
   });
-
   // todo: validation what is required
-
   project
     .save()
     .then(res.status(200).json(project._id))
@@ -81,13 +72,11 @@ router.put('/:id', async (req, res) => {
       res.status(400).send('Editing project failed: ' + error);
     });
 });
-
 router.patch('/:id', async (req, res) => {
   const { Project } = res.locals.models;
   if (!req.body) return res.status(400).send('Bad request');
   const project = await Project.findById(req.params.id);
   if (!project) return;
-
   const bodyElements = [];
   for (const el in Project.schema.obj) {
     bodyElements.push(el);
@@ -100,7 +89,6 @@ router.patch('/:id', async (req, res) => {
       });
     }
   });
-
   project
     .save()
     .then(res.status(200).json(project))
@@ -108,7 +96,6 @@ router.patch('/:id', async (req, res) => {
       res.status(400).send('Editing project failed: ' + error);
     });
 });
-
 router.delete('/:id', async (req, res) => {
   const { Project } = res.locals.models;
   const project = await Project.findById(req.params.id);
