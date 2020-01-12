@@ -29,7 +29,7 @@ class Home extends React.Component {
 
   renderContent() {
     if (this.state.content === 'project') {
-      return <Project />;
+      return <Project changeContent={this.selectContent} />;
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm changeContent={this.selectContent} />;
     } else if (this.state.content === 'editProject') {
