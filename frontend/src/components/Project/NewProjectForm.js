@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
 import moment from 'moment';
-
 const NewProjectForm = props => {
   const [projectData, setProject] = useState({});
   const [error, setError] = useState('');
@@ -11,10 +10,7 @@ const NewProjectForm = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [error, setError] = useState(null);
-
   let context = useContext(Store);
-
   // jeśli komponent otrzyma w props ID projektu, tzn ze mamy do czynienia z edycją, i pobieramy dane o projekcie z bazy
   useEffect(() => {
     if (props.projectID) {
@@ -37,7 +33,6 @@ const NewProjectForm = props => {
       };
     }
   }, [props.projectID]);
-
   useEffect(() => {
     if (projectData.title) {
       setTitle(projectData.title);
@@ -47,7 +42,6 @@ const NewProjectForm = props => {
       }
     }
   }, [projectData.title]);
-
   const sendProject = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -56,9 +50,7 @@ const NewProjectForm = props => {
     }
     e.preventDefault();
     e.stopPropagation();
-
     setValidated(true);
-
     if (!props.projectID && title.length > 2) {
       try {
         let now = new Date();
@@ -72,14 +64,10 @@ const NewProjectForm = props => {
           contributors: '',
           active: true,
         };
-
         let response = await api_rubikproject.post('/api/projects', data);
         if (response.status === 200) {
           context.changeStore('projectID', response.data);
           props.changeContent('project');
-        } else {
-          console.log(response.body);
-          setError('Failure: ' + response.body); //TODO
         }
       } catch (error) {
         if (error.message === 'Request failed with status code 409')
@@ -95,7 +83,6 @@ const NewProjectForm = props => {
           editedAt: now,
           contributors: '',
         };
-
         let response = await api_rubikproject.put(
           `/api/projects/${props.projectID}`,
           data
@@ -109,7 +96,6 @@ const NewProjectForm = props => {
       }
     }
   };
-
   if (error) {
     return (
       <div className="container">
@@ -136,7 +122,6 @@ const NewProjectForm = props => {
               Please choose an uniq project name with at least 3 characters.
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group controlId="projectDescription">
             <Form.Label>Description</Form.Label>
             <Form.Control
@@ -149,7 +134,6 @@ const NewProjectForm = props => {
               }}
             />
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Deadline</Form.Label>
             <Form.Control
@@ -160,12 +144,10 @@ const NewProjectForm = props => {
               }}
             />
           </Form.Group>
-
           <Button type="submit">{props.projectID ? 'Update' : 'Submit'}</Button>
         </Form>
       </>
     );
   }
 };
-
 export default NewProjectForm;

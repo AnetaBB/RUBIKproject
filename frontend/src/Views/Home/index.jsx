@@ -55,8 +55,6 @@ class Home extends React.Component {
       return <Comment changeContent={this.selectContent} />;
     } else if (this.state.content === 'newComment') {
       return <AddComment changeContent={this.selectContent} />;
-    } else if (this.state.content === 'bugs') {
-      return <Bugs />;
     } else if (this.state.content === 'todo') {
       return <Todo />;
     } else return <StartDashboard />;

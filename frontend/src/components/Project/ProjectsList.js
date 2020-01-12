@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../Store';
 import api_rubikproject from '../../api/api_rubikproject';
-
 const ProjectsList = props => {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
-
   let context = useContext(Context);
-
   useEffect(() => {
     let isSubscribed = true;
     const fetchProjects = async () => {
@@ -25,7 +22,6 @@ const ProjectsList = props => {
     };
     fetchProjects();
   }, [context.projectID, context.user._id]);
-
   if (error) {
     return (
       <span className="collapse-item">
@@ -33,25 +29,21 @@ const ProjectsList = props => {
       </span>
     );
   } else {
-    return (
-      projects &&
-      projects.map(project => {
-        return (
-          <span
-            key={project._id}
-            id={project._id}
-            className="collapse-item"
-            onClick={() => {
-              props.changeContent('project');
-              context.changeStore('projectID', project._id);
-            }}
-          >
-            {project.title}
-          </span>
-        );
-      })
-    );
+    return projects.map(project => {
+      return (
+        <span
+          key={project._id}
+          id={project._id}
+          className="collapse-item"
+          onClick={() => {
+            props.changeContent('project');
+            context.changeStore('projectID', project._id);
+          }}
+        >
+          {project.title}
+        </span>
+      );
+    });
   }
 };
-
 export default ProjectsList;

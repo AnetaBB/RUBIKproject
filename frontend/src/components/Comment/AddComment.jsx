@@ -6,7 +6,7 @@ const AddComment = props => {
   const [validated, setValidated] = useState(false);
 
   /* to wstawiłam sama, bo tak mi się wydaje, nie wiem gdzie i czy to wywołać */
-  const [status, setStatus] = useState('');
+  // const [status, setStatus] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
