@@ -1,6 +1,5 @@
 const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
-
 const Project = new Schema({
   title: {
     type: String,
@@ -26,8 +25,11 @@ const Project = new Schema({
   contributors: {
     type: String,
   },
+  active: {
+    type: Boolean,
+    required: true,
+  },
 });
-
 module.exports = {
   Project,
 };
