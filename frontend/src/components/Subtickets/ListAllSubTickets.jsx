@@ -2,59 +2,48 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
-class ListAllTickets extends React.Component {
-  state = { ticketsApi: [], projectName: '' };
+class ListAllSubTickets extends React.Component {
+  state = { subTicketsApi: [] };
 
   async componentDidMount() {
-    //const response = await fetch('http://127.0.0.1:8080/api/tickets');
-    //const data = await response.json();
-    //this.setState({ ticketsApi: data });
-    this.setState({ ticketsApi: await this.getTickets() });
-  }
-
-  async getTickets() {
-    const response = await fetch('/api/tickets');
+    const response = await fetch('http://127.0.0.1:8080/api/subtickets');
     const data = await response.json();
-    return data;
+    this.setState({ subTicketsApi: data });
   }
 
   render() {
     return (
       <div className="col-sm-12">
         <Card>
-          <Card.Header>List of tickets</Card.Header>
+          <Card.Header style={{ fontWeight: 500 }}>
+            List of subtickets
+          </Card.Header>
           <Card.Body>
-            <Table
-              responsive="x1"
-              striped
-              bordered
-              hover
-              variant="dark"
-              id="tableListAllBugs"
-            >
+            <Table responsive="x1" striped bordered hover variant="dark">
               <thead>
                 <tr>
                   <th>Title</th>
                   <th>Relevance</th>
                   <th>Status</th>
+                  <th>Ticket</th>
                   <th>Project</th>
                 </tr>
               </thead>
               <tbody
-                className="viewBugDetails"
                 onClick={e =>
-                  this.props.viewBugDetail(
+                  this.props.onSelect('getOne',
                     e.target.parentNode.lastChild.textContent
                   )
                 }
               >
-                {this.state.ticketsApi.map(function(item) {
+                {this.state.subTicketsApi.map(function (item) {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>
-                      <td>{item.status}</td>
                       <td>{item.relevance}</td>
-                      <td>{item.projectName}</td>
+                      <td>{item.status}</td>
+                      <td>{item.ticket}</td>
+                      <td>project-name</td>
                       <td style={{ display: 'none' }}>{item._id}</td>
                     </tr>
                   );
@@ -68,4 +57,4 @@ class ListAllTickets extends React.Component {
   }
 }
 
-export default ListAllTickets;
+export default ListAllSubTickets;

@@ -13,6 +13,9 @@ const Project = new Schema({
   createdAt: {
     type: Date,
   },
+  editedAt: {
+    type: Date,
+  },
   deadline: {
     type: Date,
   },

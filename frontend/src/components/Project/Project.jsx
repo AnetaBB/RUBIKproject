@@ -2,16 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ProgressBar, Table, Button, Card } from 'react-bootstrap';
 import { Context } from '../../Store';
 import DeletingProjectModal from './DeletingProjectModal';
-
 const Project = props => {
   const [project, setProject] = useState({});
+  const [tickets, setTickets] = useState([]);
   const [error, setError] = useState('');
   const [show, setShow] = useState(false);
-
   let context = useContext(Context);
-
   const handleClose = () => setShow(true);
-
   useEffect(() => {
     let isSubscribed = true;
     const fetchData = async () => {
@@ -31,7 +28,27 @@ const Project = props => {
       isSubscribed = false;
     };
   }, [context.projectID]);
-
+  useEffect(() => {
+    let isSubscribed = true;
+    const fetchTickets = async () => {
+      try {
+        const response = await fetch(
+          `/api/tickets?projectID=${context.projectID}`
+        );
+        if (response.status === 200) {
+          const ticketsData = await response.json();
+          console.log(ticketsData);
+          if (isSubscribed) setTickets(ticketsData);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTickets();
+    return () => {
+      isSubscribed = false;
+    };
+  }, [context.projectID]);
   if (error) {
     return (
       <div className="container">
@@ -51,7 +68,6 @@ const Project = props => {
             add task for this project
           </Button>
         </div>
-
         <div className="row">
           <div className="col-lg-7 mb-4">
             <Card>
@@ -62,20 +78,23 @@ const Project = props => {
                     <tr>
                       <th>Task</th>
                       <th>Priority</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {tickets.map(ticket => {
+                      return (
+                        <tr key={ticket._id}>
+                          <td>{ticket.title}</td>
+                          <td>{ticket.priority}</td>
+                          <td>{ticket.status}</td>
+                        </tr>
+                      );
+                    })}
                     <tr>
-                      <td>task1</td>
-                      <td>low</td>
-                    </tr>
-                    <tr>
-                      <td>task2</td>
-                      <td>height</td>
-                    </tr>
-                    <tr>
-                      <td>View all tasks</td>
-                      <td></td>
+                      <td onClick={() => props.changeContent('viewAllBugs')}>
+                        View all tasks
+                      </td>
                     </tr>
                   </tbody>
                 </Table>
@@ -96,7 +115,6 @@ const Project = props => {
             </Card>
           </div>
         </div>
-
         <div className="row">
           <div className="col-lg-7 mb-4">
             <Card>
@@ -126,6 +144,13 @@ const Project = props => {
             </Card>
           </div>
         </div>
+        <Button
+          className="mr-3"
+          variant="warning"
+          onClick={() => props.changeContent('editProject')}
+        >
+          Edit this project
+        </Button>
         <Button variant="danger" onClick={handleClose}>
           Delete this project
         </Button>
@@ -138,5 +163,4 @@ const Project = props => {
     );
   }
 };
-
 export default Project;

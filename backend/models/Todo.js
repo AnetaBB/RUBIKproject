@@ -7,10 +7,10 @@ const Todo = new Schema({
     required: true,
     unique: true,
   },
-  done: {
-    type: Boolean,
-    default: false,
+  userId: {
+    type: String,
     required: true,
+    unique: false,
   },
 });
 

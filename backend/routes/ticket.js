@@ -3,13 +3,19 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const { Ticket } = res.locals.models;
-  const ticket = await Ticket.find();
-  res.status(200).json(ticket);
+
+  const query = { status: 'Open' };
+
+  if (req.query.projectID) {
+    query.projectID = req.query.projectID;
+  }
+  const tickets = await Ticket.find(query);
+  res.status(200).json(tickets);
 });
 
 router.get('/:id', async (req, res) => {
   const { Ticket } = res.locals.models;
-  const ticket = await Ticket.findById(req.params.id);
+  const ticket = await Ticket.findOne({ _id: req.params.id });
   res.status(200).json(ticket);
 });
 

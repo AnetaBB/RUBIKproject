@@ -5,12 +5,16 @@ import TopNavbar from '../../components/Home/TopNavbar';
 import Milestone from '../../components/Milestones/index';
 import AddAMilestone from '../../components/Milestones/AddAMilestone';
 import Footer from '../../components/Home/Footer';
-import Bugs from '../../components/Bugs/index';
+import ListAllTickets from '../../components/Bugs';
+import AddTicket from '../../components/Bugs/AddTicket';
 import Project from '../../components/Project/Project';
 import Store from '../../Store';
 import NewProjectForm from '../../components/Project/NewProjectForm';
 import Comment from '../../components/Comment';
 import AddComment from '../../components/Comment/AddComment';
+import Todo from '../../components/Todo';
+import SubTickets from '../../components/Subtickets';
+import AddSubTicket from '../../components/Subtickets/AddSubTicket';
 
 //import { ReactComponent } from '*.svg';
 
@@ -28,8 +32,21 @@ class Home extends React.Component {
       return <Project />;
     } else if (this.state.content === 'newProject') {
       return <NewProjectForm changeContent={this.selectContent} />;
-    } else if (this.state.content === 'bugs') {
-      return <Bugs />;
+    } else if (this.state.content === 'editProject') {
+      return (
+        <NewProjectForm
+          projectID={this.context.projectID}
+          changeContent={this.selectContent}
+        />
+      );
+    } else if (this.state.content === 'viewAllBugs') {
+      return <ListAllTickets />;
+    } else if (this.state.content === 'addBug') {
+      return <AddTicket />;
+    } else if (this.state.content === 'viewAllSubTickets') {
+      return <SubTickets />;
+    } else if (this.state.content === 'addSubTicket') {
+      return <AddSubTicket />;
     } else if (this.state.content === 'milestone') {
       return <Milestone />;
     } else if (this.state.content === 'newMilestone') {
@@ -40,6 +57,8 @@ class Home extends React.Component {
       return <AddComment changeContent={this.selectContent} />;
     } else if (this.state.content === 'bugs') {
       return <Bugs />;
+    } else if (this.state.content === 'todo') {
+      return <Todo />;
     } else return <StartDashboard />;
   }
 
