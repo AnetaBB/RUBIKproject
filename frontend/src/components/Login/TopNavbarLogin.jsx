@@ -1,5 +1,4 @@
 import React from 'react';
-
 class TopNavbarLogin extends React.Component {
   render() {
     return (
@@ -14,6 +13,7 @@ class TopNavbarLogin extends React.Component {
                 className="rubik-project"
                 style={{ fontSize: '46px' }}
                 onClick={() => {
+                  localStorage.removeItem('rubikproject_user');
                   window.location.reload();
                 }}
               >
@@ -60,5 +60,4 @@ class TopNavbarLogin extends React.Component {
     );
   }
 }
-
 export default TopNavbarLogin;

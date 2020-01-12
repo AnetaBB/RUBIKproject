@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import Store from '../../Store';
 import Card from 'react-bootstrap/Card';
 import api_rubikproject from '../../api/api_rubikproject';
-
 class Register extends React.Component {
   state = {
     name: '',
@@ -13,15 +12,12 @@ class Register extends React.Component {
     re_pass: '',
     error: '',
   };
-
   static contextType = Store;
-
   registerUser = async () => {
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', e => {
       e.preventDefault();
     });
-
     if (
       this.state.name &&
       this.state.surname &&
@@ -38,18 +34,20 @@ class Register extends React.Component {
           repeat_password: this.state.re_pass,
           active: true,
         });
-        if (response.status)
+        if (response.status) {
           this.context.isLogged = localStorage.setItem(
             'token',
             'wartoscTokena'
           );
-        window.location.reload();
+          const userData = JSON.parse(response.request.response);
+          window.localStorage.setItem('rubikproject_user', userData._id);
+          window.location.reload();
+        }
       } catch (error) {
         this.setState({ error: 'Incorrect data' });
       }
     } else this.setState({ error: 'Fill in all blanks' });
   };
-
   render() {
     if (this.context.isLogged) return <Redirect to="/" />;
     return (
@@ -171,5 +169,4 @@ class Register extends React.Component {
     );
   }
 }
-
 export default Register;
