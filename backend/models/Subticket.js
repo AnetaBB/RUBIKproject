@@ -1,6 +1,4 @@
-const {
-  Schema
-} = require('mongoose');
+const { Schema } = require('mongoose');
 const ObjectId = Schema.Types.ObjectId;
 
 const Subticket = new Schema({

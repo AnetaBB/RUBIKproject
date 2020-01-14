@@ -4,9 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const {
-      Subticket
-    } = res.locals.models;
+    const { Subticket } = res.locals.models;
     const subtickets = await Subticket.find();
     res.status(200).json(subtickets);
   } catch (err) {
@@ -16,9 +14,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const {
-      Subticket
-    } = res.locals.models;
+    const { Subticket } = res.locals.models;
     const subticket = await Subticket.findById(req.params.id);
     if (!subticket)
       return res.status(404).send('The subticket with given ID was not found.');
@@ -30,10 +26,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const schema = Joi.object({
-    ticketId: Joi.any()
-      .required(),
-    ticket: Joi.string()
-      .required(),
+    ticketId: Joi.any().required(),
+    ticket: Joi.string().required(),
     title: Joi.string()
       .min(5)
       .max(70)
@@ -50,13 +44,11 @@ router.post('/', async (req, res) => {
     contributor: Joi.string()
       .min(3)
       .max(30)
-      .required()
+      .required(),
   });
   try {
     const value = await schema.validateAsync(req.body);
-    const {
-      Subticket
-    } = res.locals.models;
+    const { Subticket } = res.locals.models;
     const subticket = new Subticket(value);
     const result = await subticket.save();
     res.status(200).json(result);
@@ -80,9 +72,7 @@ router.put('/:id', async (req, res) => {
   });
   try {
     const value = await schema.validateAsync(req.body);
-    const {
-      Subticket
-    } = res.locals.models;
+    const { Subticket } = res.locals.models;
     const subticket = await Subticket.findById(req.params.id);
     if (!subticket)
       return res.status(404).send('The subticket with given ID was not found.');
@@ -98,9 +88,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const {
-      Subticket
-    } = res.locals.models;
+    const { Subticket } = res.locals.models;
     const subticket = await Subticket.findByIdAndRemove(req.params.id);
     if (!subticket)
       return res.status(404).send('The subticket with given ID was not found.');
