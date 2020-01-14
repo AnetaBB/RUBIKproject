@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import api_rubikproject from '../../api/api_rubikproject';
 import Store from '../../Store';
 import moment from 'moment';
+
 const NewProjectForm = props => {
   const [projectData, setProject] = useState({});
   const [error, setError] = useState('');
@@ -11,7 +12,9 @@ const NewProjectForm = props => {
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
   let context = useContext(Store);
+
   // jeśli komponent otrzyma w props ID projektu, tzn ze mamy do czynienia z edycją, i pobieramy dane o projekcie z bazy
+
   useEffect(() => {
     if (props.projectID) {
       let isSubscribed = true;
@@ -33,6 +36,7 @@ const NewProjectForm = props => {
       };
     }
   }, [props.projectID]);
+
   useEffect(() => {
     if (projectData.title) {
       setTitle(projectData.title);
@@ -42,6 +46,7 @@ const NewProjectForm = props => {
       }
     }
   }, [projectData.title]);
+
   const sendProject = async e => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -96,6 +101,7 @@ const NewProjectForm = props => {
       }
     }
   };
+
   if (error) {
     return (
       <div className="container">
@@ -150,4 +156,5 @@ const NewProjectForm = props => {
     );
   }
 };
+
 export default NewProjectForm;

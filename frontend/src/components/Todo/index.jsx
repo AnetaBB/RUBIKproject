@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Button, Form, Row } from 'react-bootstrap';
+// import { Card, Button, Form, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Context } from '../../Store';
 import ListTodo from './TodoList';
 import AddTodo from './AddTodo';
@@ -8,6 +9,7 @@ import api_rubikproject from '../../api/api_rubikproject';
 export class Todo extends React.Component {
   inputElement = React.createRef();
   static contextType = Context;
+
   constructor() {
     super();
     this.state = {
@@ -26,9 +28,18 @@ export class Todo extends React.Component {
     await api_rubikproject.delete(`/api/todos/${todoId}`);
     console.log('removetodo');
   };
-  componentDidMount() {
+
+  // componentDidMount() {
+  //   const userId = { userId: this.context.user._id };
+  //   this.setState({ userId: userId });
+  // }
+
+  async componentDidMount() {
     const userId = { userId: this.context.user._id };
     this.setState({ userId: userId });
+    const response = await fetch('/api/todos');
+    const data = await response.json();
+    this.setState({ todos: data });
   }
 
   handleInput = e => {
@@ -56,12 +67,6 @@ export class Todo extends React.Component {
       });
     }
   };
-
-  async componentDidMount() {
-    const response = await fetch('http://127.0.0.1:8080/api/todos');
-    const data = await response.json();
-    this.setState({ todos: data });
-  }
 
   render() {
     return (

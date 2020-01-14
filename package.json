@@ -1,5 +1,5 @@
 {
-  "name": "RUBIKproject",
+  "name": "ribik-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "prettier-mac": "prettier --write '**/*.js'",
     "server": "node -r dotenv/config ./backend/app.js",
     "client": "npm start --prefix ./frontend",
-    "dev": "concurrently \" npm run server\" \"npm run client\""
+    "dev": "concurrently -n backend,frontend -k \"npm run mon\" \"cd frontend && npm run start\""
   },
   "repository": {
     "type": "git",
@@ -40,5 +40,5 @@
     "react-router-dom": "^5.1.2",
     "serialize-javascript": "^2.1.1"
   },
-  "proxy": "http://127.0.0.1:8080"
+  "proxy": "http://localhost:8080"
 }

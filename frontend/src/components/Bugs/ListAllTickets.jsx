@@ -6,7 +6,7 @@ class ListAllTickets extends React.Component {
   state = { ticketsApi: [], projectName: '' };
 
   async componentDidMount() {
-    //const response = await fetch('http://127.0.0.1:8080/api/tickets');
+    //const response = await fetch('/api/tickets');
     //const data = await response.json();
     //this.setState({ ticketsApi: data });
     this.setState({ ticketsApi: await this.getTickets() });

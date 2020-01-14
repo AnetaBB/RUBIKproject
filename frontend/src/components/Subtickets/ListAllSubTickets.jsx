@@ -6,7 +6,7 @@ class ListAllSubTickets extends React.Component {
   state = { subTicketsApi: [] };
 
   async componentDidMount() {
-    const response = await fetch('http://127.0.0.1:8080/api/subtickets');
+    const response = await fetch('/api/subtickets');
     const data = await response.json();
     this.setState({ subTicketsApi: data });
   }
@@ -31,12 +31,13 @@ class ListAllSubTickets extends React.Component {
               </thead>
               <tbody
                 onClick={e =>
-                  this.props.onSelect('getOne',
+                  this.props.onSelect(
+                    'getOne',
                     e.target.parentNode.lastChild.textContent
                   )
                 }
               >
-                {this.state.subTicketsApi.map(function (item) {
+                {this.state.subTicketsApi.map(function(item) {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>

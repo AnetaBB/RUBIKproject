@@ -6,9 +6,7 @@ class GetOneSubTicket extends React.Component {
   state = { oneSubTicket: [] };
 
   async componentDidMount() {
-    const response = await fetch(
-      `http://127.0.0.1:8080/api/subtickets/${this.props.getOne}`
-    );
+    const response = await fetch(`/api/subtickets/${this.props.getOne}`);
     const data = await response.json();
     this.setState({ oneSubTicket: data });
   }
@@ -40,7 +38,11 @@ class GetOneSubTicket extends React.Component {
           <Button variant="warning" className="mr-1" onClick={this.backToAll}>
             Back
           </Button>
-          <Button variant="warning" className="mr-1" onClick={this.editSubTicket}>
+          <Button
+            variant="warning"
+            className="mr-1"
+            onClick={this.editSubTicket}
+          >
             Edit
           </Button>
           <Button variant="danger" onClick={this.deleteSubTicket}>

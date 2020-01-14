@@ -6,7 +6,7 @@ class GetOneTicket extends React.Component {
 
   async componentDidMount() {
     const response = await api_rubikproject.get(
-      `http://127.0.0.1:8080/api/tickets/${this.props.bugContent}`
+      `/api/tickets/${this.props.bugContent}`
     );
     if (response.status) {
       let responseData = JSON.parse(response.request.response);
